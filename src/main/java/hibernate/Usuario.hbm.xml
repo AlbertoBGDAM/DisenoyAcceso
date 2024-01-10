@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 6 ene 2024, 13:03:04 by Hibernate Tools 4.3.6.Final -->
+<hibernate-mapping>
+    <class name="Model.Usuario" table="usuario" catalog="proyectoalberto" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="username" type="string">
+            <column name="username" length="50" not-null="true" unique="true" />
+        </property>
+        <property name="correo" type="string">
+            <column name="correo" not-null="true" />
+        </property>
+        <property name="contrasenaEncriptada" type="string">
+            <column name="contrasena_encriptada" not-null="true" />
+        </property>
+        <property name="edad" type="java.lang.Integer">
+            <column name="edad" />
+        </property>
+        <property name="esMenor" type="java.lang.Boolean">
+            <column name="es_menor" />
+        </property>
+        <set name="musicas" table="musica_usuario" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="id_usuario" not-null="true" />
+            </key>
+            <many-to-many entity-name="Model.Musica">
+                <column name="id_musica" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="juegoses" table="juegos_usuario" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="id_usuario" not-null="true" />
+            </key>
+            <many-to-many entity-name="Model.Juegos">
+                <column name="id_juego" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="usuariosForIdUsuario1" table="amigos" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="id_usuario2" not-null="true" />
+            </key>
+            <many-to-many entity-name="Model.Usuario">
+                <column name="id_usuario1" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="usuariosForIdUsuario2" table="amigos" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="id_usuario1" not-null="true" />
+            </key>
+            <many-to-many entity-name="Model.Usuario">
+                <column name="id_usuario2" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="comprases" table="compras" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_usuario" />
+            </key>
+            <one-to-many class="Model.Compras" />
+        </set>
+        <set name="historials" table="historial" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_usuario" />
+            </key>
+            <one-to-many class="Model.Historial" />
+        </set>
+        <one-to-one name="tarjetacredito" class="Model.Tarjetacredito"></one-to-one>
+    </class>
+</hibernate-mapping>

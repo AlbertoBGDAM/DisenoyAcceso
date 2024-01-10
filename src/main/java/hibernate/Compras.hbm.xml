@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 6 ene 2024, 13:03:04 by Hibernate Tools 4.3.6.Final -->
+<hibernate-mapping>
+    <class name="Model.Compras" table="compras" catalog="proyectoalberto" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="juegos" class="Model.Juegos" fetch="select">
+            <column name="id_juego" />
+        </many-to-one>
+        <many-to-one name="musica" class="Model.Musica" fetch="select">
+            <column name="id_musica" />
+        </many-to-one>
+        <many-to-one name="tarjetacredito" class="Model.Tarjetacredito" fetch="select">
+            <column name="id_usuario" />
+        </many-to-one>
+        <many-to-one name="usuario" class="Model.Usuario" update="false" insert="false" fetch="select">
+            <column name="id_usuario" />
+        </many-to-one>
+        <property name="fechaCompra" type="timestamp">
+            <column name="fecha_compra" length="19" />
+        </property>
+    </class>
+</hibernate-mapping>
