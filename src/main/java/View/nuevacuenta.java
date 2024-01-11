@@ -303,10 +303,11 @@ public class nuevacuenta extends javax.swing.JPanel {
     }//GEN-LAST:event_NombreKeyPressed
 
     private void NCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NCActionPerformed
-        if((!Nombre.getText().equals(defN)) && 
-                (!String.valueOf(contra.getPassword()).equals(String.valueOf(defC)))&&
-                (ConfCont.getPassword()==contra.getPassword())&& (!Tarjeta.getText().equals(defTar))
-                &&(!String.valueOf(CodTar.getPassword()).equals(String.valueOf(defCon)))){
+        if((Nombre.getText().equals(defN))==false &&
+                Arrays.equals(contra.getPassword(), defC)==false&&
+                (Arrays.equals(ConfCont.getPassword(), defC)==false)&&
+                (Arrays.equals(ConfCont.getPassword(), contra.getPassword()))==true&& (!Tarjeta.getText().equals(defTar))
+                &&(Arrays.equals(CodTar.getPassword(),defCon))==false){
             int edades=(int) Edad.getValue();
             boolean menor=false;
             if(edades<18){
@@ -314,8 +315,9 @@ public class nuevacuenta extends javax.swing.JPanel {
             }
             mod.insertarUsuario(Alias.getText(),String.valueOf(contra.getPassword())
                     ,Nombre.getText(),edades,menor);
+            int codigo=Integer.parseInt(String.valueOf(CodTar.getPassword()));
             mod.agregarTarjetaCredito(Nombre.getText(), 
-                    Tarjeta.getText(),Integer.parseInt(String.valueOf(CodTar.getPassword())) );
+                    Tarjeta.getText(),codigo);
         }
     }//GEN-LAST:event_NCActionPerformed
 
@@ -334,8 +336,8 @@ public class nuevacuenta extends javax.swing.JPanel {
 
     private void ConfContMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ConfContMouseClicked
         if (Arrays.equals(ConfCont.getPassword(), defC)) {
-            contra.setText("");
-            contra.setForeground(Color.white);
+            ConfCont.setText("");
+            ConfCont.setForeground(Color.white);
         }
     }//GEN-LAST:event_ConfContMouseClicked
 

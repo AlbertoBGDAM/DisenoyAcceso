@@ -15,7 +15,7 @@ public class Hibernate {
 
     public SessionFactory Model() {
         // Configurar la fábrica de sesiones de Hibernate
-        Configuration configuration = new Configuration().configure("hibernate/hibernate.cfg.xml");
+        Configuration configuration = new Configuration().configure("/hibernate/hibernate.cfg.xml");
         SessionFactory sessionFactory = configuration.buildSessionFactory();
         return sessionFactory;
     }
