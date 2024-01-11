@@ -1,72 +1,70 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 6 ene 2024, 13:03:04 by Hibernate Tools 4.3.6.Final -->
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 11 ene 2024 18:58:00 by Hibernate Tools 5.4.33.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class name="Model.Usuario" table="usuario" catalog="proyectoalberto" optimistic-lock="version">
+    <class catalog="proyectoalberto" name="Usuario" optimistic-lock="none" table="usuario">
         <id name="id" type="java.lang.Integer">
-            <column name="id" />
-            <generator class="identity" />
+            <column name="id"/>
+            <generator class="identity"/>
         </id>
         <property name="username" type="string">
-            <column name="username" length="50" not-null="true" unique="true" />
+            <column length="50" name="username" not-null="true" unique="true"/>
         </property>
         <property name="correo" type="string">
-            <column name="correo" not-null="true" />
+            <column name="correo" not-null="true"/>
         </property>
         <property name="contrasenaEncriptada" type="string">
-            <column name="contrasena_encriptada" not-null="true" />
+            <column name="contrasena_encriptada" not-null="true"/>
         </property>
         <property name="edad" type="java.lang.Integer">
-            <column name="edad" />
+            <column name="edad"/>
         </property>
         <property name="esMenor" type="java.lang.Boolean">
-            <column name="es_menor" />
+            <column name="es_menor"/>
         </property>
-        <set name="musicas" table="musica_usuario" inverse="false" lazy="true" fetch="select">
+        <set fetch="select" inverse="false" lazy="true" name="musicas" table="musica_usuario">
             <key>
-                <column name="id_usuario" not-null="true" />
+                <column name="id_usuario" not-null="true"/>
             </key>
-            <many-to-many entity-name="Model.Musica">
-                <column name="id_musica" not-null="true" />
+            <many-to-many entity-name="Musica">
+                <column name="id_musica" not-null="true"/>
             </many-to-many>
         </set>
-        <set name="juegoses" table="juegos_usuario" inverse="false" lazy="true" fetch="select">
+        <set fetch="select" inverse="false" lazy="true" name="juegoses" table="juegos_usuario">
             <key>
-                <column name="id_usuario" not-null="true" />
+                <column name="id_usuario" not-null="true"/>
             </key>
-            <many-to-many entity-name="Model.Juegos">
-                <column name="id_juego" not-null="true" />
+            <many-to-many entity-name="Juegos">
+                <column name="id_juego" not-null="true"/>
             </many-to-many>
         </set>
-        <set name="usuariosForIdUsuario1" table="amigos" inverse="false" lazy="true" fetch="select">
+        <set fetch="select" inverse="false" lazy="true" name="usuariosForIdUsuario1" table="amigos">
             <key>
-                <column name="id_usuario2" not-null="true" />
+                <column name="id_usuario2" not-null="true"/>
             </key>
-            <many-to-many entity-name="Model.Usuario">
-                <column name="id_usuario1" not-null="true" />
+            <many-to-many entity-name="Usuario">
+                <column name="id_usuario1" not-null="true"/>
             </many-to-many>
         </set>
-        <set name="usuariosForIdUsuario2" table="amigos" inverse="false" lazy="true" fetch="select">
+        <set fetch="select" inverse="false" lazy="true" name="usuariosForIdUsuario2" table="amigos">
             <key>
-                <column name="id_usuario1" not-null="true" />
+                <column name="id_usuario1" not-null="true"/>
             </key>
-            <many-to-many entity-name="Model.Usuario">
-                <column name="id_usuario2" not-null="true" />
+            <many-to-many entity-name="Usuario">
+                <column name="id_usuario2" not-null="true"/>
             </many-to-many>
         </set>
-        <set name="comprases" table="compras" inverse="true" lazy="true" fetch="select">
+        <set fetch="select" inverse="true" lazy="true" name="comprases" table="compras">
             <key>
-                <column name="id_usuario" />
+                <column name="id_usuario"/>
             </key>
-            <one-to-many class="Model.Compras" />
+            <one-to-many class="Compras"/>
         </set>
-        <set name="historials" table="historial" inverse="true" lazy="true" fetch="select">
+        <set fetch="select" inverse="true" lazy="true" name="historials" table="historial">
             <key>
-                <column name="id_usuario" />
+                <column name="id_usuario"/>
             </key>
-            <one-to-many class="Model.Historial" />
+            <one-to-many class="Historial"/>
         </set>
-        <one-to-one name="tarjetacredito" class="Model.Tarjetacredito"></one-to-one>
+        <one-to-one class="Tarjetacredito" name="tarjetacredito"/>
     </class>
 </hibernate-mapping>

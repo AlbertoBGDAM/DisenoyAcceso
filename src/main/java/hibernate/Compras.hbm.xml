@@ -1,27 +1,25 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 6 ene 2024, 13:03:04 by Hibernate Tools 4.3.6.Final -->
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 11 ene 2024 18:58:00 by Hibernate Tools 5.4.33.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class name="Model.Compras" table="compras" catalog="proyectoalberto" optimistic-lock="version">
+    <class catalog="proyectoalberto" name="Compras" optimistic-lock="none" table="compras">
         <id name="id" type="java.lang.Integer">
-            <column name="id" />
-            <generator class="identity" />
+            <column name="id"/>
+            <generator class="identity"/>
         </id>
-        <many-to-one name="juegos" class="Model.Juegos" fetch="select">
-            <column name="id_juego" />
+        <many-to-one class="Juegos" fetch="select" name="juegos">
+            <column name="id_juego"/>
         </many-to-one>
-        <many-to-one name="musica" class="Model.Musica" fetch="select">
-            <column name="id_musica" />
+        <many-to-one class="Musica" fetch="select" name="musica">
+            <column name="id_musica"/>
         </many-to-one>
-        <many-to-one name="tarjetacredito" class="Model.Tarjetacredito" fetch="select">
-            <column name="id_usuario" />
+        <many-to-one class="Tarjetacredito" fetch="select" name="tarjetacredito">
+            <column name="id_usuario"/>
         </many-to-one>
-        <many-to-one name="usuario" class="Model.Usuario" update="false" insert="false" fetch="select">
-            <column name="id_usuario" />
+        <many-to-one class="Usuario" fetch="select" insert="false" name="usuario" update="false">
+            <column name="id_usuario"/>
         </many-to-one>
         <property name="fechaCompra" type="timestamp">
-            <column name="fecha_compra" length="19" />
+            <column length="19" name="fecha_compra"/>
         </property>
     </class>
 </hibernate-mapping>

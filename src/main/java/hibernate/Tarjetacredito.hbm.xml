@@ -1,30 +1,25 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 6 ene 2024, 13:03:04 by Hibernate Tools 4.3.6.Final -->
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 11 ene 2024 18:58:00 by Hibernate Tools 5.4.33.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class name="Model.Tarjetacredito" table="tarjetacredito" catalog="proyectoalberto" optimistic-lock="version">
+    <class catalog="proyectoalberto" name="Tarjetacredito" optimistic-lock="none" table="tarjetacredito">
         <id name="idUsuario" type="int">
-            <column name="id_usuario" />
+            <column name="id_usuario"/>
             <generator class="foreign">
                 <param name="property">usuario</param>
             </generator>
         </id>
-        <one-to-one name="usuario" class="Model.Usuario" constrained="true"></one-to-one>
+        <one-to-one class="Usuario" constrained="true" name="usuario"/>
         <property name="numeroTarjeta" type="string">
-            <column name="numero_tarjeta" length="16" not-null="true" />
-        </property>
-        <property name="fechaExpiracion" type="date">
-            <column name="fecha_expiracion" length="10" not-null="true" />
+            <column length="16" name="numero_tarjeta" not-null="true"/>
         </property>
         <property name="codigoSeguridad" type="int">
-            <column name="codigo_seguridad" not-null="true" />
+            <column name="codigo_seguridad" not-null="true"/>
         </property>
-        <set name="comprases" table="compras" inverse="true" lazy="true" fetch="select">
+        <set fetch="select" inverse="true" lazy="true" name="comprases" table="compras">
             <key>
-                <column name="id_usuario" />
+                <column name="id_usuario"/>
             </key>
-            <one-to-many class="Model.Compras" />
+            <one-to-many class="Compras"/>
         </set>
     </class>
 </hibernate-mapping>

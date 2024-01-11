@@ -1,7 +1,6 @@
 package hibernate;
-// Generated 6 ene 2024, 13:03:03 by Hibernate Tools 4.3.6.Final
+// Generated 11 ene 2024 18:58:00 by Hibernate Tools 5.4.33.Final
 
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -25,8 +24,7 @@ public class Tarjetacredito implements java.io.Serializable {
 		this.codigoSeguridad = codigoSeguridad;
 	}
 
-	public Tarjetacredito(Usuario usuario, String numeroTarjeta, int codigoSeguridad,
-			Set comprases) {
+	public Tarjetacredito(Usuario usuario, String numeroTarjeta, int codigoSeguridad, Set comprases) {
 		this.usuario = usuario;
 		this.numeroTarjeta = numeroTarjeta;
 		this.codigoSeguridad = codigoSeguridad;
@@ -56,6 +54,7 @@ public class Tarjetacredito implements java.io.Serializable {
 	public void setNumeroTarjeta(String numeroTarjeta) {
 		this.numeroTarjeta = numeroTarjeta;
 	}
+
 	public int getCodigoSeguridad() {
 		return this.codigoSeguridad;
 	}
