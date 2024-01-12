@@ -4,14 +4,17 @@
  */
 package View;
 
+import Model.model;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author ALBERTO BARCALA GUTIÉRREZ
  */
 public class Loging extends javax.swing.JPanel {
+    model model=new model();
     String defN="ejemplo@ejemplo.com",defC="holabuenosdias";
     /**
      * Creates new form Loging
@@ -144,7 +147,12 @@ public class Loging extends javax.swing.JPanel {
     }//GEN-LAST:event_NombreKeyPressed
 
     private void conectarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_conectarseActionPerformed
-        // TODO add your handling code here:
+        boolean ver=model.verificarCredenciales(Nombre.getText(), String.valueOf(contra.getPassword()));
+        if (ver==true){
+            JOptionPane.showMessageDialog(null, "¡Bienvenido!", "Mensaje de Bienvenida", JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(null, "Credenciales incorrectas. Inténtalo de nuevo.", "Mensaje de Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_conectarseActionPerformed
 
     private void contraKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_contraKeyPressed

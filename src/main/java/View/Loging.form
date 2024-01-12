@@ -38,7 +38,7 @@
                   <Component id="nombre" min="-2" max="-2" attributes="0"/>
                   <Component id="contraseña" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="73" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" attributes="0">
                       <Component id="Nombre" max="32767" attributes="0"/>
