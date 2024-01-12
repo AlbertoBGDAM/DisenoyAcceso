@@ -5,6 +5,7 @@
 package hibernate;
 
 import org.hibernate.SessionFactory;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 
 /**
@@ -12,17 +13,19 @@ import org.hibernate.cfg.Configuration;
  * @author Alumno
  */
 public class Hibernate {
-
+    SessionFactory sessionFactory = Model();
     public SessionFactory Model() {
-        // Configurar la fábrica de sesiones de Hibernate
-        Configuration configuration = new Configuration().configure("hibernate.cfg.xml");
-        SessionFactory sessionFactory = configuration.buildSessionFactory();
-        return sessionFactory;
+    	 try {
+             return new Configuration().configure().buildSessionFactory(
+                     new StandardServiceRegistryBuilder().configure().build());
+         } catch (Throwable ex) {
+             System.err.println(ex);
+             throw new ExceptionInInitializerError(ex);
+         }
     }
 
     public void closeSessionFactory() {
         // Cerrar la fábrica de sesiones al cerrar la aplicación
-        SessionFactory sessionFactory = Model();
         if (sessionFactory != null) {
             sessionFactory.close();
         }

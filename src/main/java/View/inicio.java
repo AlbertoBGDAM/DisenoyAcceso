@@ -61,7 +61,7 @@ public class inicio extends javax.swing.JFrame {
         fijo.setBackground(new java.awt.Color(28, 10, 67));
         fijo.setForeground(new java.awt.Color(28, 10, 67));
 
-        logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logo.png"))); // NOI18N
+        logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/logo.png"))); // NOI18N
         logo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         registrarse.setBackground(new java.awt.Color(25, 30, 42));

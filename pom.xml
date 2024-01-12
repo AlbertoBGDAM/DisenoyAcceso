@@ -48,12 +48,6 @@
             <artifactId>hibernate-core</artifactId>
             <version>5.6.0.Final</version>
         </dependency>
+        
     </dependencies>
-    <build>
-        <resources>
-            <resource>
-                <directory>src/main/resources/image/</directory>
-            </resource>
-        </resources>
-    </build>
 </project>
