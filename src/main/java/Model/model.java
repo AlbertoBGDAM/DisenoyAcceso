@@ -6,7 +6,7 @@ package Model;
 
 /**
  *
- * @author alber
+ * @author ALBERTO BARCALA GUTIÉRREZ
  */
 
 import org.hibernate.Session;
@@ -32,6 +32,7 @@ public class model {
 			Usuario usuario = new Usuario(username, hashedPassword, correoRecuperacion, edad, esMenor);
 			session.save(usuario);
 			session.getTransaction().commit();
+                        hiber.closeSessionFactory();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -54,9 +55,9 @@ public class model {
 				session.update(usuario);
 				session.update(nuevoAmigo);
 			}
-
 			session.getTransaction().commit();
-		} catch (Exception e) {
+                        hiber.closeSessionFactory();
+                } catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -69,6 +70,7 @@ public class model {
 			Usuario usuario = session.get(Usuario.class, idUsuario);
 			Usuario amigoEliminar = session.get(Usuario.class, idAmigoEliminar);
 			session.getTransaction().commit();
+            hiber.closeSessionFactory();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

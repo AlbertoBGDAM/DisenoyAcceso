@@ -37,7 +37,7 @@
                       </Group>
                       <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="Nombre" pref="311" max="32767" attributes="0"/>
+                          <Component id="Nombre" pref="161" max="32767" attributes="0"/>
                           <Component id="contra" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -46,7 +46,7 @@
                       <Component id="correo" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="12" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

@@ -7,7 +7,7 @@ import com.formdev.flatlaf.extras.FlatSVGIcon;
 import com.formdev.flatlaf.intellijthemes.FlatGradiantoMidnightBlueIJTheme;
 /**
  *
- * @author Alumno
+ * @author ALBERTO BARCALA GUTIÉRREZ
  */
 public class inicio extends javax.swing.JFrame {
     Loging log =new Loging();

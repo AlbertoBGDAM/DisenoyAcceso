@@ -17,7 +17,7 @@ import javax.mail.Session;
 
 /**
  *
- * @author Alumno
+ * @author ALBERTO BARCALA GUTIÉRREZ
  */
 class Recu extends javax.swing.JPanel {
     model mod=new model();
@@ -109,12 +109,12 @@ class Recu extends javax.swing.JPanel {
                             .addComponent(nombre))
                         .addGap(64, 64, 64)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(Nombre, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)
+                            .addComponent(Nombre, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
                             .addComponent(contra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(77, 77, 77)
                         .addComponent(correo)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -147,29 +147,10 @@ class Recu extends javax.swing.JPanel {
     }//GEN-LAST:event_NombreKeyPressed
 
     private void correoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_correoActionPerformed
-        final String fromEmail="alberto.bargut@educa.jcyl.es";
-        final String password="salamanca";
-        final String toEmail=Nombre.getText();
-        Properties props =new Properties();
-        props.put("mail.smtp.host", "smtp-mail.outlook.com");
-        props.put("mail.smtp.starttls.enable","true");
-        props.put("mail.smtp.auth","true");
-        props.put("mail.smtp.port","587");
-
-        Authenticator auth = new Authenticator() {
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(fromEmail, password);
-            }
-        };
-        Session session = Session.getDefaultInstance(props, auth);
-        System.out.println("Session created");
-        try {
-            String nuevacontraseña=new String (contra.getPassword());
-            mod.cambiarContrasena(Nombre.getText(), nuevacontraseña);
-            EmailUtil.sendEmail(session, toEmail, "Cambio de contraseña","Tu nueva contraseña es: "+nuevacontraseña+" hasta que la cambies");
-        } catch (MessagingException ex) {
-            Logger.getLogger(inicio.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        String nuevacontraseña=new String (contra.getPassword());
+		mod.cambiarContrasena(Nombre.getText(), nuevacontraseña);
+		EmailUtil emailUtil = new EmailUtil();
+		emailUtil.sendEmail(Nombre.getText(), nuevacontraseña);
     }//GEN-LAST:event_correoActionPerformed
 
     private void contraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_contraMouseClicked

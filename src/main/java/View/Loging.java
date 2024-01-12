@@ -9,7 +9,7 @@ import java.awt.event.KeyEvent;
 
 /**
  *
- * @author Alumno
+ * @author ALBERTO BARCALA GUTIÉRREZ
  */
 public class Loging extends javax.swing.JPanel {
     String defN="ejemplo@ejemplo.com",defC="holabuenosdias";
@@ -131,7 +131,7 @@ public class Loging extends javax.swing.JPanel {
             Nombre.setText("");
             Nombre.setForeground(Color.black);
         }
-        if(contra.getPassword().equals("")){
+        if(String.valueOf(contra.getPassword()).equals("")){
             contra.setText(defC);
             contra.setForeground(Color.LIGHT_GRAY);
         }
@@ -158,7 +158,7 @@ public class Loging extends javax.swing.JPanel {
             Nombre.setText(defN);
             Nombre.setForeground(Color.LIGHT_GRAY);
         }
-        if(contra.getPassword().equals(defC)){
+        if(String.valueOf(contra.getPassword()).equals(defC)){
             contra.setText("");
             contra.setForeground(Color.black);
         }

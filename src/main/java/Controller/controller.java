@@ -6,7 +6,7 @@ package Controller;
 
 /**
  *
- * @author Alumno
+ * @author ALBERTO BARCALA GUTIÉRREZ
  */
 import View.*;
 public class controller {

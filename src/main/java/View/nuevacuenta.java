@@ -11,7 +11,7 @@ import java.util.Arrays;
 
 /**
  *
- * @author alber
+ * @author ALBERTO BARCALA GUTIÉRREZ
  */
 public class nuevacuenta extends javax.swing.JPanel {
     model mod=new model();
