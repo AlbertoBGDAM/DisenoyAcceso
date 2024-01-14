@@ -16,66 +16,33 @@ import org.hibernate.query.Query;
 import com.password4j.*;
 import hibernate.*;
 import javax.swing.JOptionPane;
+import org.hibernate.Transaction;
 
 public class model {
 
 	Hibernate hiber = new Hibernate();
 
-	public void insertarUsuario(String username, String password, String correoRecuperacion, int edad,
-			boolean esMenor) {
-		SessionFactory sessionFactory = hiber.Model();
-		try (Session session = sessionFactory.openSession()) {
-			session.beginTransaction();
-			// Codificar la contraseña con Password4j
-			String hashedPassword = hashPassword(password);
-			// Crear y guardar el usuario
-			Usuario usuario = new Usuario(username, hashedPassword, correoRecuperacion, edad, esMenor);
-			session.save(usuario);
-			session.getTransaction().commit();
-                        hiber.closeSessionFactory();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void agregarNuevoAmigo(int idUsuario, int idNuevoAmigo) {
-		SessionFactory sessionFactory = hiber.Model();
-		try (Session session = sessionFactory.openSession()) {
-			session.beginTransaction();
-			// Cargar el usuario actual y el nuevo amigo desde la base de datos
-			Usuario usuario = session.get(Usuario.class, idUsuario);
-			Usuario nuevoAmigo = session.get(Usuario.class, idNuevoAmigo);
-			// Verificar si ya son amigos para evitar duplicados
-			if (!usuario.getUsuariosForIdUsuario2().contains(nuevoAmigo)) {
-				// Agregar el nuevo amigo a la lista
-				usuario.getUsuariosForIdUsuario2().add(nuevoAmigo);
-				// Establecer la relación en ambos lados (bidireccional)
-				nuevoAmigo.getUsuariosForIdUsuario2().add(usuario);
-				// Actualizar las entidades en la base de datos
-				session.update(usuario);
-				session.update(nuevoAmigo);
-			}
-			session.getTransaction().commit();
-                        hiber.closeSessionFactory();
-                } catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void eliminarAmigo(int idUsuario, int idAmigoEliminar) {
-		SessionFactory sessionFactory = hiber.Model();
-		try (Session session = sessionFactory.openSession()) {
-			session.beginTransaction();
-			// Cargar el usuario actual y el amigo a eliminar desde la base de datos
-			Usuario usuario = session.get(Usuario.class, idUsuario);
-			Usuario amigoEliminar = session.get(Usuario.class, idAmigoEliminar);
-			session.getTransaction().commit();
-            hiber.closeSessionFactory();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
+public void insertarUsuario(String username, String password, String correoRecuperacion, int edad, boolean esMenor) {
+    try (Session session = hiber.Model().openSession()) {
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            // Codificar la contraseña con Password4j
+            String hashedPassword = hashPassword(password);
+            // Crear y guardar el usuario
+            Usuario usuario = new Usuario(username, hashedPassword, correoRecuperacion, edad, esMenor);
+            session.save(usuario);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
 	public void cambiarContrasena(String correo, String nuevaContrasena) {
 		SessionFactory sessionFactory = hiber.Model();
 		try (Session session = sessionFactory.openSession()) {
@@ -102,25 +69,25 @@ public class model {
 	}
 
 	public void agregarTarjetaCredito(String correoUsuario, String numeroTarjeta, int codigoSeguridad) {
-		SessionFactory sessionFactory = hiber.Model();
-		try (Session session = sessionFactory.openSession()) {
-			session.beginTransaction();
-			// Buscar el usuario por correo
-			Usuario usuario = (Usuario) session.createQuery("FROM Usuario WHERE correo = :correo")
-					.setParameter("correo", correoUsuario).uniqueResult();
-			if (usuario != null) {
-				// Crear la nueva tarjeta de crédito
-				Tarjetacredito tarjetaCredito = new Tarjetacredito(usuario, numeroTarjeta, codigoSeguridad);
-				// Asociar la tarjeta de crédito con el usuario
-				usuario.setTarjetacredito(tarjetaCredito);
-				// Guardar la tarjeta de crédito en la base de datos
-				session.save(tarjetaCredito);
-				session.getTransaction().commit();
-			} else {
-				System.out.println("Usuario no encontrado.");
-			}
+            SessionFactory sessionFactory = hiber.Model();
+            try (Session session = sessionFactory.openSession()) {
+                session.beginTransaction();
+		// Buscar el usuario por correo
+		Usuario usuario = (Usuario) session.createQuery("FROM Usuario WHERE correo = :correo")
+				.setParameter("correo", correoUsuario).uniqueResult();
+		if (usuario != null) {
+                    // Crear la nueva tarjeta de crédito
+                    Tarjetacredito tarjetaCredito = new Tarjetacredito(usuario, numeroTarjeta, codigoSeguridad);
+                    // Asociar la tarjeta de crédito con el usuario
+                    usuario.setTarjetacredito(tarjetaCredito);
+                    // Guardar la tarjeta de crédito en la base de datos
+                    session.save(tarjetaCredito);
+                    session.getTransaction().commit();
+		} else {
+                    System.out.println("Usuario no encontrado.");
+		}
 		} catch (Exception e) {
-			e.printStackTrace();
+                    e.printStackTrace();
 		}
 	}
 
@@ -140,7 +107,7 @@ public class model {
 			query.setParameter("username", username);
 			Usuario usuario = query.uniqueResult();
 			// Verificar si se encontró un usuario y la contraseña coincide
-			return usuario != null /* && verificarPassword(password, usuario.getContrasenaEncriptada()) */;
+			return usuario != null && verificarPassword(password, usuario.getContrasenaEncriptada());
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
