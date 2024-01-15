@@ -172,6 +172,11 @@ public class nuevacuenta extends javax.swing.JPanel {
                 CodTarMouseClicked(evt);
             }
         });
+        CodTar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CodTarActionPerformed(evt);
+            }
+        });
         CodTar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 CodTarKeyPressed(evt);
@@ -378,6 +383,7 @@ public class nuevacuenta extends javax.swing.JPanel {
             CodTar.setText("");
             CodTar.setForeground(Color.white);
         }
+        NC.setEnabled(true);
     }//GEN-LAST:event_CodTarMouseClicked
 
     private void CodTarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CodTarKeyPressed
@@ -407,6 +413,16 @@ public class nuevacuenta extends javax.swing.JPanel {
             contra.requestFocus();
         }
     }//GEN-LAST:event_AliasKeyPressed
+
+    private void CodTarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CodTarActionPerformed
+         if((Nombre.getText().equals(defN))==false &&
+                Arrays.equals(contra.getPassword(), defC)==false&&
+                (Arrays.equals(ConfCont.getPassword(), defC)==false)&&
+                (Arrays.equals(ConfCont.getPassword(), contra.getPassword()))==true&& (!Tarjeta.getText().equals(defTar))
+                &&(Arrays.equals(CodTar.getPassword(),defCon))==false){
+             NC.setEnabled(true);
+         }
+    }//GEN-LAST:event_CodTarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
