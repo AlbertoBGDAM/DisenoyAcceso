@@ -6,7 +6,7 @@ package Model;
 
 /**
  *
- * @author ALBERTO BARCALA GUTIÉRREZ
+ * @author ALBERTO BARCALA GUTIÉRREZ 
  */
 
 import org.hibernate.Session;
