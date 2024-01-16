@@ -99,19 +99,19 @@ public void insertarUsuario(String username, String password, String correoRecup
 	}
 
 	public boolean verificarCredenciales(String username, String password) {
-		SessionFactory sessionFactory = hiber.Model();
-		try (Session session = sessionFactory.openSession()) {
-			session.beginTransaction();
-			// Query para obtener un usuario con el nombre dado
-			Query<Usuario> query = session.createQuery("FROM Usuario WHERE username = :username", Usuario.class);
-			query.setParameter("username", username);
-			Usuario usuario = query.uniqueResult();
-			// Verificar si se encontró un usuario y la contraseña coincide
-			return usuario != null && verificarPassword(password, usuario.getContrasenaEncriptada());
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
+            SessionFactory sessionFactory = hiber.Model();
+             try (Session session = sessionFactory.openSession()) {
+                // Cargar un usuario por ID
+                Long userId = 1L; // Cambia el valor según el ID del usuario que deseas cargar
+                Usuario usuario = session.load(Usuario.class, userId);
+                // Verificar si el usuario fue cargado
+                if (usuario != null) {
+                    return true;
+                }
+        } catch (Exception e) {
+                e.printStackTrace();
+            }
+                 return false;
 	}
 
 	private boolean verificarPassword(String password, String hashedPassword) {

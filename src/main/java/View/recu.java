@@ -37,8 +37,6 @@ class Recu extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        contraseña = new javax.swing.JLabel();
-        contra = new javax.swing.JPasswordField();
         nombre = new javax.swing.JLabel();
         Nombre = new javax.swing.JTextField();
         correo = new javax.swing.JButton();
@@ -46,26 +44,6 @@ class Recu extends javax.swing.JPanel {
         setBackground(new java.awt.Color(31, 37, 51));
         setMinimumSize(new java.awt.Dimension(432, 636));
         setPreferredSize(new java.awt.Dimension(432, 636));
-
-        contraseña.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
-        contraseña.setForeground(new java.awt.Color(255, 255, 255));
-        contraseña.setText("Nueva Contraseña:");
-
-        contra.setBackground(new java.awt.Color(31, 37, 51));
-        contra.setForeground(new java.awt.Color(255, 255, 255));
-        contra.setText("jPasswordField1");
-        contra.setMinimumSize(new java.awt.Dimension(139, 22));
-        contra.setPreferredSize(new java.awt.Dimension(139, 22));
-        contra.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                contraMouseClicked(evt);
-            }
-        });
-        contra.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                contraKeyPressed(evt);
-            }
-        });
 
         nombre.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
         nombre.setForeground(new java.awt.Color(255, 255, 255));
@@ -90,6 +68,7 @@ class Recu extends javax.swing.JPanel {
         correo.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         correo.setForeground(new java.awt.Color(255, 255, 255));
         correo.setText("Enviar nueva contraseña");
+        correo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         correo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 correoActionPerformed(evt);
@@ -104,13 +83,9 @@ class Recu extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(45, 45, 45)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(contraseña)
-                            .addComponent(nombre))
-                        .addGap(64, 64, 64)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(Nombre, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
-                            .addComponent(contra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(nombre)
+                        .addGap(156, 156, 156)
+                        .addComponent(Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(77, 77, 77)
                         .addComponent(correo)))
@@ -123,11 +98,7 @@ class Recu extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nombre)
                     .addComponent(Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(contra, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(91, 91, 91)
+                .addGap(166, 166, 166)
                 .addComponent(correo, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(156, 156, 156))
         );
@@ -147,34 +118,15 @@ class Recu extends javax.swing.JPanel {
     }//GEN-LAST:event_NombreKeyPressed
 
     private void correoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_correoActionPerformed
-        String nuevacontraseña=new String (contra.getPassword());
+        String nuevacontraseña="contraseñaprovisional";
 		mod.cambiarContrasena(Nombre.getText(), nuevacontraseña);
 		EmailUtil emailUtil = new EmailUtil();
 		emailUtil.sendEmail(Nombre.getText(), nuevacontraseña);
     }//GEN-LAST:event_correoActionPerformed
 
-    private void contraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_contraMouseClicked
-        if(Nombre.getText().equals("")){
-            Nombre.setText(defN);
-            Nombre.setForeground(Color.LIGHT_GRAY);
-        }
-        if(contra.getPassword().equals(defC)){
-            contra.setText("");
-            contra.setForeground(Color.black);
-        }
-    }//GEN-LAST:event_contraMouseClicked
-
-    private void contraKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_contraKeyPressed
-        if(evt.getExtendedKeyCode()==KeyEvent.VK_ENTER){
-            correo.requestFocus();
-        }        // TODO add your handling code here:
-    }//GEN-LAST:event_contraKeyPressed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Nombre;
-    private javax.swing.JPasswordField contra;
-    private javax.swing.JLabel contraseña;
     private javax.swing.JButton correo;
     private javax.swing.JLabel nombre;
     // End of variables declaration//GEN-END:variables

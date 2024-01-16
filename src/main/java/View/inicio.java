@@ -10,15 +10,14 @@ import com.formdev.flatlaf.intellijthemes.FlatGradiantoMidnightBlueIJTheme;
  * @author ALBERTO BARCALA GUTIÉRREZ
  */
 public class inicio extends javax.swing.JFrame {
-    Loging log =new Loging();
-    Recu rec= new Recu();
-    nuevacuenta nue= new nuevacuenta();
     /**
      * Creates new form NewJFrame
      */
     public inicio() {
+        setLocationRelativeTo(null);
         initComponents();
         atras.setVisible(false);
+        Loging log =new Loging();
         log.setSize(mobil.getWidth(),mobil.getHeight());
         log.setLocation(0,0);
         mobil.removeAll();
@@ -65,9 +64,10 @@ public class inicio extends javax.swing.JFrame {
         logo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         registrarse.setBackground(new java.awt.Color(25, 30, 42));
-        registrarse.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        registrarse.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
         registrarse.setForeground(new java.awt.Color(255, 255, 255));
         registrarse.setText("Registrarse");
+        registrarse.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         registrarse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 registrarseActionPerformed(evt);
@@ -75,9 +75,10 @@ public class inicio extends javax.swing.JFrame {
         });
 
         atras.setBackground(new java.awt.Color(25, 30, 42));
-        atras.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        atras.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
         atras.setForeground(new java.awt.Color(255, 255, 255));
         atras.setText("Atras");
+        atras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         atras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 atrasActionPerformed(evt);
@@ -85,9 +86,10 @@ public class inicio extends javax.swing.JFrame {
         });
 
         contraseña.setBackground(new java.awt.Color(25, 30, 42));
-        contraseña.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        contraseña.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
         contraseña.setForeground(new java.awt.Color(255, 255, 255));
         contraseña.setText("Restablecer contraseña");
+        contraseña.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         contraseña.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 contraseñaActionPerformed(evt);
@@ -147,6 +149,7 @@ public class inicio extends javax.swing.JFrame {
         atras.setVisible(true);
         contraseña.setVisible(false);
         registrarse.setVisible(false);
+        Recu rec= new Recu();
         rec.setSize(mobil.getWidth(),mobil.getHeight());
         rec.setLocation(0,0);
         mobil.removeAll();
@@ -159,6 +162,7 @@ public class inicio extends javax.swing.JFrame {
         atras.setVisible(false);
         contraseña.setVisible(true);
         registrarse.setVisible(true);
+        Loging log =new Loging();
         log.setSize(mobil.getWidth(),mobil.getHeight());
         log.setLocation(0,0);
         mobil.removeAll();
@@ -171,6 +175,7 @@ public class inicio extends javax.swing.JFrame {
         atras.setVisible(true);
         contraseña.setVisible(false);
         registrarse.setVisible(false);
+        nuevacuenta nue= new nuevacuenta();
         nue.setSize(mobil.getWidth(),mobil.getHeight());
         nue.setLocation(0,0);
         mobil.removeAll();

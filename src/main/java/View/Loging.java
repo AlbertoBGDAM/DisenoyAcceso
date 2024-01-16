@@ -85,6 +85,7 @@ public class Loging extends javax.swing.JPanel {
         conectarse.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         conectarse.setForeground(new java.awt.Color(255, 255, 255));
         conectarse.setText("Conectarse");
+        conectarse.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         conectarse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 conectarseActionPerformed(evt);
@@ -104,7 +105,7 @@ public class Loging extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(nombre)
                     .addComponent(contraseña))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(Nombre)
