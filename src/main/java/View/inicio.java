@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package View;
+import com.formdev.flatlaf.extras.FlatSVGIcon;
 import com.formdev.flatlaf.intellijthemes.FlatGradiantoMidnightBlueIJTheme;
 /**
  *
@@ -15,6 +16,7 @@ public class inicio extends javax.swing.JFrame {
     public inicio() {
         setLocationRelativeTo(null);
         initComponents();
+        logo.setIcon(new FlatSVGIcon( "image/atras.svg" ));
         atras.setVisible(false);
         Loging log =new Loging();
         log.setSize(mobil.getWidth(),mobil.getHeight());
@@ -59,7 +61,6 @@ public class inicio extends javax.swing.JFrame {
         fijo.setBackground(new java.awt.Color(28, 10, 67));
         fijo.setForeground(new java.awt.Color(28, 10, 67));
 
-        logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/logo.png"))); // NOI18N
         logo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         registrarse.setBackground(new java.awt.Color(25, 30, 42));

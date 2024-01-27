@@ -9,11 +9,21 @@ package Controller;
  * @author ALBERTO BARCALA GUTIÉRREZ
  */
 import View.*;
+import com.formdev.flatlaf.intellijthemes.FlatGradiantoMidnightBlueIJTheme;
 
 public class controller {
     private static inicio instancia = new inicio();
 
     public static void main(String[] args) {
+        FlatGradiantoMidnightBlueIJTheme.setup();
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                iniciar();
+            }
+        });
+    }
+
+    private static void iniciar() {
         instancia.setVisible(true);
     }
 
@@ -28,5 +38,6 @@ public class controller {
         mainFrame.setVisible(true);
     }
 }
+
 
 

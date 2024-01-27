@@ -15,6 +15,7 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 import com.password4j.*;
 import hibernate.*;
+import java.util.List;
 import javax.swing.JOptionPane;
 import org.hibernate.Transaction;
 
@@ -122,4 +123,16 @@ public void insertarUsuario(String username, String password, String correoRecup
 		var resultado = bcrypt.check(password, hash);
 		return resultado;
 	}
+        public List<Usuario> obtenerNoAmigos(int usuarioId) {
+             SessionFactory sessionFactory = hiber.Model();
+             try (Session session = sessionFactory.openSession()) {
+                Query query = session.createQuery("FROM Usuario u WHERE u.id NOT IN "
+                        + "(SELECT amigo.id FROM Usuario usuario JOIN usuario.amigos amigo WHERE usuario.id = :usuarioId)");
+                query.setParameter("usuarioId", usuarioId);
+                return query.list();
+            } catch (Exception e) {
+            e.printStackTrace();
+            }
+            return Collections.emptyList(); // En caso de error, devolver una lista vacía o manejar la excepción adecuadamente
+        }
 }

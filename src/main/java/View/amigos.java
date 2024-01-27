@@ -4,6 +4,7 @@
  */
 package View;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
+import com.formdev.flatlaf.intellijthemes.FlatGradiantoMidnightBlueIJTheme;
 /**
  *
  * @author Alumno
@@ -15,7 +16,7 @@ public class amigos extends javax.swing.JFrame {
      */
     public amigos() {
         initComponents();
-        atras.setIcon(new FlatSVGIcon( "atras.svg" ));
+        atras.setIcon(new FlatSVGIcon( "image/atras.svg" ));
     }
 
     /**
@@ -27,15 +28,61 @@ public class amigos extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        panelamigos = new javax.swing.JPanel();
+        Listaamigos = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
+        agregar = new javax.swing.JButton();
+        panellogo = new javax.swing.JPanel();
         Atras = new javax.swing.JPanel();
         atras = new javax.swing.JLabel();
         Icon = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
-        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        panelamigos.setBackground(new java.awt.Color(31, 37, 51));
+
+        jList1.setBackground(new java.awt.Color(45, 64, 87));
+        jList1.setForeground(new java.awt.Color(255, 255, 255));
+        jList1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Listaamigos.setViewportView(jList1);
+
+        agregar.setBackground(new java.awt.Color(25, 30, 42));
+        agregar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        agregar.setForeground(new java.awt.Color(255, 255, 255));
+        agregar.setText("Agregar amigos");
+        agregar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        javax.swing.GroupLayout panelamigosLayout = new javax.swing.GroupLayout(panelamigos);
+        panelamigos.setLayout(panelamigosLayout);
+        panelamigosLayout.setHorizontalGroup(
+            panelamigosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelamigosLayout.createSequentialGroup()
+                .addGroup(panelamigosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelamigosLayout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelamigosLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(Listaamigos, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(22, Short.MAX_VALUE))
+        );
+        panelamigosLayout.setVerticalGroup(
+            panelamigosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelamigosLayout.createSequentialGroup()
+                .addContainerGap(38, Short.MAX_VALUE)
+                .addComponent(Listaamigos, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38))
+        );
+
+        getContentPane().add(panelamigos, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 0, 420, 430));
+
+        panellogo.setBackground(new java.awt.Color(44, 47, 72));
+        panellogo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        Atras.setBackground(new java.awt.Color(44, 47, 72));
 
         atras.setPreferredSize(new java.awt.Dimension(70, 70));
 
@@ -44,33 +91,22 @@ public class amigos extends javax.swing.JFrame {
         AtrasLayout.setHorizontalGroup(
             AtrasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AtrasLayout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(atras, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE))
+                .addGap(124, 124, 124)
+                .addComponent(atras, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE))
         );
         AtrasLayout.setVerticalGroup(
             AtrasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AtrasLayout.createSequentialGroup()
                 .addGap(0, 0, 0)
-                .addComponent(atras, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
-                .addGap(0, 0, 0))
+                .addComponent(atras, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        getContentPane().add(Atras, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 70, 70));
+        panellogo.add(Atras, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 70, 70));
 
         Icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/logo.png"))); // NOI18N
-        getContentPane().add(Icon, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        panellogo.add(Icon, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane1.setViewportView(jList1);
-
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 0, 380, 246));
-
-        jButton1.setText("jButton1");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 280, 330, 90));
+        getContentPane().add(panellogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -10, 390, 440));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -78,13 +114,14 @@ public class amigos extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Atras;
     private javax.swing.JLabel Icon;
+    private javax.swing.JScrollPane Listaamigos;
+    private javax.swing.JButton agregar;
     private javax.swing.JLabel atras;
-    private javax.swing.JButton jButton1;
     private javax.swing.JList<String> jList1;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel panelamigos;
+    private javax.swing.JPanel panellogo;
     // End of variables declaration//GEN-END:variables
 }
