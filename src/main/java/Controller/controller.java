@@ -9,13 +9,24 @@ package Controller;
  * @author ALBERTO BARCALA GUTIÉRREZ
  */
 import View.*;
+
 public class controller {
-    /**
-     * @param args the command line arguments
-     */
+    private static inicio instancia = new inicio();
+
     public static void main(String[] args) {
-        inicio.main();
-        
+        instancia.setVisible(true);
     }
-    
+
+    public static void abrirMainFrame() {
+        // Cerrar el JFrame actual
+        if (instancia != null) {
+            instancia.dispose();
+        }
+
+        // Crear e mostrar el nuevo JFrame (Main)
+        main mainFrame = new main();
+        mainFrame.setVisible(true);
+    }
 }
+
+

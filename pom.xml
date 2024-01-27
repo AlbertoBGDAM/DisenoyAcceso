@@ -54,4 +54,11 @@
             <version>5.1.47</version>
         </dependency>
     </dependencies>
+        <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources/image</directory>
+            </resource>
+        </resources>
+        </build>
 </project>

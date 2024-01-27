@@ -4,6 +4,7 @@
  */
 package View;
 
+import Controller.controller;
 import Model.model;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
@@ -154,6 +155,7 @@ public class Loging extends javax.swing.JPanel {
         }else{
             JOptionPane.showMessageDialog(null, "Credenciales incorrectas. Inténtalo de nuevo.", "Mensaje de Error", JOptionPane.ERROR_MESSAGE);
         }
+        controller.abrirMainFrame();
     }//GEN-LAST:event_conectarseActionPerformed
 
     private void contraKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_contraKeyPressed
