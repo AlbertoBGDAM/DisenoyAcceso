@@ -172,4 +172,28 @@ public void insertarUsuario(String username, String password, String correoRecup
                 e.printStackTrace();
             }
     }
+    public List<Musica> obtenerMusicasCompradas(int i) {
+        SessionFactory sessionFactory = hiber.Model();
+        try (Session session = sessionFactory.openSession()) {
+            Query query = session.createQuery("FROM Compras WHERE id_usuario = :usuarioId");
+            query.setParameter("usuarioId", user.getId());
+            if(i != 0) {
+                query.setMaxResults(3);
+            }
+            List<Compras> compras = query.list();
+            return compras.stream().map(Compras::getMusica).toList();
+        }
+    }
+    public JPanel crearMusicaPanel(Musica musica) {
+        JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
+        JLabel nombreLabel = new JLabel(musica.getNombre());
+        JLabel descripcionLabel = new JLabel(musica.getDescripcion());
+        JLabel creadorLabel = new JLabel("Creador: " + musica.getCreador());
+        panel.add(nombreLabel, BorderLayout.NORTH);
+        panel.add(descripcionLabel, BorderLayout.CENTER);
+        panel.add(creadorLabel, BorderLayout.SOUTH);
+        panel.setPreferredSize(new Dimension(320, 280));
+        return panel;
+    }
 }

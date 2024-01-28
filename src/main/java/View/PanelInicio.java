@@ -5,9 +5,10 @@
 package View;
 
 import Model.model;
-import hibernate.Juegos;
+import hibernate.*;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.List;
 import javax.swing.BorderFactory;
@@ -20,11 +21,13 @@ import javax.swing.JPanel;
  */
 public class PanelInicio extends javax.swing.JPanel {
     private JPanel panelCambia;
+    private JPanel panelInformacion;
     /**
      * Creates new form PanelInicio
      */
     model model=new model();
     public PanelInicio() {
+        initComponents();
         panelCambia = new JPanel(new BorderLayout());
         panelCambia.setBorder(BorderFactory.createEmptyBorder(133, 36, 433, 33));
         // Configurar el panel de juegos
@@ -36,9 +39,16 @@ public class PanelInicio extends javax.swing.JPanel {
             panelmenu.add(juegoPanel);
         }
         panelCambia.add(panelmenu, BorderLayout.CENTER);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(new BorderLayout());
-        add(panelCambia, BorderLayout.CENTER);
+        List<Musica> musicas = model.obtenerMusicasCompradas(0);
+        panelInformacion = new JPanel();
+        panelInformacion.setPreferredSize(new Dimension(1069, 135));
+        panelInformacion.setBorder(BorderFactory.createEmptyBorder(65, 192, 53, 600));
+        panelCambia = new JPanel(new GridLayout(0, 3, 50, 50));
+        panelCambia.setBorder(BorderFactory.createEmptyBorder(133, 36, 214, 33));
+        for (Musica musica : musicas) {
+            JPanel musicaPanel = model.crearMusicaPanel(musica);
+            panelCambia.add(musicaPanel);
+        }
     }
 
     /**
