@@ -152,10 +152,11 @@ public class Loging extends javax.swing.JPanel {
         boolean ver=model.verificarCredenciales(Nombre.getText(), String.valueOf(contra.getPassword()));
         if (ver==true){
             JOptionPane.showMessageDialog(null, "¡Bienvenido!", "Mensaje de Bienvenida", JOptionPane.INFORMATION_MESSAGE);
+            model.setUser(Nombre.getText(), String.valueOf(contra.getPassword()));
+            controller.abrirMainFrame();
         }else{
             JOptionPane.showMessageDialog(null, "Credenciales incorrectas. Inténtalo de nuevo.", "Mensaje de Error", JOptionPane.ERROR_MESSAGE);
         }
-        controller.abrirMainFrame();
     }//GEN-LAST:event_conectarseActionPerformed
 
     private void contraKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_contraKeyPressed

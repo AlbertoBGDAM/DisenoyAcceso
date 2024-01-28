@@ -4,7 +4,6 @@
  */
 package View;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
-import com.formdev.flatlaf.intellijthemes.FlatGradiantoMidnightBlueIJTheme;
 /**
  *
  * @author ALBERTO BARCALA GUTIÉRREZ
@@ -16,15 +15,8 @@ public class inicio extends javax.swing.JFrame {
     public inicio() {
         setLocationRelativeTo(null);
         initComponents();
-        logo.setIcon(new FlatSVGIcon( "image/atras.svg" ));
-        atras.setVisible(false);
-        Loging log =new Loging();
-        log.setSize(mobil.getWidth(),mobil.getHeight());
-        log.setLocation(0,0);
-        mobil.removeAll();
-        mobil.add(log);
-        mobil.revalidate();
-        mobil.repaint();
+        logo.setIcon(new FlatSVGIcon( "image/logo.svg" ));
+        cambiarPanel(new Loging(),false);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -146,44 +138,27 @@ public class inicio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void contraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contraseñaActionPerformed
-        atras.setVisible(true);
-        contraseña.setVisible(false);
-        registrarse.setVisible(false);
-        Recu rec= new Recu();
-        rec.setSize(mobil.getWidth(),mobil.getHeight());
-        rec.setLocation(0,0);
-        mobil.removeAll();
-        mobil.add(rec);
-        mobil.revalidate();
-        mobil.repaint();
+        cambiarPanel(new Recu(),true);
     }//GEN-LAST:event_contraseñaActionPerformed
 
     private void atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atrasActionPerformed
-        atras.setVisible(false);
-        contraseña.setVisible(true);
-        registrarse.setVisible(true);
-        Loging log =new Loging();
-        log.setSize(mobil.getWidth(),mobil.getHeight());
-        log.setLocation(0,0);
-        mobil.removeAll();
-        mobil.add(log);
-        mobil.revalidate();
-        mobil.repaint();
+        cambiarPanel(new Loging(),false);
     }//GEN-LAST:event_atrasActionPerformed
 
     private void registrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarseActionPerformed
-        atras.setVisible(true);
-        contraseña.setVisible(false);
-        registrarse.setVisible(false);
-        nuevacuenta nue= new nuevacuenta();
-        nue.setSize(mobil.getWidth(),mobil.getHeight());
-        nue.setLocation(0,0);
+        cambiarPanel(new nuevacuenta(),false);
+    }//GEN-LAST:event_registrarseActionPerformed
+    private void cambiarPanel(javax.swing.JPanel nuevoPanel,boolean atrass) {
+        atras.setVisible(atrass);
+        contraseña.setVisible(!atrass);
+        registrarse.setVisible(!atrass);
+        nuevoPanel.setSize(mobil.getWidth(), mobil.getHeight());
+        nuevoPanel.setLocation(0, 0);
         mobil.removeAll();
-        mobil.add(nue);
+        mobil.add(nuevoPanel);
         mobil.revalidate();
         mobil.repaint();
-    }//GEN-LAST:event_registrarseActionPerformed
-
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton atras;

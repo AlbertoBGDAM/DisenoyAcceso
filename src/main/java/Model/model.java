@@ -11,16 +11,18 @@ package Model;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 import com.password4j.*;
 import hibernate.*;
 import java.util.List;
 import javax.swing.JOptionPane;
 import org.hibernate.Transaction;
-import View.;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 public class model {
-
+        Usuario user;
 	Hibernate hiber = new Hibernate();
 
 public void insertarUsuario(String username, String password, String correoRecuperacion, int edad, boolean esMenor) {
@@ -109,7 +111,7 @@ public void insertarUsuario(String username, String password, String correoRecup
                 if (usuario != null) {
                     return true;
                 }
-        } catch (Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
                  return false;
@@ -135,16 +137,39 @@ public void insertarUsuario(String username, String password, String correoRecup
             }
             return null;
         }
-
-    /**
-     *
-     * @param atras
-     * @param log
-     * @param rec
-     * @param nue
-     * @param selection
-     */
-    public void cambiar(boolean atras,Loging log, Recu rec, nuevacuenta nue, int selection ){
-            
+        public List<Juegos> obtenerJuegosComprados(int i) {
+            SessionFactory sessionFactory = hiber.Model();
+            try (Session session = sessionFactory.openSession()) {
+                Query query = session.createQuery("FROM Compras WHERE id_usuario = :usuarioId");
+                query.setParameter("usuarioId", user.getId());
+                if(i!=0){
+                    query.setMaxResults(3);
+                }
+                List<Compras> compras = query.list();
+                return compras.stream().map(Compras::getJuegos).toList();
+            }
         }
+        public JPanel crearJuegoPanel(Juegos juego) {
+            JPanel panel = new JPanel();
+            panel.setLayout(new BorderLayout());
+            JLabel nombreLabel = new JLabel(juego.getNombre());
+            JLabel descripcionLabel = new JLabel(juego.getDescripcion());
+            JLabel creadorLabel = new JLabel("Creador: " + juego.getCreador());
+            panel.add(nombreLabel, BorderLayout.NORTH);
+            panel.add(descripcionLabel, BorderLayout.CENTER);
+            panel.add(creadorLabel, BorderLayout.SOUTH);
+            panel.setPreferredSize(new Dimension(320, 280));
+        return panel;
+    }
+
+    public void setUser(String text, String valueOf) {
+        SessionFactory sessionFactory = hiber.Model();
+             try (Session session = sessionFactory.openSession()) {
+                // Cargar un usuario por ID
+                Long userId = 1L; // Cambia el valor según el ID del usuario que deseas cargar
+                user = session.load(Usuario.class, userId);
+            }catch (Exception e) {
+                e.printStackTrace();
+            }
+    }
 }
