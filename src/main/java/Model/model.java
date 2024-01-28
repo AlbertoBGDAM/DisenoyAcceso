@@ -18,7 +18,7 @@ import hibernate.*;
 import java.util.List;
 import javax.swing.JOptionPane;
 import org.hibernate.Transaction;
-
+import View.;
 public class model {
 
 	Hibernate hiber = new Hibernate();
@@ -133,6 +133,18 @@ public void insertarUsuario(String username, String password, String correoRecup
             } catch (Exception e) {
             e.printStackTrace();
             }
-            return Collections.emptyList(); // En caso de error, devolver una lista vacía o manejar la excepción adecuadamente
+            return null;
+        }
+
+    /**
+     *
+     * @param atras
+     * @param log
+     * @param rec
+     * @param nue
+     * @param selection
+     */
+    public void cambiar(boolean atras,Loging log, Recu rec, nuevacuenta nue, int selection ){
+            
         }
 }
