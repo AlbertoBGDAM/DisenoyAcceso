@@ -12,11 +12,12 @@ import javax.swing.JPanel;
  *
  * @author ALBERTO BARCALA GUTIÉRREZ
  */
-public class main extends javax.swing.JFrame {
+public class Interior extends javax.swing.JFrame {
+
     /**
      * Creates new form main
      */
-    public main() {
+    public Interior() {
         initComponents();
     }
 
@@ -65,7 +66,6 @@ public class main extends javax.swing.JFrame {
 
         principal.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         principal.setForeground(new java.awt.Color(255, 255, 255));
-        principal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Explore.png"))); // NOI18N
         principal.setText("Home");
         principal.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -95,7 +95,6 @@ public class main extends javax.swing.JFrame {
 
         comprar.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         comprar.setForeground(new java.awt.Color(255, 255, 255));
-        comprar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Tech.png"))); // NOI18N
         comprar.setText("Comprar");
         comprar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -125,7 +124,6 @@ public class main extends javax.swing.JFrame {
 
         jugar.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jugar.setForeground(new java.awt.Color(255, 255, 255));
-        jugar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Education.png"))); // NOI18N
         jugar.setText("Jugar");
         jugar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -155,7 +153,6 @@ public class main extends javax.swing.JFrame {
 
         musica.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         musica.setForeground(new java.awt.Color(255, 255, 255));
-        musica.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Music.png"))); // NOI18N
         musica.setText("Musica");
         musica.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -185,7 +182,6 @@ public class main extends javax.swing.JFrame {
 
         amigos.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         amigos.setForeground(new java.awt.Color(255, 255, 255));
-        amigos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Symbol.png"))); // NOI18N
         amigos.setText("Amigos");
         amigos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -360,6 +356,37 @@ private void colores(javax.swing.JPanel Panelpuesto){
         Principal.setBackground(Color.decode("#2C2F48"));
         Panelpuesto.setBackground(Color.black);
 }
+public static void main() {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Interior.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Interior.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Interior.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Interior.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        FlatGradiantoMidnightBlueIJTheme.setup();
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Interior().setVisible(true);
+            }
+        });
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Amigos;
     private javax.swing.JPanel Cambiante;

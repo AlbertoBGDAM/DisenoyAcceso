@@ -5,6 +5,7 @@
 package View;
 
 import Model.model;
+import hibernate.Usuario;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.util.Arrays;
@@ -315,10 +316,10 @@ public class nuevacuenta extends javax.swing.JPanel {
             if(edades<18){
                 menor=true;
             }
-            mod.insertarUsuario(Alias.getText(),String.valueOf(contra.getPassword())
+            Usuario user= mod.insertarUsuario(Alias.getText(),String.valueOf(contra.getPassword())
                     ,Nombre.getText(),edades,menor);
             int codigo=Integer.parseInt(String.valueOf(CodTar.getPassword()));
-            mod.agregarTarjetaCredito(Nombre.getText(), 
+            mod.agregarTarjetaCredito(user, 
                     Tarjeta.getText(),codigo);
         }
     }//GEN-LAST:event_NCActionPerformed

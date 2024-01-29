@@ -1,5 +1,5 @@
 package hibernate;
-// Generated 11 ene 2024 18:58:00 by Hibernate Tools 5.4.33.Final
+// Generated 29 ene 2024 18:07:53 by Hibernate Tools 5.4.33.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -15,40 +15,40 @@ public class Usuario implements java.io.Serializable {
 	private String contrasenaEncriptada;
 	private Integer edad;
 	private Boolean esMenor;
+	private String numeroTarjeta;
+	private Integer codigoSeguridad;
 	private Set musicas = new HashSet(0);
 	private Set juegoses = new HashSet(0);
 	private Set usuariosForIdUsuario1 = new HashSet(0);
 	private Set usuariosForIdUsuario2 = new HashSet(0);
 	private Set comprases = new HashSet(0);
 	private Set historials = new HashSet(0);
-	private Tarjetacredito tarjetacredito;
 
 	public Usuario() {
 	}
 
-	public Usuario(String username, String correo, String contrasenaEncriptada, int edad2, boolean esMenor2) {
+	public Usuario(String username, String correo, String contrasenaEncriptada) {
 		this.username = username;
 		this.correo = correo;
 		this.contrasenaEncriptada = contrasenaEncriptada;
-		this.edad=edad2;
-		this.esMenor=esMenor2;
 	}
 
 	public Usuario(String username, String correo, String contrasenaEncriptada, Integer edad, Boolean esMenor,
-			Set musicas, Set juegoses, Set usuariosForIdUsuario1, Set usuariosForIdUsuario2, Set comprases,
-			Set historials, Tarjetacredito tarjetacredito) {
+			String numeroTarjeta, Integer codigoSeguridad, Set musicas, Set juegoses, Set usuariosForIdUsuario1,
+			Set usuariosForIdUsuario2, Set comprases, Set historials) {
 		this.username = username;
 		this.correo = correo;
 		this.contrasenaEncriptada = contrasenaEncriptada;
 		this.edad = edad;
 		this.esMenor = esMenor;
+		this.numeroTarjeta = numeroTarjeta;
+		this.codigoSeguridad = codigoSeguridad;
 		this.musicas = musicas;
 		this.juegoses = juegoses;
 		this.usuariosForIdUsuario1 = usuariosForIdUsuario1;
 		this.usuariosForIdUsuario2 = usuariosForIdUsuario2;
 		this.comprases = comprases;
 		this.historials = historials;
-		this.tarjetacredito = tarjetacredito;
 	}
 
 	public Integer getId() {
@@ -99,6 +99,22 @@ public class Usuario implements java.io.Serializable {
 		this.esMenor = esMenor;
 	}
 
+	public String getNumeroTarjeta() {
+		return this.numeroTarjeta;
+	}
+
+	public void setNumeroTarjeta(String numeroTarjeta) {
+		this.numeroTarjeta = numeroTarjeta;
+	}
+
+	public Integer getCodigoSeguridad() {
+		return this.codigoSeguridad;
+	}
+
+	public void setCodigoSeguridad(Integer codigoSeguridad) {
+		this.codigoSeguridad = codigoSeguridad;
+	}
+
 	public Set getMusicas() {
 		return this.musicas;
 	}
@@ -145,14 +161,6 @@ public class Usuario implements java.io.Serializable {
 
 	public void setHistorials(Set historials) {
 		this.historials = historials;
-	}
-
-	public Tarjetacredito getTarjetacredito() {
-		return this.tarjetacredito;
-	}
-
-	public void setTarjetacredito(Tarjetacredito tarjetacredito) {
-		this.tarjetacredito = tarjetacredito;
 	}
 
 }

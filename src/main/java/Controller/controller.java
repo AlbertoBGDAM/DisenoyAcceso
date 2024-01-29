@@ -11,33 +11,15 @@ package Controller;
 import View.*;
 import com.formdev.flatlaf.intellijthemes.FlatGradiantoMidnightBlueIJTheme;
 
-public class controller {
-    private static inicio instancia = new inicio();
-
+public  class controller {
+    static inicio in=new inicio();
+    static Interior main= new Interior();
     public static void main(String[] args) {
-        FlatGradiantoMidnightBlueIJTheme.setup();
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                iniciar();
-            }
-        });
-    }
-
-    private static void iniciar() {
-        instancia.setVisible(true);
-    }
-
+        in.main();
+        
+    } 
     public static void abrirMainFrame() {
-        // Cerrar el JFrame actual
-        if (instancia != null) {
-            instancia.dispose();
-        }
-
-        // Crear e mostrar el nuevo JFrame (Main)
-        main mainFrame = new main();
-        mainFrame.setVisible(true);
+        in.dispose();
+        main.main();
     }
 }
-
-
-

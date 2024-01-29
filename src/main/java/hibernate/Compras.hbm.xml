@@ -1,21 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Generated 11 ene 2024 18:58:00 by Hibernate Tools 5.4.33.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 29 ene 2024 18:07:53 by Hibernate Tools 5.4.33.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class catalog="proyectoalberto" name="Compras" optimistic-lock="none" table="compras">
+    <class catalog="proyectoalberto" name="hibernate.Compras" optimistic-lock="none" table="compras">
         <id name="id" type="java.lang.Integer">
             <column name="id"/>
             <generator class="identity"/>
         </id>
-        <many-to-one class="Juegos" fetch="select" name="juegos">
+        <many-to-one class="hibernate.Juegos" fetch="select" name="juegos">
             <column name="id_juego"/>
         </many-to-one>
-        <many-to-one class="Musica" fetch="select" name="musica">
+        <many-to-one class="hibernate.Musica" fetch="select" name="musica">
             <column name="id_musica"/>
         </many-to-one>
-        <many-to-one class="Tarjetacredito" fetch="select" name="tarjetacredito">
-            <column name="id_usuario"/>
-        </many-to-one>
-        <many-to-one class="Usuario" fetch="select" insert="false" name="usuario" update="false">
+        <many-to-one class="hibernate.Usuario" fetch="select" name="usuario">
             <column name="id_usuario"/>
         </many-to-one>
         <property name="fechaCompra" type="timestamp">

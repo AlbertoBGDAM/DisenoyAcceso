@@ -1,5 +1,5 @@
 package hibernate;
-// Generated 11 ene 2024 18:58:00 by Hibernate Tools 5.4.33.Final
+// Generated 29 ene 2024 18:07:53 by Hibernate Tools 5.4.33.Final
 
 import java.util.Date;
 
@@ -11,17 +11,15 @@ public class Compras implements java.io.Serializable {
 	private Integer id;
 	private Juegos juegos;
 	private Musica musica;
-	private Tarjetacredito tarjetacredito;
 	private Usuario usuario;
 	private Date fechaCompra;
 
 	public Compras() {
 	}
 
-	public Compras(Juegos juegos, Musica musica, Tarjetacredito tarjetacredito, Usuario usuario, Date fechaCompra) {
+	public Compras(Juegos juegos, Musica musica, Usuario usuario, Date fechaCompra) {
 		this.juegos = juegos;
 		this.musica = musica;
-		this.tarjetacredito = tarjetacredito;
 		this.usuario = usuario;
 		this.fechaCompra = fechaCompra;
 	}
@@ -48,14 +46,6 @@ public class Compras implements java.io.Serializable {
 
 	public void setMusica(Musica musica) {
 		this.musica = musica;
-	}
-
-	public Tarjetacredito getTarjetacredito() {
-		return this.tarjetacredito;
-	}
-
-	public void setTarjetacredito(Tarjetacredito tarjetacredito) {
-		this.tarjetacredito = tarjetacredito;
 	}
 
 	public Usuario getUsuario() {
