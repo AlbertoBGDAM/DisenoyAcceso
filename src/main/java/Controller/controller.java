@@ -11,15 +11,17 @@ package Controller;
 import View.*;
 import com.formdev.flatlaf.intellijthemes.FlatGradiantoMidnightBlueIJTheme;
 
-public  class controller {
-    static inicio in=new inicio();
-    static Interior main= new Interior();
-    public static void main(String[] args) {
-        in.main();
-        
-    } 
-    public static void abrirMainFrame() {
-        in.dispose();
-        main.main();
-    }
+public class controller {
+	static inicio in = new inicio();
+	static Interior main = new Interior();
+
+	public static void main(String[] args) {
+		in.main();
+
+	}
+
+	public static void abrirMainFrame() {
+		in.dispose();
+		main.main();
+	}
 }

@@ -13,22 +13,23 @@ import org.hibernate.cfg.Configuration;
  * @author Alumno
  */
 public class Hibernate {
-    SessionFactory sessionFactory = Model();
-    public SessionFactory Model() {
-    	 try {
-             return new Configuration().configure().buildSessionFactory(
-                     new StandardServiceRegistryBuilder().configure().build());
-         } catch (Throwable ex) {
-             System.err.println(ex);
-             throw new ExceptionInInitializerError(ex);
-         }
-    }
+	SessionFactory sessionFactory = Model();
 
-    public void closeSessionFactory() {
-        // Cerrar la fábrica de sesiones al cerrar la aplicación
-        if (sessionFactory != null) {
-            sessionFactory.close();
-        }
-    }
-    
+	public SessionFactory Model() {
+		try {
+			return new Configuration().configure()
+					.buildSessionFactory(new StandardServiceRegistryBuilder().configure().build());
+		} catch (Throwable ex) {
+			System.err.println(ex);
+			throw new ExceptionInInitializerError(ex);
+		}
+	}
+
+	public void closeSessionFactory() {
+		// Cerrar la fábrica de sesiones al cerrar la aplicación
+		if (sessionFactory != null) {
+			sessionFactory.close();
+		}
+	}
+
 }

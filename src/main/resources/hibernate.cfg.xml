@@ -10,5 +10,10 @@
         <property name="hibernate.hbm2ddl.auto">none</property>
         <property name="hibernate.search.autoregister_listeners">true</property>
         <property name="hibernate.validator.apply_to_ddl">false</property>
+        <mapping resource="hibernate/Compras.hbm.xml"/>
+        <mapping resource="hibernate/Juegos.hbm.xml"/>
+        <mapping resource="hibernate/Usuario.hbm.xml"/>
+        <mapping resource="hibernate/Musica.hbm.xml"/>
+        <mapping resource="hibernate/Historial.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>

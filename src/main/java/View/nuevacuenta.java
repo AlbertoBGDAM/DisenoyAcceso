@@ -306,21 +306,24 @@ public class nuevacuenta extends javax.swing.JPanel {
     }//GEN-LAST:event_NombreKeyPressed
 
     private void NCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NCActionPerformed
-        if((Nombre.getText().equals(defN))==false &&
-                Arrays.equals(contra.getPassword(), defC)==false&&
-                (Arrays.equals(ConfCont.getPassword(), defC)==false)&&
-                (Arrays.equals(ConfCont.getPassword(), contra.getPassword()))==true&& (!Tarjeta.getText().equals(defTar))
-                &&(Arrays.equals(CodTar.getPassword(),defCon))==false){
-            int edades=(int) Edad.getValue();
-            boolean menor=false;
-            if(edades<18){
-                menor=true;
-            }
-            Usuario user= mod.insertarUsuario(Alias.getText(),String.valueOf(contra.getPassword())
-                    ,Nombre.getText(),edades,menor);
-            int codigo=Integer.parseInt(String.valueOf(CodTar.getPassword()));
-            mod.agregarTarjetaCredito(user, 
-                    Tarjeta.getText(),codigo);
+        if (!Nombre.getText().equals(defN) &&
+            !Arrays.equals(contra.getPassword(), defC) &&
+            !Arrays.equals(ConfCont.getPassword(), defC) &&
+            Arrays.equals(ConfCont.getPassword(), contra.getPassword()) &&
+            !Tarjeta.getText().equals(defTar) &&
+            !Arrays.equals(CodTar.getPassword(), defCon)) {
+                int edades = (int) Edad.getValue();
+                boolean menor = edades < 18;
+                Usuario user = mod.insertarUsuario(Alias.getText(), String.valueOf(contra.getPassword()),
+                Nombre.getText(), edades, menor);
+                if (user != null) {
+                    int codigo = Integer.parseInt(String.valueOf(CodTar.getPassword()));
+                    mod.agregarTarjetaCredito(user, Tarjeta.getText(), codigo);
+                } else {
+                    System.out.println("Error al insertar el usuario.");
+                }
+                } else {
+                    System.out.println("Condiciones no cumplidas para insertar el usuario.");
         }
     }//GEN-LAST:event_NCActionPerformed
 
