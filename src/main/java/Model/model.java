@@ -126,16 +126,7 @@ public class model {
 		}
 	}
 
-	private boolean verificarPassword(String password, String hashedPassword) {
-		// Verificar la contraseña utilizando Password4j
-		var bcrypt = BcryptFunction.getInstance(12);
-		var hash = "$2b$12$oG3H0L4Xhg28OHreCFM4zeIQIykLb4y356m6qn9GkbOc9i1.lbUne";
-		var result = bcrypt.hash(password).getResult();
-		var resultado = bcrypt.check(password, hash);
-		return resultado;
-	}
-
-	public List<Usuario> obtenerNoAmigos(int usuarioId) {
+        public List<Usuario> obtenerNoAmigos(int usuarioId) {
 		SessionFactory sessionFactory = hiber.Model();
 		try (Session session = sessionFactory.openSession()) {
 			Query query = session.createQuery("FROM Usuario u WHERE u.id NOT IN "
@@ -161,18 +152,21 @@ public class model {
 		}
 	}
 
-	public JPanel crearJuegoPanel(Juegos juego) {
-		JPanel panel = new JPanel();
-		panel.setLayout(new BorderLayout());
-		JLabel nombreLabel = new JLabel(juego.getNombre());
-		JLabel descripcionLabel = new JLabel(juego.getDescripcion());
-		JLabel creadorLabel = new JLabel("Creador: " + juego.getCreador());
-		panel.add(nombreLabel, BorderLayout.NORTH);
-		panel.add(descripcionLabel, BorderLayout.CENTER);
-		panel.add(creadorLabel, BorderLayout.SOUTH);
-		panel.setPreferredSize(new Dimension(320, 280));
-		return panel;
-	}
+        public List<Juegos> obtenerPrimerosTresJuegos() {
+            SessionFactory sessionFactory = hiber.Model();
+            try (Session session = sessionFactory.openSession()) {
+                session.beginTransaction();
+            // Utiliza HQL para obtener los tres primeros juegos de la tabla
+            Query query = session.createQuery("FROM Juego");
+            query.setMaxResults(3);  // Limitar a tres resultados
+            List<Juegos> juegos = query.list();
+            session.getTransaction().commit();
+            return juegos;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
 	public void setUser(String text, String valueOf) {
 		SessionFactory sessionFactory = hiber.Model();

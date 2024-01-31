@@ -20,37 +20,41 @@ import javax.swing.JPanel;
  * @author ALBERTO BARCALA GUTIÉRREZ
  */
 public class PanelInicio extends javax.swing.JPanel {
-	private JPanel panelCambia;
-	private JPanel panelInformacion;
-	/**
-	 * Creates new form PanelInicio
-	 */
-	model model = new model();
+    private JPanel panelCambia;
+    private JPanel panelInformacion;
+    
+    model model = new model();
 
-	public PanelInicio() {
-		initComponents();
-		panelCambia = new JPanel(new BorderLayout());
-		panelCambia.setBorder(BorderFactory.createEmptyBorder(133, 36, 433, 33));
-		// Configurar el panel de juegos
-		panelmenu = new JPanel(new GridLayout(1, 3, 50, 0));
-		List<Juegos> juegos = model.obtenerJuegosComprados(3);
-		// Crear paneles de juegos y agregarlos al panel de juegos
-		for (Juegos juego : juegos) {
-			JPanel juegoPanel = model.crearJuegoPanel(juego);
-			panelmenu.add(juegoPanel);
-		}
-		panelCambia.add(panelmenu, BorderLayout.CENTER);
-		List<Musica> musicas = model.obtenerMusicasCompradas(0);
-		panelInformacion = new JPanel();
-		panelInformacion.setPreferredSize(new Dimension(1069, 135));
-		panelInformacion.setBorder(BorderFactory.createEmptyBorder(65, 192, 53, 600));
-		panelCambia = new JPanel(new GridLayout(0, 3, 50, 50));
-		panelCambia.setBorder(BorderFactory.createEmptyBorder(133, 36, 214, 33));
-		for (Musica musica : musicas) {
-			JPanel musicaPanel = model.crearMusicaPanel(musica);
-			panelCambia.add(musicaPanel);
-		}
-	}
+    /**
+     * Creates new form PanelInicio
+     */
+    public PanelInicio() {
+        initComponents();
+        List<Juegos> juegos = model.obtenerJuegosComprados(3);
+        if (juegos == null || juegos.isEmpty()) {
+            juegos = model.obtenerPrimerosTresJuegos();
+        }
+
+        // Crear paneles de juegos y agregarlos al panel de juegos
+        for (Juegos juego : juegos) {
+            jueg
+            panelCambia.add(juegoPanel);
+        }
+
+        // Configurar el panel de música
+        panelInformacion = new JPanel();
+        panelInformacion.setPreferredSize(new Dimension(1069, 135));
+        panelInformacion.setBorder(BorderFactory.createEmptyBorder(65, 192, 53, 600));
+
+        List<Musica> musicas = model.obtenerMusicasCompradas(0);
+        panelCambia = new JPanel(new GridLayout(0, 3, 50, 50));
+        panelCambia.setBorder(BorderFactory.createEmptyBorder(133, 36, 214, 33));
+
+        for (Musica musica : musicas) {
+            JPanel musicaPanel = model.crearMusicaPanel(musica);
+            panelCambia.add(musicaPanel);
+        }
+    }
 
 	/**
 	 * This method is called from within the constructor to initialize the form.

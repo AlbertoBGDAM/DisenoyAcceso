@@ -14,7 +14,6 @@ import org.hibernate.cfg.Configuration;
  */
 public class Hibernate {
 	SessionFactory sessionFactory = Model();
-
 	public SessionFactory Model() {
 		try {
 			return new Configuration().configure()
