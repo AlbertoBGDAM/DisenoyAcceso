@@ -9,12 +9,18 @@ import com.password4j.types.Bcrypt;
 import hibernate.*;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.util.ArrayList;
+import java.util.Iterator;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import java.util.List;
+import java.util.Set;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
 
 public class model {
+   
 	Usuario user;
 	Hibernate hiber = new Hibernate();
 
@@ -114,10 +120,8 @@ public class model {
                         
 			if(BcryptFunction
                                 .getInstance(12).check(password, usuario.getContrasenaEncriptada())){
-                            System.out.println("O dios mio has acertado la contraseña");
                             return true;
                         } else {
-                            System.out.println("Contraseña mal sin verguencha");
                             return false;
                         }
 		} catch (Exception e) {
@@ -204,4 +208,112 @@ public class model {
 		panel.setPreferredSize(new Dimension(320, 280));
 		return panel;
 	}
+    public Usuario getUser() {
+        return user;
+    }
+
+    public void cambiarDatos(Usuario user, String nuevoAlias, String nuevaContrasena, String nuevoCorreo, String nuevaTarjeta) {
+    SessionFactory sessionFactory = hiber.Model();
+    try (Session session = sessionFactory.openSession()) {
+        session.beginTransaction();
+
+        // Buscar el usuario por ID
+        Usuario usuario = session.get(Usuario.class, user.getId());
+
+        if (usuario != null) {
+            // Actualizar los datos del usuario
+            usuario.setUsername(nuevoAlias);
+            usuario.setCorreo(nuevoCorreo);
+
+            // Solo actualizar la contraseña si se proporciona una nueva contraseña
+            if (!nuevaContrasena.isEmpty()) {
+                // Codificar la nueva contraseña con BCrypt (asumiendo que tienes el método hashPassword)
+                String hashedPassword = hashPassword(nuevaContrasena);
+                usuario.setContrasenaEncriptada(hashedPassword);
+            }
+
+            usuario.setNumeroTarjeta(nuevaTarjeta);
+
+            // Confirmar la transacción
+            session.getTransaction().commit();
+
+            // Mostrar un mensaje de éxito
+            JOptionPane.showMessageDialog(null, "Datos actualizados exitosamente");
+        } else {
+            // Mostrar un mensaje de error si el usuario no se encuentra
+            JOptionPane.showMessageDialog(null, "Usuario no encontrado", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+        hiber.closeSessionFactory();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+    public JList<String> listar(){
+        DefaultListModel<String> juegosListModel = new DefaultListModel<>();
+        JList<String> juegosJList = new JList<>(juegosListModel);
+        SessionFactory sessionFactory = hiber.Model();
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+
+            // Buscar el usuario por ID con sus juegos asociados
+            Usuario usuario = session.get(Usuario.class, user.getId());
+
+            if (usuario != null) {
+                // Obtener la lista de juegos del usuario
+                Set juegos = usuario.getJuegoses();
+
+                // Agregar nombres y descripciones al DefaultListModel
+                for (Iterator it = juegos.iterator(); it.hasNext();) {
+                    Juegos juego = (Juegos) it.next();
+                    String juegoInfo = juego.getNombre() + " - " + juego.getDescripcion();
+                    juegosListModel.addElement(juegoInfo);
+                }
+            } else {
+                // Mostrar un mensaje de error si el usuario no se encuentra
+                JOptionPane.showMessageDialog(null, "Usuario no encontrado", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return juegosJList;
+    
+}
+
+public void devolverJuegoSeleccionado(Usuario usuario, String juegoSeleccionado, String descripcionJuego) {
+        SessionFactory sessionFactory = hiber.Model();
+        try (Session session = sessionFactory.openSession()) {
+            Transaction transaction = session.beginTransaction();
+            // Obtener el juego a partir de su nombre y descripción
+            Juegos juego = obtenerJuegoPorNombreYDescripcion(session, juegoSeleccionado, descripcionJuego);
+            if (juego != null) {
+                // Eliminar la compra del usuario para ese juego
+                session.createQuery("DELETE FROM Compras WHERE id_usuario = :idUsuario AND id_juego = :idJuego")
+                        .setParameter("idUsuario", usuario.getId())
+                        .setParameter("idJuego", juego.getId())
+                        .executeUpdate();
+                transaction.commit();
+                // Mostrar un mensaje de éxito
+                JOptionPane.showMessageDialog(null, "Juego devuelto exitosamente");
+            } else {
+                // Mostrar un mensaje de error si el juego no se encuentra
+                JOptionPane.showMessageDialog(null, "Juego no encontrado", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            hiber.closeSessionFactory();
+        }
+    }
+
+    // Método para obtener un juego por nombre y descripción
+    private Juegos obtenerJuegoPorNombreYDescripcion(Session session, String nombre, String descripcion) {
+        return (Juegos) session.createQuery("FROM Juego WHERE nombre = :nombre AND descripcion = :descripcion")
+                .setParameter("nombre", nombre)
+                .setParameter("descripcion", descripcion)
+                .uniqueResult();
+    }
 }

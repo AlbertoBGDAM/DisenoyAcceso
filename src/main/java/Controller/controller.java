@@ -13,7 +13,7 @@ import com.formdev.flatlaf.intellijthemes.FlatGradiantoMidnightBlueIJTheme;
 
 public class controller {
 	static inicio in = new inicio();
-	static Interior main = new Interior();
+	static App main = new App();
 
 	public static void main(String[] args) {
 		in.main();

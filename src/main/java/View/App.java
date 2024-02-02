@@ -4,7 +4,10 @@
  */
 package View;
 
+import Model.model;
+import com.formdev.flatlaf.extras.FlatSVGIcon;
 import com.formdev.flatlaf.intellijthemes.FlatGradiantoMidnightBlueIJTheme;
+import hibernate.Usuario;
 import java.awt.Color;
 import javax.swing.JPanel;
 
@@ -12,13 +15,17 @@ import javax.swing.JPanel;
  *
  * @author ALBERTO BARCALA GUTIÉRREZ
  */
-public class Interior extends javax.swing.JFrame {
-
+public class App extends javax.swing.JFrame {
+    model model = new model();
+    Usuario user;
 	/**
 	 * Creates new form main
 	 */
-	public Interior() {
+	public App() {
+        this.user = model.getUser();
 		initComponents();
+                User.setText(user.getUsername());
+                User.setIcon(new FlatSVGIcon( "image/user.svg" ));
 	}
 
 	/**
@@ -45,6 +52,7 @@ public class Interior extends javax.swing.JFrame {
         Amigos = new javax.swing.JPanel();
         amigos = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
+        User = new javax.swing.JLabel();
         panelExplorar = new javax.swing.JPanel();
         Cambiante = new javax.swing.JPanel();
 
@@ -252,6 +260,14 @@ public class Interior extends javax.swing.JFrame {
                 .addGap(0, 110, Short.MAX_VALUE))
         );
 
+        User.setForeground(new java.awt.Color(255, 255, 255));
+        User.setPreferredSize(new java.awt.Dimension(183, 101));
+        User.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                UserMouseEntered(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelMenuLayout = new javax.swing.GroupLayout(panelMenu);
         panelMenu.setLayout(panelMenuLayout);
         panelMenuLayout.setHorizontalGroup(
@@ -260,13 +276,19 @@ public class Interior extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(Menu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(panelMenuLayout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(User, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelMenuLayout.setVerticalGroup(
             panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelMenuLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(Menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(User, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(75, 75, 75))
         );
 
         panelExplorar.setBackground(new java.awt.Color(44, 47, 72));
@@ -330,6 +352,10 @@ public class Interior extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_principalMouseClicked
 
+    private void UserMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UserMouseEntered
+	cambiarPanel(new Usermenu(user));
+    }//GEN-LAST:event_UserMouseEntered
+
   private void comprarMouseEntered(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_comprarMouseEntered
 	colores(Comprar);
 	cambiarPanel(new PanelInicio());
@@ -380,19 +406,19 @@ public class Interior extends javax.swing.JFrame {
 			}
 		}
 	} catch (ClassNotFoundException ex) {
-		java.util.logging.Logger.getLogger(Interior.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+		java.util.logging.Logger.getLogger(App.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 	} catch (InstantiationException ex) {
-		java.util.logging.Logger.getLogger(Interior.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+		java.util.logging.Logger.getLogger(App.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 	} catch (IllegalAccessException ex) {
-		java.util.logging.Logger.getLogger(Interior.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+		java.util.logging.Logger.getLogger(App.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 	} catch (javax.swing.UnsupportedLookAndFeelException ex) {
-		java.util.logging.Logger.getLogger(Interior.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+		java.util.logging.Logger.getLogger(App.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 	}
 	// </editor-fold>
 	FlatGradiantoMidnightBlueIJTheme.setup();
 	java.awt.EventQueue.invokeLater(new Runnable() {
 		public void run() {
-			new Interior().setVisible(true);
+			new App().setVisible(true);
 		}
 	});
     }
@@ -405,6 +431,7 @@ public class Interior extends javax.swing.JFrame {
     private javax.swing.JPanel Menu;
     private javax.swing.JPanel Musica;
     private javax.swing.JPanel Principal;
+    private javax.swing.JLabel User;
     private javax.swing.JLabel amigos;
     private javax.swing.JLabel comprar;
     private javax.swing.JSeparator jSeparator1;
@@ -414,4 +441,5 @@ public class Interior extends javax.swing.JFrame {
     private javax.swing.JPanel panelMenu;
     private javax.swing.JLabel principal;
     // End of variables declaration//GEN-END:variables
+
 }

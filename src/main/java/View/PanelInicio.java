@@ -30,30 +30,26 @@ public class PanelInicio extends javax.swing.JPanel {
      */
     public PanelInicio() {
         initComponents();
+        panelCambia = new JPanel(new GridLayout(0, 3, 50, 50));
+        panelCambia.setBorder(BorderFactory.createEmptyBorder(133, 36, 214, 33));
         List<Juegos> juegos = model.obtenerJuegosComprados(3);
         if (juegos == null || juegos.isEmpty()) {
             juegos = model.obtenerPrimerosTresJuegos();
         }
-
         // Crear paneles de juegos y agregarlos al panel de juegos
         for (Juegos juego : juegos) {
-            jueg
-            panelCambia.add(juegoPanel);
+            juegosdisplay juegoss= new juegosdisplay(juego.getNombre(),juego.getDescripcion());
+            panelCambia.add(juegoss);
         }
-
-        // Configurar el panel de música
+        /*// Configurar el panel de música
         panelInformacion = new JPanel();
         panelInformacion.setPreferredSize(new Dimension(1069, 135));
         panelInformacion.setBorder(BorderFactory.createEmptyBorder(65, 192, 53, 600));
-
         List<Musica> musicas = model.obtenerMusicasCompradas(0);
-        panelCambia = new JPanel(new GridLayout(0, 3, 50, 50));
-        panelCambia.setBorder(BorderFactory.createEmptyBorder(133, 36, 214, 33));
-
         for (Musica musica : musicas) {
             JPanel musicaPanel = model.crearMusicaPanel(musica);
             panelCambia.add(musicaPanel);
-        }
+        }*/
     }
 
 	/**

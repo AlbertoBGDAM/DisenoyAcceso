@@ -4,13 +4,17 @@
  */
 package View;
 
+import com.formdev.flatlaf.FlatClientProperties;
+import com.formdev.flatlaf.extras.FlatSVGIcon;
+import javax.swing.*;
+import java.awt.*;
+import com.formdev.flatlaf.FlatIntelliJLaf;
+import com.formdev.flatlaf.ui.FlatRoundBorder;
+
 /**
  *
  * @author alber
  */
-import javax.swing.*;
-import java.awt.*;
-
 public class juegosdisplay extends JPanel {
     private String title;
     private String description;
@@ -22,8 +26,9 @@ public class juegosdisplay extends JPanel {
         setPreferredSize(new Dimension(320, 208));
         setLayout(null);  // Usamos un diseño nulo para posicionar los elementos manualmente
         setBackground(new Color(44, 47, 72));
-        setBorder(BorderFactory.createRoundedBorder(20));
-
+        FlatRoundBorder border = new FlatRoundBorder();
+        setBorder(BorderFactory.createCompoundBorder(border, BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+        
         JLabel titleLabel = new JLabel(title);
         titleLabel.setBounds(12, 113, 139, 20);
         titleLabel.setForeground(Color.WHITE);
@@ -36,20 +41,6 @@ public class juegosdisplay extends JPanel {
         descriptionArea.setEditable(false);
         add(descriptionArea);
     }
-
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("Featured Card Example");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        juegosdisplay juego = new juegosdisplay("Your Title", "Your Description");
-        frame.add(juego);
-
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-    }
-}
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
