@@ -269,18 +269,12 @@ public class model {
                     String juegoInfo = juego.getNombre() + " - " + juego.getDescripcion();
                     juegosListModel.addElement(juegoInfo);
                 }
-            } else {
-                // Mostrar un mensaje de error si el usuario no se encuentra
-                JOptionPane.showMessageDialog(null, "Usuario no encontrado", "Error", JOptionPane.ERROR_MESSAGE);
             }
-
             session.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return juegosJList;
-    
 }
 
 public void devolverJuegoSeleccionado(Usuario usuario, String juegoSeleccionado, String descripcionJuego) {
@@ -304,8 +298,6 @@ public void devolverJuegoSeleccionado(Usuario usuario, String juegoSeleccionado,
             }
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            hiber.closeSessionFactory();
         }
     }
 

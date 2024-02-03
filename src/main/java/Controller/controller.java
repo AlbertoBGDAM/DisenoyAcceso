@@ -24,4 +24,7 @@ public class controller {
 		in.dispose();
 		main.main();
 	}
+        public static void salir(){
+            main.dispose();
+        }
 }

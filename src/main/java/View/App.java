@@ -4,12 +4,12 @@
  */
 package View;
 
+import Controller.controller;
 import Model.model;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import com.formdev.flatlaf.intellijthemes.FlatGradiantoMidnightBlueIJTheme;
 import hibernate.Usuario;
 import java.awt.Color;
-import javax.swing.JPanel;
 
 /**
  *
@@ -25,6 +25,7 @@ public class App extends javax.swing.JFrame {
         this.user = model.getUser();
 		initComponents();
                 User.setText(user.getUsername());
+                Personal.setText(user.getUsername());
                 User.setIcon(new FlatSVGIcon( "image/user.svg" ));
 	}
 
@@ -53,6 +54,8 @@ public class App extends javax.swing.JFrame {
         amigos = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         User = new javax.swing.JLabel();
+        Personal = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         panelExplorar = new javax.swing.JPanel();
         Cambiante = new javax.swing.JPanel();
 
@@ -65,7 +68,7 @@ public class App extends javax.swing.JFrame {
 
         Explorar.setFont(new java.awt.Font("SansSerif", 3, 14)); // NOI18N
         Explorar.setForeground(new java.awt.Color(255, 255, 255));
-        Explorar.setText("Explore");
+        Explorar.setText("Explore, Find, Play");
         Explorar.setMaximumSize(new java.awt.Dimension(244, 44));
         Explorar.setMinimumSize(new java.awt.Dimension(244, 44));
         Explorar.setPreferredSize(new java.awt.Dimension(244, 44));
@@ -80,6 +83,7 @@ public class App extends javax.swing.JFrame {
 
         principal.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         principal.setForeground(new java.awt.Color(255, 255, 255));
+        principal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Explore.png"))); // NOI18N
         principal.setText("Home");
         principal.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -109,6 +113,7 @@ public class App extends javax.swing.JFrame {
 
         comprar.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         comprar.setForeground(new java.awt.Color(255, 255, 255));
+        comprar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Tech.png"))); // NOI18N
         comprar.setText("Comprar");
         comprar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -138,6 +143,7 @@ public class App extends javax.swing.JFrame {
 
         jugar.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jugar.setForeground(new java.awt.Color(255, 255, 255));
+        jugar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Education.png"))); // NOI18N
         jugar.setText("Jugar");
         jugar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -167,6 +173,7 @@ public class App extends javax.swing.JFrame {
 
         musica.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         musica.setForeground(new java.awt.Color(255, 255, 255));
+        musica.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Music.png"))); // NOI18N
         musica.setText("Musica");
         musica.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -196,6 +203,7 @@ public class App extends javax.swing.JFrame {
 
         amigos.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         amigos.setForeground(new java.awt.Color(255, 255, 255));
+        amigos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Symbol.png"))); // NOI18N
         amigos.setText("Amigos");
         amigos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -232,13 +240,13 @@ public class App extends javax.swing.JFrame {
                     .addComponent(Jugar, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Comprar, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Principal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(71, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MenuLayout.createSequentialGroup()
                 .addGroup(MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(MenuLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(Explorar, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                        .addComponent(Explorar, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)))
                 .addGap(62, 62, 62))
         );
         MenuLayout.setVerticalGroup(
@@ -257,7 +265,7 @@ public class App extends javax.swing.JFrame {
                 .addComponent(Musica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(Amigos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 110, Short.MAX_VALUE))
+                .addGap(0, 26, Short.MAX_VALUE))
         );
 
         User.setForeground(new java.awt.Color(255, 255, 255));
@@ -268,17 +276,41 @@ public class App extends javax.swing.JFrame {
             }
         });
 
+        Personal.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        Personal.setForeground(new java.awt.Color(255, 255, 255));
+        Personal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/user.png"))); // NOI18N
+        Personal.setText("User");
+        Personal.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Personal.setIconTextGap(22);
+
+        jButton1.setBackground(new java.awt.Color(65, 74, 92));
+        jButton1.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Salir");
+        jButton1.setPreferredSize(new java.awt.Dimension(162, 28));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelMenuLayout = new javax.swing.GroupLayout(panelMenu);
         panelMenu.setLayout(panelMenuLayout);
         panelMenuLayout.setHorizontalGroup(
             panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelMenuLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(Menu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(panelMenuLayout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(User, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelMenuLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(Personal, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(User, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelMenuLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(Menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelMenuLayout.createSequentialGroup()
+                        .addGap(107, 107, 107)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelMenuLayout.setVerticalGroup(
@@ -287,8 +319,12 @@ public class App extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(Menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(User, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(75, 75, 75))
+                .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(User, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Personal, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(18, 18, 18)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(74, 74, 74))
         );
 
         panelExplorar.setBackground(new java.awt.Color(44, 47, 72));
@@ -355,6 +391,10 @@ public class App extends javax.swing.JFrame {
     private void UserMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UserMouseEntered
 	cambiarPanel(new Usermenu(user));
     }//GEN-LAST:event_UserMouseEntered
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        controller.salir();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
   private void comprarMouseEntered(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_comprarMouseEntered
 	colores(Comprar);
@@ -430,10 +470,12 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JPanel Jugar;
     private javax.swing.JPanel Menu;
     private javax.swing.JPanel Musica;
+    private javax.swing.JLabel Personal;
     private javax.swing.JPanel Principal;
     private javax.swing.JLabel User;
     private javax.swing.JLabel amigos;
     private javax.swing.JLabel comprar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel jugar;
     private javax.swing.JLabel musica;

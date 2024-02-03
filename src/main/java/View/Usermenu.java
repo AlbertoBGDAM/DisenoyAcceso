@@ -6,6 +6,8 @@ package View;
 
 import Model.model;
 import hibernate.Usuario;
+import java.awt.BorderLayout;
+import javax.swing.*;
 
 /**
  *
@@ -21,9 +23,11 @@ public class Usermenu extends javax.swing.JPanel {
         initComponents();
         Usuario usuario=user;
         Juegos=model.listar();
-        if(Juegos==null){
+        if(Juegos.getModel().getSize() == 0){
             remove(Juegos);
-            /*add()*/
+            ImageIcon icon = new ImageIcon("/images/nothing_here.png");
+            JLabel imageLabel = new JLabel(icon);
+            Lista.add(imageLabel, BorderLayout.CENTER);
         }
     }
 
@@ -47,9 +51,10 @@ public class Usermenu extends javax.swing.JPanel {
         Tarjeta = new javax.swing.JTextArea();
         tarjeta = new javax.swing.JLabel();
         Cambiar = new javax.swing.JButton();
+        Devolver = new javax.swing.JButton();
+        Lista = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         Juegos = new javax.swing.JList<>();
-        Devolver = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(44, 47, 72));
         setMaximumSize(new java.awt.Dimension(1132, 774));
@@ -145,7 +150,7 @@ public class Usermenu extends javax.swing.JPanel {
                         .addComponent(contra)
                         .addGap(18, 18, 18)
                         .addComponent(Contra, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(318, Short.MAX_VALUE))))
+                        .addContainerGap(322, Short.MAX_VALUE))))
         );
         modifyLayout.setVerticalGroup(
             modifyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -178,15 +183,6 @@ public class Usermenu extends javax.swing.JPanel {
                 .addGap(22, 22, 22))
         );
 
-        Juegos.setBackground(new java.awt.Color(65, 74, 92));
-        Juegos.setBorder(null);
-        Juegos.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { " " };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane1.setViewportView(Juegos);
-
         Devolver.setBackground(new java.awt.Color(44, 47, 72));
         Devolver.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         Devolver.setForeground(new java.awt.Color(255, 255, 255));
@@ -199,6 +195,25 @@ public class Usermenu extends javax.swing.JPanel {
                 DevolverMouseClicked(evt);
             }
         });
+        Devolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DevolverActionPerformed(evt);
+            }
+        });
+
+        Lista.setBackground(new java.awt.Color(44, 47, 72));
+        Lista.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        Juegos.setBackground(new java.awt.Color(65, 74, 92));
+        Juegos.setBorder(null);
+        Juegos.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { " " };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(Juegos);
+
+        Lista.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-8, -3, 1040, 370));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -209,7 +224,7 @@ public class Usermenu extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(32, 32, 32)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 916, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Lista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(modify, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(241, 241, 241)
@@ -219,13 +234,16 @@ public class Usermenu extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(modify, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 411, Short.MAX_VALUE)
-                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(modify, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(261, 261, 261)
+                        .addComponent(Lista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addComponent(Devolver, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35))
+                .addGap(37, 37, 37))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -244,6 +262,10 @@ public class Usermenu extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_DevolverMouseClicked
 
+    private void DevolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DevolverActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DevolverActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea Alias;
@@ -252,6 +274,7 @@ public class Usermenu extends javax.swing.JPanel {
     private javax.swing.JTextArea Correo;
     private javax.swing.JButton Devolver;
     private javax.swing.JList<String> Juegos;
+    private javax.swing.JPanel Lista;
     private javax.swing.JTextArea Tarjeta;
     private javax.swing.JLabel alias;
     private javax.swing.JLabel contra;
