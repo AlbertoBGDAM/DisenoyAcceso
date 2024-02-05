@@ -1,5 +1,5 @@
 package hibernate;
-// Generated 30 ene 2024 16:53:44 by Hibernate Tools 5.4.33.Final
+// Generated 4 feb 2024, 15:12:38 by Hibernate Tools 5.4.33.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -15,6 +15,7 @@ public class Juegos implements java.io.Serializable {
 	private String creador;
 	private String descripcion;
 	private Date fechaSalida;
+	private String tipo;
 	private Set comprases = new HashSet(0);
 	private Set usuarios = new HashSet(0);
 
@@ -26,11 +27,13 @@ public class Juegos implements java.io.Serializable {
 		this.creador = creador;
 	}
 
-	public Juegos(String nombre, String creador, String descripcion, Date fechaSalida, Set comprases, Set usuarios) {
+	public Juegos(String nombre, String creador, String descripcion, Date fechaSalida, String tipo, Set comprases,
+			Set usuarios) {
 		this.nombre = nombre;
 		this.creador = creador;
 		this.descripcion = descripcion;
 		this.fechaSalida = fechaSalida;
+		this.tipo = tipo;
 		this.comprases = comprases;
 		this.usuarios = usuarios;
 	}
@@ -73,6 +76,14 @@ public class Juegos implements java.io.Serializable {
 
 	public void setFechaSalida(Date fechaSalida) {
 		this.fechaSalida = fechaSalida;
+	}
+
+	public String getTipo() {
+		return this.tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 
 	public Set getComprases() {

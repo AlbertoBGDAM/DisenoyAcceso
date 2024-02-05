@@ -117,7 +117,7 @@
                           <Component id="contra" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="Contra" min="-2" pref="242" max="-2" attributes="0"/>
-                          <EmptySpace pref="322" max="32767" attributes="0"/>
+                          <EmptySpace pref="318" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -294,7 +294,7 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Devolver selecuionado"/>
+        <Property name="text" type="java.lang.String" value="Devolver selecionado"/>
         <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[650, 75]"/>
         </Property>
@@ -307,7 +307,6 @@
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="DevolverMouseClicked"/>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DevolverActionPerformed"/>
       </Events>
     </Component>
     <Container class="javax.swing.JPanel" name="Lista">

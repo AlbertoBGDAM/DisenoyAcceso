@@ -146,7 +146,7 @@ public class Loging extends javax.swing.JPanel {
 	private void conectarseActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_conectarseActionPerformed
 		boolean ver = model.verificarCredenciales(Nombre.getText(), String.valueOf(contra.getPassword()));
 		if (ver == true) {
-                    
+
 			JOptionPane.showMessageDialog(null, "¡Bienvenido!", "Mensaje de Bienvenida",
 					JOptionPane.INFORMATION_MESSAGE);
 			model.setUser(Nombre.getText(), String.valueOf(contra.getPassword()));
