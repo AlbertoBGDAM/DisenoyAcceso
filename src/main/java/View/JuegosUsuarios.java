@@ -60,6 +60,7 @@ public class JuegosUsuarios extends javax.swing.JPanel {
         Spaneljuego.setPreferredSize(new java.awt.Dimension(1132, 774));
 
         paneljuego.setBackground(new java.awt.Color(44, 47, 72));
+        paneljuego.setMaximumSize(new java.awt.Dimension(1132, 774));
         paneljuego.setMinimumSize(new java.awt.Dimension(1132, 774));
 
         javax.swing.GroupLayout paneljuegoLayout = new javax.swing.GroupLayout(paneljuego);

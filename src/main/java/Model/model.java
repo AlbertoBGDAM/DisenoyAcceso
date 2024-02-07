@@ -13,11 +13,25 @@ import java.util.Set;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 
+/**
+ * Clase que gestiona las operaciones relacionadas con la base de datos y los
+ * usuarios.
+ */
 public class model {
 
-	Usuario user;
 	Hibernate hiber = new Hibernate();
+	Usuario user;
 
+	/**
+	 * Inserta un nuevo usuario en la base de datos.
+	 * 
+	 * @param username           El nombre de usuario.
+	 * @param password           La contraseña del usuario.
+	 * @param correoRecuperacion El correo de recuperación del usuario.
+	 * @param edad               La edad del usuario.
+	 * @param esMenor            Indica si el usuario es menor de edad.
+	 * @return La instancia del usuario insertado.
+	 */
 	public Usuario insertarUsuario(String username, String password, String correoRecuperacion, int edad,
 			boolean esMenor) {
 		try (Session session = hiber.Model().openSession()) {
@@ -34,7 +48,7 @@ public class model {
 				session.save(usuario);
 				transaction.commit();
 				this.user = usuario;
-				return usuario; // Devolver la instancia gestionada después de guardarla
+				return usuario;
 			} catch (Exception e) {
 				if (transaction != null) {
 					transaction.rollback();
@@ -47,15 +61,20 @@ public class model {
 		return null;
 	}
 
+	/**
+	 * Agrega la información de una tarjeta de crédito a un usuario existente.
+	 * 
+	 * @param user1           El usuario al que se le agregará la tarjeta de
+	 *                        crédito.
+	 * @param numeroTarjeta   El número de la tarjeta de crédito.
+	 * @param codigoSeguridad El código de seguridad de la tarjeta de crédito.
+	 */
 	public void agregarTarjetaCredito(Usuario user1, String numeroTarjeta, int codigoSeguridad) {
 		SessionFactory sessionFactory = hiber.Model();
 		try (Session session = sessionFactory.openSession()) {
 			session.beginTransaction();
-			// Obtener la instancia gestionada del usuario
-			Usuario usuario = session.get(Usuario.class, user1.getId()); // Asume que hay un método getId() en Usuario
-
+			Usuario usuario = session.get(Usuario.class, user1.getId());
 			if (usuario != null) {
-				// Actualizar la información de la tarjeta de crédito
 				usuario.setNumeroTarjeta(numeroTarjeta);
 				usuario.setCodigoSeguridad(codigoSeguridad);
 				session.update(usuario);
@@ -68,23 +87,24 @@ public class model {
 		}
 	}
 
+	/**
+	 * Cambia la contraseña de un usuario.
+	 * 
+	 * @param correo          El correo del usuario.
+	 * @param nuevaContrasena La nueva contraseña del usuario.
+	 */
 	public void cambiarContrasena(String correo, String nuevaContrasena) {
 		SessionFactory sessionFactory = hiber.Model();
 		try (Session session = sessionFactory.openSession()) {
 			session.beginTransaction();
-			// Buscar el usuario por correo
-			Usuario usuario = (Usuario) session.createQuery("FROM Usuario WHERE correo = :correo")
+			Usuario usuario = (Usuario) session.createQuery("FROM Usuario WHERE correoRecuperacion = :correo")
 					.setParameter("correo", correo).uniqueResult();
 			if (usuario != null) {
-				// Codificar la nueva contraseña con BCrypt
 				String hashedPassword = hashPassword(nuevaContrasena);
-				// Establecer la nueva contraseña
 				usuario.setContrasenaEncriptada(hashedPassword);
 				session.getTransaction().commit();
-				// Mostrar un mensaje de éxito
 				JOptionPane.showMessageDialog(null, "Contraseña cambiada exitosamente");
 			} else {
-				// Mostrar un mensaje de error si el usuario no se encuentra
 				JOptionPane.showMessageDialog(null, "Usuario no encontrado", "Error", JOptionPane.ERROR_MESSAGE);
 			}
 			hiber.closeSessionFactory();
@@ -93,97 +113,15 @@ public class model {
 		}
 	}
 
-	private String hashPassword(String password) {
-		// Usar Password4j para almacenar contraseñas de manera segura
-		var bcrypt = BcryptFunction.getInstance(12);
-		System.out.println("Contraseña -> " + password);
-		var hashedPassword = bcrypt.hash(password).getResult();
-		System.out.println(hashedPassword);
-		return hashedPassword;
-	}
-
-	public boolean verificarCredenciales(String username, String password) {
-		SessionFactory sessionFactory = hiber.Model();
-		try (Session session = sessionFactory.openSession()) {
-			session.beginTransaction();
-			// String hashedPassword = hashPassword(password);
-			Query query = session.createQuery("FROM Usuario WHERE correo = :username").setParameter("username",
-					username);
-			Usuario usuario = (Usuario) query.uniqueResult();
-			session.getTransaction().commit();
-			if (BcryptFunction.getInstance(12).check(password, usuario.getContrasenaEncriptada())) {
-				return true;
-			} else {
-				return false;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
-	}
-
-	public JList<Usuario> obtenerNoAmigos(int usuarioId) {
-		SessionFactory sessionFactory = hiber.Model();
-		try (Session session = sessionFactory.openSession()) {
-			Query<Usuario> query = session.createQuery("FROM Usuario u WHERE u.id NOT IN "
-					+ "(SELECT amigo.id FROM Usuario usuario JOIN usuario.amigos amigo WHERE usuario.id = :usuarioId)",
-					Usuario.class);
-			query.setParameter("usuarioId", usuarioId);
-			List<Usuario> resultList = query.list();
-			Usuario[] usuariosArray = resultList.toArray(new Usuario[0]);
-			return new JList<>(usuariosArray);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	public List<Juegos> obtenerJuegosComprados(int i) {
-		SessionFactory sessionFactory = hiber.Model();
-		try (Session session = sessionFactory.openSession()) {
-			Query query = session.createQuery("FROM Compras WHERE id_usuario = :usuarioId");
-			query.setParameter("usuarioId", user.getId());
-			if (i == 0) {
-				query.setMaxResults(3);
-			}
-			List<Compras> compras = query.list();
-			return compras.stream().map(Compras::getJuegos).toList();
-		}
-	}
-
-	public List<Juegos> obtenerPrimerosTresJuegos() {
-		SessionFactory sessionFactory = hiber.Model();
-		try (Session session = sessionFactory.openSession()) {
-			session.beginTransaction();
-			// Utiliza HQL para obtener los tres primeros juegos de la tabla
-			Query query = session.createQuery("FROM Juego");
-			query.setMaxResults(3); // Limitar a tres resultados
-			List<Juegos> juegos = query.list();
-			session.getTransaction().commit();
-			return juegos;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-public void setUser(String username) {
-    SessionFactory sessionFactory = hiber.Model();
-    try (Session session = sessionFactory.openSession()) {
-        // Crear la consulta HQL para obtener el usuario por su nombre de usuario
-        Query<Usuario> query = session.createQuery("FROM Usuario u WHERE u.username = :username", Usuario.class);
-        query.setParameter("username", username);
-        Usuario user = query.uniqueResult();
-        this.user = user;
-
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
-}
-	public Usuario getUser() {
-		return user;
-	}
-
+	/**
+	 * Cambia los datos del usuario en la base de datos.
+	 * 
+	 * @param user            El usuario cuyos datos se van a cambiar.
+	 * @param nuevoAlias      El nuevo alias para el usuario.
+	 * @param nuevaContrasena La nueva contraseña para el usuario.
+	 * @param nuevoCorreo     El nuevo correo electrónico para el usuario.
+	 * @param nuevaTarjeta    El nuevo número de tarjeta para el usuario.
+	 */
 	public void cambiarDatos(Usuario user, String nuevoAlias, String nuevaContrasena, String nuevoCorreo,
 			String nuevaTarjeta) {
 		SessionFactory sessionFactory = hiber.Model();
@@ -213,8 +151,7 @@ public void setUser(String username) {
 
 				// Mostrar un mensaje de éxito
 				JOptionPane.showMessageDialog(null, "Datos actualizados exitosamente");
-			} else {
-				// Mostrar un mensaje de error si el usuario no se encuentra
+			} else { // Mostrar un mensaje de error si el usuario no se encuentra
 				JOptionPane.showMessageDialog(null, "Usuario no encontrado", "Error", JOptionPane.ERROR_MESSAGE);
 			}
 
@@ -224,21 +161,100 @@ public void setUser(String username) {
 		}
 	}
 
+	private String hashPassword(String password) {
+		var bcrypt = BcryptFunction.getInstance(12);
+		System.out.println("Contraseña -> " + password);
+		var hashedPassword = bcrypt.hash(password).getResult();
+		System.out.println(hashedPassword);
+		return hashedPassword;
+	}
+
+	/**
+	 * Verifica las credenciales de inicio de sesión de un usuario.
+	 * 
+	 * @param username El nombre de usuario.
+	 * @param password La contraseña del usuario.
+	 * @return true si las credenciales son válidas, false de lo contrario.
+	 */
+	public boolean verificarCredenciales(String username, String password) {
+		SessionFactory sessionFactory = hiber.Model();
+		try (Session session = sessionFactory.openSession()) {
+			session.beginTransaction();
+			Query query = session.createQuery("FROM Usuario WHERE username = :username").setParameter("username",
+					username);
+			Usuario usuario = (Usuario) query.uniqueResult();
+			session.getTransaction().commit();
+			if (BcryptFunction.getInstance(12).check(password, usuario.getContrasenaEncriptada())) {
+				return true;
+			} else {
+				return false;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	/**
+	 * Obtiene los primeros tres juegos de la tabla.
+	 * 
+	 * @return Una lista de los primeros tres juegos.
+	 */
+	public List<Juegos> obtenerPrimerosTresJuegos() {
+		SessionFactory sessionFactory = hiber.Model();
+		try (Session session = sessionFactory.openSession()) {
+			session.beginTransaction();
+			Query query = session.createQuery("FROM Juegos");
+			query.setMaxResults(3);
+			List<Juegos> juegos = query.list();
+			session.getTransaction().commit();
+			return juegos;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	/**
+	 * Establece el usuario actual basado en el nombre de usuario.
+	 * 
+	 * @param username El nombre de usuario.
+	 */
+	public void setUser(String username) {
+		SessionFactory sessionFactory = hiber.Model();
+		try (Session session = sessionFactory.openSession()) {
+			Query<Usuario> query = session.createQuery("FROM Usuario u WHERE u.username = :username", Usuario.class);
+			query.setParameter("username", username);
+			Usuario user = query.uniqueResult();
+			this.user = user;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Obtiene el usuario actual.
+	 * 
+	 * @return El usuario actual.
+	 */
+	public Usuario getUser() {
+		return user;
+	}
+
+	/**
+	 * Lista los juegos asociados al usuario.
+	 * 
+	 * @return Una lista de juegos asociados al usuario.
+	 */
 	public JList<String> listar() {
 		DefaultListModel<String> juegosListModel = new DefaultListModel<>();
 		JList<String> juegosJList = new JList<>(juegosListModel);
 		SessionFactory sessionFactory = hiber.Model();
 		try (Session session = sessionFactory.openSession()) {
 			session.beginTransaction();
-
-			// Buscar el usuario por ID con sus juegos asociados
 			Usuario usuario = session.get(Usuario.class, user.getId());
-
 			if (usuario != null) {
-				// Obtener la lista de juegos del usuario
 				Set juegos = usuario.getJuegoses();
-
-				// Agregar nombres y descripciones al DefaultListModel
 				for (Iterator it = juegos.iterator(); it.hasNext();) {
 					Juegos juego = (Juegos) it.next();
 					String juegoInfo = juego.getNombre() + " - " + juego.getDescripcion();
@@ -252,22 +268,25 @@ public void setUser(String username) {
 		return juegosJList;
 	}
 
+	/**
+	 * Devuelve un juego seleccionado por el usuario.
+	 * 
+	 * @param usuario           El usuario que devuelve el juego.
+	 * @param juegoSeleccionado El juego seleccionado por el usuario.
+	 * @param descripcionJuego  La descripción del juego seleccionado.
+	 */
 	public void devolverJuegoSeleccionado(Usuario usuario, String juegoSeleccionado, String descripcionJuego) {
 		SessionFactory sessionFactory = hiber.Model();
 		try (Session session = sessionFactory.openSession()) {
 			Transaction transaction = session.beginTransaction();
-			// Obtener el juego a partir de su nombre y descripción
 			Juegos juego = obtenerJuegoPorNombreYDescripcion(session, juegoSeleccionado, descripcionJuego);
 			if (juego != null) {
-				// Eliminar la compra del usuario para ese juego
-				session.createQuery("DELETE FROM Compras WHERE id_usuario = :idUsuario AND id_juego = :idJuego")
-						.setParameter("idUsuario", usuario.getId()).setParameter("idJuego", juego.getId())
+				session.createQuery("DELETE FROM Compras WHERE usuario.id = :usuarioId AND juegos.id = :juegoId")
+						.setParameter("usuarioId", usuario.getId()).setParameter("juegoId", juego.getId())
 						.executeUpdate();
 				transaction.commit();
-				// Mostrar un mensaje de éxito
 				JOptionPane.showMessageDialog(null, "Juego devuelto exitosamente");
 			} else {
-				// Mostrar un mensaje de error si el juego no se encuentra
 				JOptionPane.showMessageDialog(null, "Juego no encontrado", "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		} catch (Exception e) {
@@ -277,19 +296,85 @@ public void setUser(String username) {
 
 	// Método para obtener un juego por nombre y descripción
 	private Juegos obtenerJuegoPorNombreYDescripcion(Session session, String nombre, String descripcion) {
-		return (Juegos) session.createQuery("FROM Juego WHERE nombre = :nombre AND descripcion = :descripcion")
+		return (Juegos) session.createQuery("FROM Juegos WHERE nombre = :nombre AND descripcion = :descripcion")
 				.setParameter("nombre", nombre).setParameter("descripcion", descripcion).uniqueResult();
 	}
 
-    public void agregarAmigo(Usuario amigo,Usuario user) {
-        SessionFactory sessionFactory = hiber.Model();
-        try (Session session = sessionFactory.openSession()) {
-            Transaction tx = session.beginTransaction();
-            user.getUsuariosForIdUsuario1().add(amigo); //añadir el amigo al conjunto de usuarios relacionados
-            session.update(user); //actualizar el usuario en la base de datos
-            tx.commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+	/**
+	 * Agrega un amigo al usuario.
+	 * 
+	 * @param amigo El amigo que se agregará.
+	 * @param user  El usuario al que se le agregará el amigo.
+	 */
+	public void agregarAmigo(Usuario amigo, Usuario user) {
+		SessionFactory sessionFactory = hiber.Model();
+		try (Session session = sessionFactory.openSession()) {
+			Transaction tx = session.beginTransaction();
+			user.getUsuariosForIdUsuario1().add(amigo);
+			session.update(user);
+			tx.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Obtiene los juegos comprados por un usuario.
+	 * 
+	 * @return Una lista de juegos comprados por el usuario.
+	 */
+	public List<Juegos> obtenerJuegosComprados() {
+		SessionFactory sessionFactory = hiber.Model();
+		try (Session session = sessionFactory.openSession()) {
+			Query query = session.createQuery("FROM Compras WHERE usuario.id = :usuarioId");
+			query.setParameter("usuarioId", user.getId());
+			List<Compras> compras = query.list();
+			return compras.stream().map(Compras::getJuegos).toList();
+		}
+	}
+
+	/**
+	 * Obtiene una lista de usuarios que no son amigos del usuario dado.
+	 * 
+	 * @param usuarioId El ID del usuario.
+	 * @return Una lista de usuarios que no son amigos del usuario dado.
+	 */
+	public JList<Usuario> obtenerNoAmigos(int usuarioId) {
+		SessionFactory sessionFactory = hiber.Model();
+		try (Session session = sessionFactory.openSession()) {
+			Query<Usuario> query = session.createQuery("FROM Usuario u WHERE u.id NOT IN "
+					+ "(SELECT amigo.id FROM Usuario usuario JOIN usuario.usuariosForIdUsuario1 amigo WHERE usuario.id = :usuarioId)",
+					Usuario.class);
+			query.setParameter("usuarioId", usuarioId);
+			List<Usuario> resultList = query.list();
+			Usuario[] usuariosArray = resultList.toArray(new Usuario[0]);
+			return new JList<>(usuariosArray);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	/**
+	 * Obtiene una lista de juegos comprados por el usuario.
+	 * 
+	 * @param i numero de juegos que recibe del usuario.
+	 * @return Una lista de juegos comprados por el usuario.
+	 */
+	public List<Juegos> obtenerJuegosComprados(int i) {
+		SessionFactory sessionFactory = hiber.Model();
+		try (Session session = sessionFactory.openSession()) {
+			Query query = session.createQuery("FROM Compras WHERE usuario.id = :usuarioId");
+			query.setParameter("usuarioId", user.getId());
+			if (i == 0) {
+				query.setMaxResults(3);
+			}
+			List<Compras> compras = query.list();
+			return compras.stream().map(Compras::getJuegos).toList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 }
