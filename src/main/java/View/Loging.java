@@ -150,7 +150,7 @@ public class Loging extends javax.swing.JPanel {
 
 			JOptionPane.showMessageDialog(null, "¡Bienvenido!", "Mensaje de Bienvenida",
 					JOptionPane.INFORMATION_MESSAGE);
-			model.setUser(Nombre.getText(), String.valueOf(contra.getPassword()));
+			model.setUser(Nombre.getText());
 			controller.abrirMainFrame();
 		} else {
 			JOptionPane.showMessageDialog(null, "Credenciales incorrectas. Inténtalo de nuevo.", "Mensaje de Error",

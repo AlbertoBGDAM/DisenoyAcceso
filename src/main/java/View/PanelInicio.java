@@ -19,16 +19,17 @@ public class PanelInicio extends javax.swing.JPanel {
 	private JPanel panelCambia;
 	private JPanel panelInformacion;
 
-	model model = new model();
+	model model;
 
 	/**
 	 * Creates new form PanelInicio
 	 */
-	public PanelInicio() {
+	public PanelInicio(model model1) {
+                this.model=model1;
 		initComponents();
 		panelCambia = new JPanel(new GridLayout(0, 3, 50, 50));
 		panelCambia.setBorder(BorderFactory.createEmptyBorder(133, 36, 214, 33));
-		List<Juegos> juegos = model.obtenerJuegosComprados(3);
+		List<Juegos> juegos = model.obtenerJuegosComprados(0);
 		if (juegos == null || juegos.isEmpty()) {
 			juegos = model.obtenerPrimerosTresJuegos();
 		}

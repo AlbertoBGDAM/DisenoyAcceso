@@ -143,7 +143,7 @@ public class model {
 		try (Session session = sessionFactory.openSession()) {
 			Query query = session.createQuery("FROM Compras WHERE id_usuario = :usuarioId");
 			query.setParameter("usuarioId", user.getId());
-			if (i != 0) {
+			if (i == 0) {
 				query.setMaxResults(3);
 			}
 			List<Compras> compras = query.list();
@@ -167,17 +167,19 @@ public class model {
 		return null;
 	}
 
-	public void setUser(String text, String valueOf) {
-		SessionFactory sessionFactory = hiber.Model();
-		try (Session session = sessionFactory.openSession()) {
-			// Cargar un usuario por ID
-			Long userId = 1L; // Cambia el valor según el ID del usuario que deseas cargar
-			user = session.load(Usuario.class, userId);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+public void setUser(String username) {
+    SessionFactory sessionFactory = hiber.Model();
+    try (Session session = sessionFactory.openSession()) {
+        // Crear la consulta HQL para obtener el usuario por su nombre de usuario
+        Query<Usuario> query = session.createQuery("FROM Usuario u WHERE u.username = :username", Usuario.class);
+        query.setParameter("username", username);
+        Usuario user = query.uniqueResult();
+        this.user = user;
 
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
 	public Usuario getUser() {
 		return user;
 	}

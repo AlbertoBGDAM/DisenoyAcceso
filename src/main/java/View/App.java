@@ -428,7 +428,7 @@ public class App extends javax.swing.JFrame {
 
     private void PrincipalMouseEntered(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_PrincipalMouseEntered
 	colores(Principal);
-	cambiarPanel(new PanelInicio());
+	cambiarPanel(new PanelInicio(model));
     }
 
     private void UserMouseEntered(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_UserMouseEntered
@@ -437,22 +437,22 @@ public class App extends javax.swing.JFrame {
 
     private void comprarMouseEntered(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_comprarMouseEntered
 	colores(Comprar);
-	cambiarPanel(new PanelInicio());
+	cambiarPanel(new PanelInicio(model));
     }
 
     private void jugarMouseEntered(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jugarMouseEntered
 	colores(Jugar);
-	cambiarPanel(new PanelInicio());
+	cambiarPanel(new JuegosUsuarios(model));
     }
 
     private void musicaMouseEntered(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_musicaMouseEntered
     	colores(Musica);
-	cambiarPanel(new PanelInicio());
+	cambiarPanel(new PanelInicio(model));
     }
 
     private void amigosMouseEntered(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_amigosMouseEntered
     	colores(Amigos);
-    	cambiarPanel(new PanelInicio());
+    	cambiarPanel(new PanelInicio(model));
     }
 
     private void cambiarPanel(javax.swing.JPanel nuevoPanel) {
