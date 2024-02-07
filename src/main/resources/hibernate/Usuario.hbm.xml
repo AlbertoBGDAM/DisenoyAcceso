@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 5 feb 2024 20:20:46 by Hibernate Tools 5.4.33.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class catalog="proyectoalberto" name="hibernate.Usuario" optimistic-lock="none" table="usuario">
+        <id name="id" type="java.lang.Integer">
+            <column name="id"/>
+            <generator class="identity"/>
+        </id>
+        <property name="username" type="string">
+            <column length="50" name="username" not-null="true" unique="true"/>
+        </property>
+        <property name="contrasenaEncriptada" type="string">
+            <column name="contrasena_encriptada" not-null="true"/>
+        </property>
+        <property name="correoRecuperacion" type="string">
+            <column name="correo_recuperacion" not-null="true"/>
+        </property>
+        <property name="edad" type="java.lang.Integer">
+            <column name="edad"/>
+        </property>
+        <property name="esMenor" type="java.lang.Boolean">
+            <column name="es_menor"/>
+        </property>
+        <property name="numeroTarjeta" type="string">
+            <column length="16" name="numero_tarjeta" unique="true"/>
+        </property>
+        <property name="fechaExpiracion" type="date">
+            <column length="10" name="fecha_expiracion"/>
+        </property>
+        <property name="codigoSeguridad" type="java.lang.Integer">
+            <column name="codigo_seguridad"/>
+        </property>
+        <set fetch="select" inverse="false" lazy="true" name="juegoses" table="juegos_usuario">
+            <key>
+                <column name="id_usuario" not-null="true"/>
+            </key>
+            <many-to-many entity-name="hibernate.Juegos">
+                <column name="id_juego" not-null="true"/>
+            </many-to-many>
+        </set>
+        <set fetch="select" inverse="false" lazy="true" name="usuariosForIdUsuario1" table="amigos">
+            <key>
+                <column name="id_usuario2" not-null="true"/>
+            </key>
+            <many-to-many entity-name="hibernate.Usuario">
+                <column name="id_usuario1" not-null="true"/>
+            </many-to-many>
+        </set>
+        <set fetch="select" inverse="false" lazy="true" name="usuariosForIdUsuario2" table="amigos">
+            <key>
+                <column name="id_usuario1" not-null="true"/>
+            </key>
+            <many-to-many entity-name="hibernate.Usuario">
+                <column name="id_usuario2" not-null="true"/>
+            </many-to-many>
+        </set>
+        <set fetch="select" inverse="true" lazy="true" name="comprases" table="compras">
+            <key>
+                <column name="id_usuario"/>
+            </key>
+            <one-to-many class="hibernate.Compras"/>
+        </set>
+        <set fetch="select" inverse="true" lazy="true" name="historials" table="historial">
+            <key>
+                <column name="id_usuario"/>
+            </key>
+            <one-to-many class="hibernate.Historial"/>
+        </set>
+    </class>
+</hibernate-mapping>

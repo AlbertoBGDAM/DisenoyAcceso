@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.org/dtd/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+
+
+<table-filter match-name="amigos" match-catalog="proyectoalberto"></table-filter>
+	<table-filter match-name="compras"
+		match-catalog="proyectoalberto">
+	</table-filter>
+	<table-filter match-name="historial"
+		match-catalog="proyectoalberto">
+	</table-filter>
+	<table-filter match-name="juegos" match-catalog="proyectoalberto"></table-filter>
+	<table-filter match-name="juegos_usuario"
+		match-catalog="proyectoalberto">
+	</table-filter>
+	<table-filter match-name="musica" match-catalog="proyectoalberto"></table-filter>
+	<table-filter match-name="musica_usuario"
+		match-catalog="proyectoalberto">
+	</table-filter>
+	<table-filter match-name="tarjetacredito"
+		match-catalog="proyectoalberto">
+	</table-filter>
+	<table-filter match-name="usuario"
+		match-catalog="proyectoalberto">
+	</table-filter>
+</hibernate-reverse-engineering>

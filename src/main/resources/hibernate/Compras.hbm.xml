@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 5 feb 2024 20:20:46 by Hibernate Tools 5.4.33.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class catalog="proyectoalberto" name="hibernate.Compras" optimistic-lock="none" table="compras">
+        <id name="id" type="java.lang.Integer">
+            <column name="id"/>
+            <generator class="identity"/>
+        </id>
+        <many-to-one class="hibernate.Juegos" fetch="select" name="juegos">
+            <column name="id_juego"/>
+        </many-to-one>
+        <many-to-one class="hibernate.Usuario" fetch="select" name="usuario">
+            <column name="id_usuario"/>
+        </many-to-one>
+        <property name="fechaCompra" type="timestamp">
+            <column length="19" name="fecha_compra"/>
+        </property>
+    </class>
+</hibernate-mapping>

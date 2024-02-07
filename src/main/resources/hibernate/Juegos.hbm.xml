@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 5 feb 2024 20:20:46 by Hibernate Tools 5.4.33.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class catalog="proyectoalberto" name="hibernate.Juegos" optimistic-lock="none" table="juegos">
+        <id name="id" type="java.lang.Integer">
+            <column name="id"/>
+            <generator class="identity"/>
+        </id>
+        <property name="nombre" type="string">
+            <column length="100" name="nombre" not-null="true"/>
+        </property>
+        <property name="creador" type="string">
+            <column length="100" name="creador" not-null="true"/>
+        </property>
+        <property name="descripcion" type="string">
+            <column length="65535" name="descripcion"/>
+        </property>
+        <property name="fechaSalida" type="date">
+            <column length="10" name="fecha_salida"/>
+        </property>
+        <property name="categoria" type="string">
+            <column length="20" name="categoria"/>
+        </property>
+        <set fetch="select" inverse="true" lazy="true" name="comprases" table="compras">
+            <key>
+                <column name="id_juego"/>
+            </key>
+            <one-to-many class="hibernate.Compras"/>
+        </set>
+        <set fetch="select" inverse="false" lazy="true" name="usuarios" table="juegos_usuario">
+            <key>
+                <column name="id_juego" not-null="true"/>
+            </key>
+            <many-to-many entity-name="hibernate.Usuario">
+                <column name="id_usuario" not-null="true"/>
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>
