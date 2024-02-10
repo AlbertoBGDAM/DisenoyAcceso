@@ -19,15 +19,15 @@ import javax.swing.SwingUtilities;
  */
 public class Loging extends javax.swing.JPanel {
 	model model;
-        inicio in;
+	inicio in;
 	String defN = "ejemplo@ejemplo.com", defC = "holabuenosdias";
 
 	/**
 	 * Creates new form Loging
 	 */
-	public Loging(model mod,inicio ini) {
+	public Loging(model mod, inicio ini) {
 		this.model = mod;
-                this.in=ini;
+		this.in = ini;
 		initComponents();
 	}
 
@@ -156,7 +156,7 @@ public class Loging extends javax.swing.JPanel {
 					JOptionPane.INFORMATION_MESSAGE);
 			model.setUser(Nombre.getText());
 			controller.mainApp(model);
-                        in.cerrar();
+			in.cerrar();
 
 			// Obtener la referencia al JFrame actual
 			JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);

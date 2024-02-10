@@ -22,13 +22,13 @@ public class App extends javax.swing.JFrame {
 	/**
 	 * Creates new form main
 	 */
-	public App(model mod,Usuario user) {
+	public App(model mod, Usuario user) {
 		initComponents();
-                this.model=mod;
+		this.model = mod;
 		User.setText(user.getUsername());
 		Personal.setText(user.getUsername());
 		User.setIcon(new FlatSVGIcon("image/user.svg"));
-                colores(Principal);
+		colores(Principal);
 		cambiarPanel(new PanelInicio(model));
 	}
 
@@ -455,6 +455,7 @@ public class App extends javax.swing.JFrame {
 		Principal.setBackground(Color.decode("#2C2F48"));
 		Panelpuesto.setBackground(Color.black);
 	}
+
 	// Variables declaration - do not modify//GEN-BEGIN:variables
 	private javax.swing.JPanel Amigos;
 	private javax.swing.JPanel Cambiante;

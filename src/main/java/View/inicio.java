@@ -24,8 +24,8 @@ public class inicio extends javax.swing.JFrame {
 	public inicio(model model) {
 		setLocationRelativeTo(null);
 		initComponents();
-                this.mod=model;
-		cambiarPanel(new Loging(mod,this), false);
+		this.mod = model;
+		cambiarPanel(new Loging(mod, this), false);
 	}
 
 	/**
@@ -151,7 +151,7 @@ public class inicio extends javax.swing.JFrame {
 	}// GEN-LAST:event_contraseñaActionPerformed
 
 	private void atrasActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_atrasActionPerformed
-		cambiarPanel(new Loging(mod,this), false);
+		cambiarPanel(new Loging(mod, this), false);
 	}// GEN-LAST:event_atrasActionPerformed
 
 	private void registrarseActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_registrarseActionPerformed
@@ -169,10 +169,10 @@ public class inicio extends javax.swing.JFrame {
 		mobil.revalidate();
 		mobil.repaint();
 	}
-        public void cerrar(){
-            dispose();
-        }
-	
+
+	public void cerrar() {
+		dispose();
+	}
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables
 	private javax.swing.JButton atras;

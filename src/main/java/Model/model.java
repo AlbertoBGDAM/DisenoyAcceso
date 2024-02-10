@@ -14,9 +14,8 @@ import javax.swing.DefaultListModel;
 import javax.swing.JList;
 
 /**
- * @author ALBERTO BARCALA GUTIÉRREZ
- * Clase que gestiona las operaciones relacionadas con la base de datos y los
- * usuarios.
+ * @author ALBERTO BARCALA GUTIÉRREZ Clase que gestiona las operaciones
+ *         relacionadas con la base de datos y los usuarios.
  */
 public class model {
 
@@ -376,17 +375,17 @@ public class model {
 		return null;
 	}
 
-    public List<Juegos> obtenerTodosLosJuegos() {
-        try (Session session = hiber.Model().openSession()) {
-            session.beginTransaction();
-            Query<Juegos> query = session.createQuery("FROM Juegos", Juegos.class);
-            List<Juegos> juegos = query.list();
-            session.getTransaction().commit();
-            return juegos;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
+	public List<Juegos> obtenerTodosLosJuegos() {
+		try (Session session = hiber.Model().openSession()) {
+			session.beginTransaction();
+			Query<Juegos> query = session.createQuery("FROM Juegos", Juegos.class);
+			List<Juegos> juegos = query.list();
+			session.getTransaction().commit();
+			return juegos;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 }
