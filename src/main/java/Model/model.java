@@ -14,6 +14,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JList;
 
 /**
+ * @author ALBERTO BARCALA GUTIÉRREZ
  * Clase que gestiona las operaciones relacionadas con la base de datos y los
  * usuarios.
  */
@@ -107,7 +108,6 @@ public class model {
 			} else {
 				JOptionPane.showMessageDialog(null, "Usuario no encontrado", "Error", JOptionPane.ERROR_MESSAGE);
 			}
-			hiber.closeSessionFactory();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -155,7 +155,6 @@ public class model {
 				JOptionPane.showMessageDialog(null, "Usuario no encontrado", "Error", JOptionPane.ERROR_MESSAGE);
 			}
 
-			hiber.closeSessionFactory();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -180,8 +179,8 @@ public class model {
 		SessionFactory sessionFactory = hiber.Model();
 		try (Session session = sessionFactory.openSession()) {
 			session.beginTransaction();
-			Query query = session.createQuery("FROM Usuario WHERE username = :username").setParameter("username",
-					username);
+			Query query = session.createQuery("FROM Usuario WHERE correo_recuperacion = :username")
+					.setParameter("username", username);
 			Usuario usuario = (Usuario) query.uniqueResult();
 			session.getTransaction().commit();
 			if (BcryptFunction.getInstance(12).check(password, usuario.getContrasenaEncriptada())) {
@@ -376,5 +375,18 @@ public class model {
 		}
 		return null;
 	}
+
+    public List<Juegos> obtenerTodosLosJuegos() {
+        try (Session session = hiber.Model().openSession()) {
+            session.beginTransaction();
+            Query<Juegos> query = session.createQuery("FROM Juegos", Juegos.class);
+            List<Juegos> juegos = query.list();
+            session.getTransaction().commit();
+            return juegos;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
 }

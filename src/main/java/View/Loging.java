@@ -6,23 +6,28 @@ package View;
 
 import Controller.controller;
 import Model.model;
+import hibernate.Usuario;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 /**
  *
  * @author ALBERTO BARCALA GUTIÉRREZ
  */
 public class Loging extends javax.swing.JPanel {
-	model model = new model();
+	model model;
+        inicio in;
 	String defN = "ejemplo@ejemplo.com", defC = "holabuenosdias";
 
 	/**
 	 * Creates new form Loging
 	 */
-	public Loging(model mod) {
-                this.model=mod;
+	public Loging(model mod,inicio ini) {
+		this.model = mod;
+                this.in=ini;
 		initComponents();
 	}
 
@@ -144,24 +149,30 @@ public class Loging extends javax.swing.JPanel {
 		}
 	}// GEN-LAST:event_NombreKeyPressed
 
-	private void conectarseActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_conectarseActionPerformed
+	private void conectarseActionPerformed(java.awt.event.ActionEvent evt) {
 		boolean ver = model.verificarCredenciales(Nombre.getText(), String.valueOf(contra.getPassword()));
-		if (ver == true) {
-
+		if (ver) {
 			JOptionPane.showMessageDialog(null, "¡Bienvenido!", "Mensaje de Bienvenida",
 					JOptionPane.INFORMATION_MESSAGE);
 			model.setUser(Nombre.getText());
-			controller.abrirMainFrame();
+			controller.mainApp(model);
+                        in.cerrar();
+
+			// Obtener la referencia al JFrame actual
+			JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+
+			// Cerrar el JFrame actual
+			frame.dispose();
 		} else {
 			JOptionPane.showMessageDialog(null, "Credenciales incorrectas. Inténtalo de nuevo.", "Mensaje de Error",
 					JOptionPane.ERROR_MESSAGE);
 		}
-	}// GEN-LAST:event_conectarseActionPerformed
+	}
 
 	private void contraKeyPressed(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_contraKeyPressed
 		if (evt.getExtendedKeyCode() == KeyEvent.VK_ENTER) {
 			conectarse.requestFocus();
-		} // TODO add your handling code here:
+		}
 	}// GEN-LAST:event_contraKeyPressed
 
 	private void contraMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_contraMouseClicked
