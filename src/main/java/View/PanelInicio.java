@@ -6,10 +6,12 @@ package View;
 
 import Model.model;
 import hibernate.*;
+import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import java.util.Iterator;
 
 /**
  *
@@ -18,26 +20,39 @@ import javax.swing.JPanel;
 public class PanelInicio extends javax.swing.JPanel {
 	private JPanel panelCambia;
 	private JPanel panelInformacion;
-
+        Usuario user;
 	model model;
 
 	/**
 	 * Creates new form PanelInicio
 	 */
-	public PanelInicio(model model1) {
-                this.model=model1;
+
+	public PanelInicio(model model1, Usuario user) {
+		this.model = model1;
+                this.user=user;
 		initComponents();
 		panelCambia = new JPanel(new GridLayout(0, 3, 50, 50));
 		panelCambia.setBorder(BorderFactory.createEmptyBorder(133, 36, 214, 33));
-		List<Juegos> juegos = model.obtenerJuegosComprados(0);
-		if (juegos == null || juegos.isEmpty()) {
-			juegos = model.obtenerPrimerosTresJuegos();
+		Iterator<Juegos> juegosIterator = model.obtenerJuegosComprados(0);
+		if (juegosIterator==null) {
+			juegosIterator = model.obtenerTodosLosJuegos();
 		}
+                int i=0;
 		// Crear paneles de juegos y agregarlos al panel de juegos
-		for (Juegos juego : juegos) {
-			juegosdisplay juegoss = new juegosdisplay(juego.getNombre(), juego.getDescripcion(), juego.getCreador(), juego.getCategoria());
+		while (juegosIterator.hasNext()&&i!=3) {
+			Juegos juego = juegosIterator.next();
+			juegosdisplay juegoss = new juegosdisplay(juego.getNombre(), juego.getDescripcion(), juego.getCreador(),
+					juego.getCategoria());
 			panelCambia.add(juegoss);
+                        i++;
 		}
+		// Agregar el panel de juegos al panel principal
+		panelmenu.add(panelCambia); // Aquí se agrega el panelCambia al panel principal panelmenu
+
+		// Ajustar el tamaño y el espacio alrededor del panelCambia
+		panelCambia.setPreferredSize(new Dimension(1063, 208)); // Establecer el tamaño del panelCambia
+		panelCambia.setBorder(new EmptyBorder(133, 36, 214, 33)); // Establecer el espacio alrededor del panelCambia
+
 		/*
 		 * // Configurar el panel de música panelInformacion = new JPanel();s
 		 * panelInformacion.setPreferredSize(new Dimension(1069, 135));

@@ -20,12 +20,14 @@ import javax.swing.SwingUtilities;
 public class Loging extends javax.swing.JPanel {
 	model model;
 	inicio in;
+        controller con;
 	String defN = "ejemplo@ejemplo.com", defC = "holabuenosdias";
 
 	/**
 	 * Creates new form Loging
 	 */
-	public Loging(model mod, inicio ini) {
+	public Loging(model mod, inicio ini,controller cono) {
+                this.con=con;
 		this.model = mod;
 		this.in = ini;
 		initComponents();
@@ -150,17 +152,14 @@ public class Loging extends javax.swing.JPanel {
 	}// GEN-LAST:event_NombreKeyPressed
 
 	private void conectarseActionPerformed(java.awt.event.ActionEvent evt) {
-		boolean ver = model.verificarCredenciales(Nombre.getText(), String.valueOf(contra.getPassword()));
+		boolean ver = model.verificarCredenciales(Nombre.getText(), String.valueOf(contra.getPassword()),con);
 		if (ver) {
 			JOptionPane.showMessageDialog(null, "¡Bienvenido!", "Mensaje de Bienvenida",
-					JOptionPane.INFORMATION_MESSAGE);
-			model.setUser(Nombre.getText());
+					JOptionPane.INFORMATION_MESSAGE);                        
 			controller.mainApp(model);
 			in.cerrar();
-
 			// Obtener la referencia al JFrame actual
 			JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
-
 			// Cerrar el JFrame actual
 			frame.dispose();
 		} else {

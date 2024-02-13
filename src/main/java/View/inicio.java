@@ -20,12 +20,13 @@ public class inicio extends javax.swing.JFrame {
 	 * Creates new form NewJFrame
 	 */
 	model mod;
-
-	public inicio(model model) {
+        controller con;
+	public inicio(model model,controller cono) {
 		setLocationRelativeTo(null);
 		initComponents();
 		this.mod = model;
-		cambiarPanel(new Loging(mod, this), false);
+                this.con=cono;
+		cambiarPanel(new Loging(mod, this,con), false);
 	}
 
 	/**
@@ -151,7 +152,7 @@ public class inicio extends javax.swing.JFrame {
 	}// GEN-LAST:event_contraseñaActionPerformed
 
 	private void atrasActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_atrasActionPerformed
-		cambiarPanel(new Loging(mod, this), false);
+		cambiarPanel(new Loging(mod, this,con), false);
 	}// GEN-LAST:event_atrasActionPerformed
 
 	private void registrarseActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_registrarseActionPerformed

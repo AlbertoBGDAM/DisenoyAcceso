@@ -9,51 +9,51 @@ import javax.swing.*;
 import java.awt.*;
 
 public class juegosdisplay extends JPanel {
-    private final String title;
-    private final String description;
-    private final String creator;
-    private final String gameType;
+	private final String title;
+	private final String description;
+	private final String creator;
+	private final String gameType;
 
-    public juegosdisplay(String titl, String des, String crea, String game) {
-        this.title = titl;
-        this.description = des;
-        this.creator = crea;
-        this.gameType = game;
+	public juegosdisplay(String titl, String des, String crea, String game) {
+		this.title = titl;
+		this.description = des;
+		this.creator = crea;
+		this.gameType = game;
 
-        setPreferredSize(new Dimension(320, 208));
-        setLayout(null);
-        setBackground(new Color(44, 47, 72));
-        FlatRoundBorder border = new FlatRoundBorder();
-        setBorder(BorderFactory.createCompoundBorder(border, BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+		setPreferredSize(new Dimension(320, 208));
+		setLayout(null);
+		setBackground(new Color(44, 47, 72));
+		FlatRoundBorder border = new FlatRoundBorder();
+		setBorder(BorderFactory.createCompoundBorder(border, BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
-        JLabel titleLabel = new JLabel(title);
-        titleLabel.setBounds(12, 113, 139, 20);
-        titleLabel.setForeground(Color.WHITE);
-        add(titleLabel);
+		JLabel titleLabel = new JLabel(title);
+		titleLabel.setBounds(12, 113, 139, 20);
+		titleLabel.setForeground(Color.WHITE);
+		add(titleLabel);
 
-        JTextArea descriptionArea = new JTextArea(description);
-        descriptionArea.setBounds(12, 145, 283, 28);
-        descriptionArea.setForeground(new Color(255, 255, 255, 55));
-        descriptionArea.setOpaque(false);
-        descriptionArea.setEditable(false);
-        add(descriptionArea);
+		JTextArea descriptionArea = new JTextArea(description);
+		descriptionArea.setBounds(12, 145, 283, 28);
+		descriptionArea.setForeground(new Color(255, 255, 255, 55));
+		descriptionArea.setOpaque(false);
+		descriptionArea.setEditable(false);
+		add(descriptionArea);
 
-        // Añadir la etiqueta para la imagen (icono)
-        JLabel imagen = new JLabel("");
-        imagen.setBounds(10, 10, 100, 93);
-        add(imagen);
+		// Añadir la etiqueta para la imagen (icono)
+		JLabel imagen = new JLabel("");
+		imagen.setBounds(10, 10, 100, 93);
+		add(imagen);
 
-        // Configurar el icono basado en el tipo de juego
-        String iconPath = "image/" + (gameType.equals("PC") ? "PC.png" : "Consola.png");
-        ImageIcon icon = new ImageIcon(getClass().getResource(iconPath));
-        imagen.setIcon(icon);
+		// Configurar el icono basado en el tipo de juego
+		String iconPath = "/image/" + (gameType.equals("PC") ? "PC.png" : "Consola.png");
+		ImageIcon icon = new ImageIcon(getClass().getResource(iconPath));
+		imagen.setIcon(icon);
 
-        // Añadir información del creador
-        JLabel creatorLabel = new JLabel("Creador: " + creator);
-        creatorLabel.setBounds(150, 113, 200, 20);
-        creatorLabel.setForeground(Color.WHITE);
-        add(creatorLabel);
-    }
+		// Añadir información del creador
+		JLabel creatorLabel = new JLabel("Creador: " + creator);
+		creatorLabel.setBounds(150, 113, 200, 20);
+		creatorLabel.setForeground(Color.WHITE);
+		add(creatorLabel);
+	}
 
 	/**
 	 * This method is called from within the constructor to initialize the form.

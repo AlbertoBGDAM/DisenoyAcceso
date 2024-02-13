@@ -1,11 +1,14 @@
 package Model;
 
+import Controller.controller;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import com.password4j.*;
 import hibernate.*;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Iterator;
 import javax.swing.JOptionPane;
 import java.util.List;
@@ -14,13 +17,12 @@ import javax.swing.DefaultListModel;
 import javax.swing.JList;
 
 /**
- * @author ALBERTO BARCALA GUTIÉRREZ Clase que gestiona las operaciones
- *         relacionadas con la base de datos y los usuarios.
+ * @author ALBERTO BARCALA GUTIÉRREZ
  */
 public class model {
 
 	Hibernate hiber = new Hibernate();
-	Usuario user;
+	Usuario user = controller.getUser();
 
 	/**
 	 * Inserta un nuevo usuario en la base de datos.
@@ -126,10 +128,9 @@ public class model {
 		SessionFactory sessionFactory = hiber.Model();
 		try (Session session = sessionFactory.openSession()) {
 			session.beginTransaction();
-
-			// Buscar el usuario por ID
-			Usuario usuario = session.get(Usuario.class, user.getId());
-
+			Query query = session.createQuery("FROM Usuario WHERE correo_recuperacion = :username")
+					.setParameter("username", user);
+			Usuario usuario = (Usuario) query.uniqueResult();
 			if (usuario != null) {
 				// Actualizar los datos del usuario
 				usuario.setUsername(nuevoAlias);
@@ -174,7 +175,7 @@ public class model {
 	 * @param password La contraseña del usuario.
 	 * @return true si las credenciales son válidas, false de lo contrario.
 	 */
-	public boolean verificarCredenciales(String username, String password) {
+	public boolean verificarCredenciales(String username, String password, controller con) {
 		SessionFactory sessionFactory = hiber.Model();
 		try (Session session = sessionFactory.openSession()) {
 			session.beginTransaction();
@@ -182,10 +183,11 @@ public class model {
 					.setParameter("username", username);
 			Usuario usuario = (Usuario) query.uniqueResult();
 			session.getTransaction().commit();
-			if (BcryptFunction.getInstance(12).check(password, usuario.getContrasenaEncriptada())) {
-				return true;
+			if (usuario != null && BcryptFunction.getInstance(12).check(password, usuario.getContrasenaEncriptada())) {
+				con.setUser(usuario); // Guarda el usuario
+				return true; // Devuelve true si las credenciales son válidas
 			} else {
-				return false;
+				return false; // Devuelve false si las credenciales no son válidas
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -194,37 +196,44 @@ public class model {
 	}
 
 	/**
-	 * Obtiene los primeros tres juegos de la tabla.
-	 * 
-	 * @return Una lista de los primeros tres juegos.
-	 */
-	public List<Juegos> obtenerPrimerosTresJuegos() {
-		SessionFactory sessionFactory = hiber.Model();
-		try (Session session = sessionFactory.openSession()) {
-			session.beginTransaction();
-			Query query = session.createQuery("FROM Juegos");
-			query.setMaxResults(3);
-			List<Juegos> juegos = query.list();
-			session.getTransaction().commit();
-			return juegos;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	/**
 	 * Establece el usuario actual basado en el nombre de usuario.
 	 * 
 	 * @param username El nombre de usuario.
 	 */
-	public void setUser(String username) {
+	public void setUser(Usuario username) {
 		SessionFactory sessionFactory = hiber.Model();
 		try (Session session = sessionFactory.openSession()) {
 			Query<Usuario> query = session.createQuery("FROM Usuario u WHERE u.username = :username", Usuario.class);
-			query.setParameter("username", username);
+			query.setParameter("username", username.getUsername());
 			Usuario user = query.uniqueResult();
 			this.user = user;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Agrega un nuevo registro al historial para el usuario especificado.
+	 * 
+	 * @param usuario El usuario para el cual se registrará el historial.
+	 */
+	public void setHistory(Usuario usuario) {
+		SessionFactory sessionFactory = hiber.Model();
+		try (Session session = sessionFactory.openSession()) {
+			Transaction transaction = session.beginTransaction();
+
+			// Obtener la fecha actual del sistema
+			Calendar calendar = Calendar.getInstance();
+			Date fechaActual = calendar.getTime();
+
+			// Crear una instancia de Historial con el usuario y la fecha actual del sistema
+			Historial historial = new Historial(usuario, fechaActual);
+
+			// Guardar el historial en la base de datos
+			session.save(historial);
+
+			// Confirmar la transacción
+			transaction.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -321,36 +330,44 @@ public class model {
 	 * 
 	 * @return Una lista de juegos comprados por el usuario.
 	 */
-	public List<Juegos> obtenerJuegosComprados() {
+	public Iterator<Juegos> obtenerJuegosComprados() {
 		SessionFactory sessionFactory = hiber.Model();
 		try (Session session = sessionFactory.openSession()) {
 			Query query = session.createQuery("FROM Compras WHERE usuario.id = :usuarioId");
 			query.setParameter("usuarioId", user.getId());
 			List<Compras> compras = query.list();
-			return compras.stream().map(Compras::getJuegos).toList();
+			return compras.stream().map(Compras::getJuegos).iterator();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
 		}
 	}
 
 	/**
-	 * Obtiene una lista de usuarios que no son amigos del usuario dado.
+	 * Obtiene un iterador sobre la lista de usuarios que no son amigos del usuario
+	 * dado.
 	 * 
 	 * @param usuarioId El ID del usuario.
-	 * @return Una lista de usuarios que no son amigos del usuario dado.
+	 * @return Un iterador sobre la lista de usuarios que no son amigos del usuario
+	 *         dado.
 	 */
-	public JList<Usuario> obtenerNoAmigos(int usuarioId) {
+	public Iterator<Usuario> obtenerNoAmigos(int usuarioId) {
 		SessionFactory sessionFactory = hiber.Model();
 		try (Session session = sessionFactory.openSession()) {
-			Query<Usuario> query = session.createQuery("FROM Usuario u WHERE u.id NOT IN "
-					+ "(SELECT amigo.id FROM Usuario usuario JOIN usuario.usuariosForIdUsuario1 amigo WHERE usuario.id = :usuarioId)",
+			// Seleccionar todos los usuarios que no son amigos del usuario con el ID
+			// proporcionado
+			Query<Usuario> query = session.createQuery(
+					"FROM Usuario u WHERE u.id NOT IN (SELECT amigo.id FROM Usuario usuario "
+							+ "JOIN usuario.usuariosForIdUsuario1 amigo WHERE usuario.id = :usuarioId) AND u.id != :usuarioId",
 					Usuario.class);
 			query.setParameter("usuarioId", usuarioId);
 			List<Usuario> resultList = query.list();
-			Usuario[] usuariosArray = resultList.toArray(new Usuario[0]);
-			return new JList<>(usuariosArray);
+
+			return resultList.iterator();
 		} catch (Exception e) {
 			e.printStackTrace();
+			return null;
 		}
-		return null;
 	}
 
 	/**
@@ -359,7 +376,7 @@ public class model {
 	 * @param i numero de juegos que recibe del usuario.
 	 * @return Una lista de juegos comprados por el usuario.
 	 */
-	public List<Juegos> obtenerJuegosComprados(int i) {
+	public Iterator<Juegos> obtenerJuegosComprados(int i) {
 		SessionFactory sessionFactory = hiber.Model();
 		try (Session session = sessionFactory.openSession()) {
 			Query query = session.createQuery("FROM Compras WHERE usuario.id = :usuarioId");
@@ -367,25 +384,54 @@ public class model {
 			if (i == 0) {
 				query.setMaxResults(3);
 			}
-			List<Compras> compras = query.list();
-			return compras.stream().map(Compras::getJuegos).toList();
+			List<Juegos> todosLosJuegos = query.getResultList();
+			return todosLosJuegos.iterator();
 		} catch (Exception e) {
 			e.printStackTrace();
+			return null;
 		}
-		return null;
 	}
 
-	public List<Juegos> obtenerTodosLosJuegos() {
+	public Iterator<Juegos> obtenerTodosLosJuegos() {
 		try (Session session = hiber.Model().openSession()) {
 			session.beginTransaction();
 			Query<Juegos> query = session.createQuery("FROM Juegos", Juegos.class);
 			List<Juegos> juegos = query.list();
 			session.getTransaction().commit();
-			return juegos;
+			return juegos.iterator();
 		} catch (Exception e) {
 			e.printStackTrace();
+			return null;
 		}
-		return null;
 	}
-
+     /**
+     * Realiza la compra de un juego por parte de un usuario.
+     * 
+     * @param usuario     El usuario que realiza la compra.
+     * @param nombreJuego El nombre del juego que se compra.
+     */
+    public void realizarCompra(Usuario usuario, String nombreJuego) {
+        SessionFactory sessionFactory = hiber.Model();
+        try (Session session = sessionFactory.openSession()) {
+            Transaction transaction = session.beginTransaction();
+            // Obtener el juego seleccionado por su nombre
+            Query<Juegos> query = session.createQuery("FROM Juegos j WHERE j.nombre = :nombre", Juegos.class);
+            query.setParameter("nombre", nombreJuego);
+            Juegos juego = query.uniqueResult();
+            if (juego != null) {
+                Calendar calendar = Calendar.getInstance();
+                Date fechaActual = calendar.getTime();
+                // Crear una instancia de Compras con el usuario y el juego seleccionado
+                Compras compra = new Compras(juego, usuario,fechaActual);
+                // Guardar la compra en la base de datos
+                session.save(compra);
+                // Confirmar la transacción
+                transaction.commit();
+            } else {
+                System.out.println("El juego seleccionado no existe.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
