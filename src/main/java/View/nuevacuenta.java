@@ -24,7 +24,7 @@ public class nuevacuenta extends javax.swing.JPanel {
 	 */
 	public nuevacuenta(model mod1) {
 		initComponents();
-                this.mod=mod1;
+		this.mod = mod1;
 		NC.setEnabled(false);
 	}
 

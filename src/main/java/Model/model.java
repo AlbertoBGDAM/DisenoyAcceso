@@ -7,12 +7,14 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import com.password4j.*;
 import hibernate.*;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import javax.swing.JOptionPane;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 
@@ -259,14 +261,15 @@ public class model {
 		SessionFactory sessionFactory = hiber.Model();
 		try (Session session = sessionFactory.openSession()) {
 			session.beginTransaction();
-			Usuario usuario = session.get(Usuario.class, user.getId());
-			if (usuario != null) {
-				Set juegos = usuario.getJuegoses();
-				for (Iterator it = juegos.iterator(); it.hasNext();) {
-					Juegos juego = (Juegos) it.next();
-					String juegoInfo = juego.getNombre() + " - " + juego.getDescripcion();
-					juegosListModel.addElement(juegoInfo);
-				}
+			// Consulta para obtener las compras del usuario
+			Query<Compras> query = session.createQuery("FROM Compras c WHERE c.usuario.id = :userId", Compras.class);
+			query.setParameter("userId", user.getId());
+			List<Compras> compras = query.list();
+			// Recorrer las compras para obtener los juegos asociados
+			for (Compras compra : compras) {
+				Juegos juego = compra.getJuegos();
+				String juegoInfo = juego.getNombre() + " - " + juego.getDescripcion();
+				juegosListModel.addElement(juegoInfo);
 			}
 			session.getTransaction().commit();
 		} catch (Exception e) {
@@ -326,24 +329,6 @@ public class model {
 	}
 
 	/**
-	 * Obtiene los juegos comprados por un usuario.
-	 * 
-	 * @return Una lista de juegos comprados por el usuario.
-	 */
-	public Iterator<Juegos> obtenerJuegosComprados() {
-		SessionFactory sessionFactory = hiber.Model();
-		try (Session session = sessionFactory.openSession()) {
-			Query query = session.createQuery("FROM Compras WHERE usuario.id = :usuarioId");
-			query.setParameter("usuarioId", user.getId());
-			List<Compras> compras = query.list();
-			return compras.stream().map(Compras::getJuegos).iterator();
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
-
-	/**
 	 * Obtiene un iterador sobre la lista de usuarios que no son amigos del usuario
 	 * dado.
 	 * 
@@ -351,19 +336,48 @@ public class model {
 	 * @return Un iterador sobre la lista de usuarios que no son amigos del usuario
 	 *         dado.
 	 */
-	public Iterator<Usuario> obtenerNoAmigos(int usuarioId) {
-		SessionFactory sessionFactory = hiber.Model();
-		try (Session session = sessionFactory.openSession()) {
-			// Seleccionar todos los usuarios que no son amigos del usuario con el ID
-			// proporcionado
-			Query<Usuario> query = session.createQuery(
-					"FROM Usuario u WHERE u.id NOT IN (SELECT amigo.id FROM Usuario usuario "
-							+ "JOIN usuario.usuariosForIdUsuario1 amigo WHERE usuario.id = :usuarioId) AND u.id != :usuarioId",
-					Usuario.class);
-			query.setParameter("usuarioId", usuarioId);
-			List<Usuario> resultList = query.list();
+	public List<Usuario> obtenerNoAmigos(int usuarioId) {
+		try (Session session = hiber.Model().openSession()) {
+			session.beginTransaction();
 
-			return resultList.iterator();
+			// Obtener todos los usuarios
+			Query<Usuario> query = session.createQuery("FROM Usuario", Usuario.class);
+			List<Usuario> todosLosUsuarios = query.list();
+
+			// Obtener el usuario actual
+			Usuario usuarioActual = session.get(Usuario.class, usuarioId);
+
+			// Remover el usuario actual de la lista
+			todosLosUsuarios.remove(usuarioActual);
+
+			// Obtener la lista de amigos del usuario actual
+			List<Usuario> amigos = new ArrayList<>(usuarioActual.getUsuariosForIdUsuario1());
+
+			// Remover a los amigos de la lista de todos los usuarios
+			todosLosUsuarios.removeAll(amigos);
+
+			session.getTransaction().commit();
+
+			return todosLosUsuarios;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	/**
+	 * Obtiene un iterador sobre todos los juegos disponibles en la base de datos.
+	 * 
+	 * @return Un iterador sobre todos los juegos disponibles, o un iterador vacío
+	 *         si no se encuentran juegos.
+	 */
+	public Iterator<Juegos> obtenerTodosLosJuegos() {
+		try (Session session = hiber.Model().openSession()) {
+			session.beginTransaction();
+			Query<Juegos> query = session.createQuery("FROM Juegos", Juegos.class);
+			List<Juegos> juegos = query.list();
+			session.getTransaction().commit();
+			return juegos.iterator();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
@@ -379,59 +393,49 @@ public class model {
 	public Iterator<Juegos> obtenerJuegosComprados(int i) {
 		SessionFactory sessionFactory = hiber.Model();
 		try (Session session = sessionFactory.openSession()) {
-			Query query = session.createQuery("FROM Compras WHERE usuario.id = :usuarioId");
+			Query<Juegos> query = session.createQuery("SELECT c.juegos FROM Compras c WHERE c.usuario.id = :usuarioId",
+					Juegos.class);
 			query.setParameter("usuarioId", user.getId());
-			if (i == 0) {
-				query.setMaxResults(3);
+			if (i != 0) {
+				query.setMaxResults(i);
 			}
-			List<Juegos> todosLosJuegos = query.getResultList();
-			return todosLosJuegos.iterator();
+			List<Juegos> juegosList = query.list();
+			return juegosList.iterator();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}
 	}
 
-	public Iterator<Juegos> obtenerTodosLosJuegos() {
-		try (Session session = hiber.Model().openSession()) {
-			session.beginTransaction();
-			Query<Juegos> query = session.createQuery("FROM Juegos", Juegos.class);
-			List<Juegos> juegos = query.list();
-			session.getTransaction().commit();
-			return juegos.iterator();
+	/**
+	 * Realiza la compra de un juego por parte de un usuario.
+	 * 
+	 * @param usuario     El usuario que realiza la compra.
+	 * @param nombreJuego El nombre del juego que se compra.
+	 */
+	public void realizarCompra(Usuario usuario, String nombreJuego) {
+		SessionFactory sessionFactory = hiber.Model();
+		try (Session session = sessionFactory.openSession()) {
+			Transaction transaction = session.beginTransaction();
+			// Obtener el juego seleccionado por su nombre
+			Query<Juegos> query = session.createQuery("FROM Juegos j WHERE j.nombre = :nombre", Juegos.class);
+			query.setParameter("nombre", nombreJuego);
+			Juegos juego = query.uniqueResult();
+			if (juego != null) {
+				Calendar calendar = Calendar.getInstance();
+				Date fechaActual = calendar.getTime();
+				// Crear una instancia de Compras con el usuario y el juego seleccionado
+				Compras compra = new Compras(juego, usuario, fechaActual);
+				// Guardar la compra en la base de datos
+				session.save(compra);
+				// Confirmar la transacción
+				transaction.commit();
+			} else {
+				JOptionPane.showMessageDialog(null, nombreJuego, "Mensaje de Error", JOptionPane.ERROR_MESSAGE);
+				System.out.println("El juego seleccionado no existe.");
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			return null;
 		}
 	}
-     /**
-     * Realiza la compra de un juego por parte de un usuario.
-     * 
-     * @param usuario     El usuario que realiza la compra.
-     * @param nombreJuego El nombre del juego que se compra.
-     */
-    public void realizarCompra(Usuario usuario, String nombreJuego) {
-        SessionFactory sessionFactory = hiber.Model();
-        try (Session session = sessionFactory.openSession()) {
-            Transaction transaction = session.beginTransaction();
-            // Obtener el juego seleccionado por su nombre
-            Query<Juegos> query = session.createQuery("FROM Juegos j WHERE j.nombre = :nombre", Juegos.class);
-            query.setParameter("nombre", nombreJuego);
-            Juegos juego = query.uniqueResult();
-            if (juego != null) {
-                Calendar calendar = Calendar.getInstance();
-                Date fechaActual = calendar.getTime();
-                // Crear una instancia de Compras con el usuario y el juego seleccionado
-                Compras compra = new Compras(juego, usuario,fechaActual);
-                // Guardar la compra en la base de datos
-                session.save(compra);
-                // Confirmar la transacción
-                transaction.commit();
-            } else {
-                System.out.println("El juego seleccionado no existe.");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }

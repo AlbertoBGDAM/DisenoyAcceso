@@ -20,7 +20,7 @@ class Recu extends javax.swing.JPanel {
 	 * Creates new form Loging
 	 */
 	public Recu(model mod1) {
-            this.mod=mod1;
+		this.mod = mod1;
 		initComponents();
 	}
 

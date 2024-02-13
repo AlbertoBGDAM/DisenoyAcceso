@@ -20,7 +20,7 @@ import java.util.Iterator;
 public class PanelInicio extends javax.swing.JPanel {
 	private JPanel panelCambia;
 	private JPanel panelInformacion;
-        Usuario user;
+	Usuario user;
 	model model;
 
 	/**
@@ -29,30 +29,27 @@ public class PanelInicio extends javax.swing.JPanel {
 
 	public PanelInicio(model model1, Usuario user) {
 		this.model = model1;
-                this.user=user;
+		this.user = user;
 		initComponents();
-		panelCambia = new JPanel(new GridLayout(0, 3, 50, 50));
-		panelCambia.setBorder(BorderFactory.createEmptyBorder(133, 36, 214, 33));
-		Iterator<Juegos> juegosIterator = model.obtenerJuegosComprados(0);
-		if (juegosIterator==null) {
-			juegosIterator = model.obtenerTodosLosJuegos();
-		}
-                int i=0;
-		// Crear paneles de juegos y agregarlos al panel de juegos
-		while (juegosIterator.hasNext()&&i!=3) {
-			Juegos juego = juegosIterator.next();
-			juegosdisplay juegoss = new juegosdisplay(juego.getNombre(), juego.getDescripcion(), juego.getCreador(),
-					juego.getCategoria());
-			panelCambia.add(juegoss);
-                        i++;
-		}
-		// Agregar el panel de juegos al panel principal
-		panelmenu.add(panelCambia); // Aquí se agrega el panelCambia al panel principal panelmenu
-
-		// Ajustar el tamaño y el espacio alrededor del panelCambia
-		panelCambia.setPreferredSize(new Dimension(1063, 208)); // Establecer el tamaño del panelCambia
-		panelCambia.setBorder(new EmptyBorder(133, 36, 214, 33)); // Establecer el espacio alrededor del panelCambia
-
+		Titulo.setText(Titulo.getText() + user.getUsername());
+		/*
+		 * panelCambia = new JPanel(new GridLayout(1, 3, 50, 50));
+		 * panelCambia.setBorder(BorderFactory.createEmptyBorder(133, 36, 214, 33));
+		 * Iterator<Juegos> juegosIterator= model.obtenerTodosLosJuegos();
+		 * 
+		 * int i = 0; // Crear paneles de juegos y agregarlos al panel de juegos while
+		 * (juegosIterator.hasNext() && i != 3) { Juegos juego = juegosIterator.next();
+		 * juegosdisplay juegoss = new juegosdisplay(juego.getNombre(),
+		 * juego.getDescripcion(), juego.getCreador(), juego.getCategoria());
+		 * panelCambia.add(juegoss); i++; } // Agregar el panel de juegos al panel
+		 * principal panelmenu.add(panelCambia); // Aquí se agrega el panelCambia al
+		 * panel principal panelmenu
+		 * 
+		 * // Ajustar el tamaño y el espacio alrededor del panelCambia
+		 * panelCambia.setPreferredSize(new Dimension(1063, 208)); // Establecer el
+		 * tamaño del panelCambia panelCambia.setBorder(new EmptyBorder(133, 36, 214,
+		 * 33)); // Establecer el espacio alrededor del panelCambia
+		 */
 		/*
 		 * // Configurar el panel de música panelInformacion = new JPanel();s
 		 * panelInformacion.setPreferredSize(new Dimension(1069, 135));
@@ -70,21 +67,59 @@ public class PanelInicio extends javax.swing.JPanel {
 	 */
 	@SuppressWarnings("unchecked")
 	// <editor-fold defaultstate="collapsed" desc="Generated
+	// <editor-fold defaultstate="collapsed" desc="Generated
 	// Code">//GEN-BEGIN:initComponents
 	private void initComponents() {
 
+		jLabel4 = new javax.swing.JLabel();
 		panelmenu = new javax.swing.JPanel();
+		jLabel1 = new javax.swing.JLabel();
+		jLabel2 = new javax.swing.JLabel();
+		jLabel3 = new javax.swing.JLabel();
+		Titulo = new javax.swing.JLabel();
+
+		jLabel4.setText("jLabel4");
 
 		panelmenu.setBackground(new java.awt.Color(44, 47, 72));
 		panelmenu.setMinimumSize(new java.awt.Dimension(1132, 774));
 		panelmenu.setPreferredSize(new java.awt.Dimension(1132, 774));
 
+		jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Fpry.gif"))); // NOI18N
+
+		jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/3oz8xqV63tQ58avUly.gif"))); // NOI18N
+
+		jLabel3.setIcon(
+				new javax.swing.ImageIcon(getClass().getResource("/image/7a87f976b18a75f0e14b13a124601c1c.gif"))); // NOI18N
+
+		Titulo.setFont(new java.awt.Font("SansSerif", 1, 36)); // NOI18N
+		Titulo.setForeground(new java.awt.Color(255, 255, 255));
+		Titulo.setText("Bienvenido, ");
+
 		javax.swing.GroupLayout panelmenuLayout = new javax.swing.GroupLayout(panelmenu);
 		panelmenu.setLayout(panelmenuLayout);
 		panelmenuLayout.setHorizontalGroup(panelmenuLayout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 1132, Short.MAX_VALUE));
+				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(panelmenuLayout.createSequentialGroup().addGroup(panelmenuLayout
+						.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+						.addGroup(panelmenuLayout.createSequentialGroup().addGap(166, 166, 166).addComponent(jLabel1))
+						.addGroup(panelmenuLayout.createSequentialGroup().addGap(47, 47, 47).addComponent(jLabel3)))
+						.addGroup(panelmenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+								.addGroup(panelmenuLayout.createSequentialGroup()
+										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 142,
+												Short.MAX_VALUE)
+										.addComponent(jLabel2).addGap(19, 19, 19))
+								.addGroup(panelmenuLayout.createSequentialGroup().addGap(223, 223, 223)
+										.addComponent(Titulo)
+										.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))));
 		panelmenuLayout.setVerticalGroup(panelmenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGap(0, 774, Short.MAX_VALUE));
+				.addGroup(panelmenuLayout.createSequentialGroup().addGap(66, 66, 66).addComponent(jLabel3)
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+								javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(jLabel1))
+				.addGroup(panelmenuLayout.createSequentialGroup().addGap(55, 55, 55).addComponent(Titulo)
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+								javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(jLabel2).addGap(215, 215, 215)));
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
 		this.setLayout(layout);
@@ -102,6 +137,11 @@ public class PanelInicio extends javax.swing.JPanel {
 	}
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables
+	private javax.swing.JLabel Titulo;
+	private javax.swing.JLabel jLabel1;
+	private javax.swing.JLabel jLabel2;
+	private javax.swing.JLabel jLabel3;
+	private javax.swing.JLabel jLabel4;
 	private javax.swing.JPanel panelmenu;
 	// End of variables declaration//GEN-END:variables
 }

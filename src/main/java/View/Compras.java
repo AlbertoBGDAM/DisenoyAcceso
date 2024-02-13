@@ -8,42 +8,29 @@ import Model.model;
 import hibernate.Juegos;
 import hibernate.Usuario;
 import java.util.Iterator;
-import java.util.List;
 import javax.swing.DefaultListModel;
 
 /**
  *
  * @author ALBERTO BARCALA GUTIÉRREZ
  */
-import javax.swing.DefaultListModel;
-import javax.swing.JList;
-import javax.swing.ListCellRenderer;
 
 public class Compras extends javax.swing.JPanel {
 
+	private model modelo;
+	private Usuario user;
+	DefaultListModel<String> juegosListModel = new DefaultListModel<>();
 
-    private model modelo;
-    private Usuario user;
-    DefaultListModel<String> juegosListModel = new DefaultListModel<>(); // Cambiar el tipo a JuegoInfo
-        
+	public Compras(model mode, Usuario user1) {
+		this.modelo = mode;
+		this.user = user1;
+		initComponents();
+		modelo.setUser(user);
+		listadecompra.setModel(juegosListModel);
 
-    public Compras(model mode, Usuario user1) {
-        this.modelo = mode;
-        this.user = user1;
-        initComponents();
-        modelo.setUser(user);
-        listadecompra.setModel(juegosListModel);
-        
-        DefaultListModel<String> juegosListModel = new DefaultListModel<>(); // Utilizar DefaultListModel de tipo String
-        listadecompra.setModel(juegosListModel);
-
-        // Actualizar la lista de juegos disponibles
-        actualizarLista();
-    }
-    
-
-
-
+		// Actualizar la lista de juegos disponibles
+		actualizarLista();
+	}
 
 	/**
 	 * This method is called from within the constructor to initialize the form.
@@ -52,119 +39,116 @@ public class Compras extends javax.swing.JPanel {
 	 */
 	@SuppressWarnings("unchecked")
 	// <editor-fold defaultstate="collapsed" desc="Generated
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+	// <editor-fold defaultstate="collapsed" desc="Generated
+	// Code">//GEN-BEGIN:initComponents
+	private void initComponents() {
 
-        compras = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        listadecompra = new javax.swing.JList<>();
-        agregar = new javax.swing.JButton();
+		compras = new javax.swing.JPanel();
+		jScrollPane1 = new javax.swing.JScrollPane();
+		listadecompra = new javax.swing.JList<>();
+		agregar = new javax.swing.JButton();
 
-        compras.setBackground(new java.awt.Color(29, 32, 62));
-        compras.setPreferredSize(new java.awt.Dimension(1132, 774));
+		compras.setBackground(new java.awt.Color(29, 32, 62));
+		compras.setPreferredSize(new java.awt.Dimension(1132, 774));
 
-        listadecompra.setBackground(new java.awt.Color(25, 30, 42));
-        listadecompra.setForeground(new java.awt.Color(255, 255, 255));
-        listadecompra.setMaximumSize(new java.awt.Dimension(965, 603));
-        listadecompra.setMinimumSize(new java.awt.Dimension(965, 603));
-        listadecompra.setPreferredSize(new java.awt.Dimension(965, 603));
-        jScrollPane1.setViewportView(listadecompra);
+		listadecompra.setBackground(new java.awt.Color(25, 30, 42));
+		listadecompra.setForeground(new java.awt.Color(255, 255, 255));
+		listadecompra.setMaximumSize(new java.awt.Dimension(965, 603));
+		listadecompra.setMinimumSize(new java.awt.Dimension(965, 603));
+		listadecompra.setPreferredSize(new java.awt.Dimension(965, 603));
+		jScrollPane1.setViewportView(listadecompra);
 
-        agregar.setBackground(new java.awt.Color(25, 30, 42));
-        agregar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        agregar.setForeground(new java.awt.Color(255, 255, 255));
-        agregar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        agregar.setLabel("Comprar seleccionados");
-        agregar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                agregarMouseClicked(evt);
-            }
-        });
+		agregar.setBackground(new java.awt.Color(25, 30, 42));
+		agregar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+		agregar.setForeground(new java.awt.Color(255, 255, 255));
+		agregar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+		agregar.setLabel("Comprar seleccionados");
+		agregar.addMouseListener(new java.awt.event.MouseAdapter() {
+			public void mouseClicked(java.awt.event.MouseEvent evt) {
+				agregarMouseClicked(evt);
+			}
+		});
 
-        javax.swing.GroupLayout comprasLayout = new javax.swing.GroupLayout(compras);
-        compras.setLayout(comprasLayout);
-        comprasLayout.setHorizontalGroup(
-            comprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, comprasLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(329, 329, 329))
-            .addGroup(comprasLayout.createSequentialGroup()
-                .addGap(55, 55, 55)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1023, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(54, Short.MAX_VALUE))
-        );
-        comprasLayout.setVerticalGroup(
-            comprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(comprasLayout.createSequentialGroup()
-                .addGap(64, 64, 64)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 566, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
-                .addComponent(agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36))
-        );
+		javax.swing.GroupLayout comprasLayout = new javax.swing.GroupLayout(compras);
+		compras.setLayout(comprasLayout);
+		comprasLayout.setHorizontalGroup(comprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
+						comprasLayout.createSequentialGroup()
+								.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 370,
+										javax.swing.GroupLayout.PREFERRED_SIZE)
+								.addGap(329, 329, 329))
+				.addGroup(comprasLayout
+						.createSequentialGroup().addGap(55, 55, 55).addComponent(jScrollPane1,
+								javax.swing.GroupLayout.PREFERRED_SIZE, 1023, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addContainerGap(54, Short.MAX_VALUE)));
+		comprasLayout.setVerticalGroup(comprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(comprasLayout.createSequentialGroup().addGap(64, 64, 64)
+						.addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 566,
+								javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+						.addComponent(agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 67,
+								javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addGap(36, 36, 36)));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(compras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(compras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-    }// </editor-fold>//GEN-END:initComponents
+		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+		this.setLayout(layout);
+		layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(layout.createSequentialGroup().addGap(0, 0, Short.MAX_VALUE).addComponent(compras,
+						javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+						javax.swing.GroupLayout.PREFERRED_SIZE)));
+		layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(layout.createSequentialGroup().addGap(0, 0, 0)
+						.addComponent(compras, javax.swing.GroupLayout.PREFERRED_SIZE,
+								javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addGap(0, 0, Short.MAX_VALUE)));
+	}// </editor-fold>//GEN-END:initComponents
 
-    private void agregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agregarMouseClicked
-        // Obtener el índice del juego seleccionado
-                int selectedIndex = listadecompra.getSelectedIndex();
-                if (selectedIndex != -1) { // Verificar si se ha seleccionado un juego
-                    // Obtener el nombre del juego seleccionado
-                    String selectedGame = juegosListModel.getElementAt(selectedIndex);
-                    // Dividir el nombre del juego y la descripción usando el primer espacio como delimitador
-                    String[] parts = selectedGame.split(" ", 2);
-                    String nombreJuego = parts[0]; // Nombre del juego
-                    String descripcionJuego = parts[1]; // Descripción del juego
-                    // Llamar al método en el modelo para realizar la compra del juego seleccionado
-                    modelo.realizarCompra(user,nombreJuego);
-                    // Actualizar la lista de juegos disponibles
-                    actualizarLista();
-                }
-    }//GEN-LAST:event_agregarMouseClicked
-private void actualizarLista() {
-        DefaultListModel<String> juegosListModel = (DefaultListModel<String>) listadecompra.getModel();
-        juegosListModel.clear(); // Limpiar la lista actual
-        Iterator<Juegos> todosLosJuegosIterator = modelo.obtenerTodosLosJuegos();
-        Iterator<Juegos> juegosCompradosIterator = modelo.obtenerJuegosComprados();
+	private void agregarMouseClicked(java.awt.event.MouseEvent evt) {
+		int selectedIndex = listadecompra.getSelectedIndex();
+		if (selectedIndex >= 0) { // Verificar si el índice seleccionado es válido
+			// Obtener el juego seleccionado del modelo de lista
+			String selectedGame = juegosListModel.getElementAt(selectedIndex);
+			String[] parts = selectedGame.split(" - ");
+			String nombreJuego = parts[1]; // Nombre del juego
+			// Llamar al método en el modelo para realizar la compra del juego seleccionado
+			modelo.realizarCompra(user, nombreJuego);
+			// Actualizar la lista de juegos disponibles
+			actualizarLista();
+		}
+	}
 
-        // Agregar los juegos que no han sido comprados
-        while (todosLosJuegosIterator.hasNext()) {
-            Juegos juego = todosLosJuegosIterator.next();
-            boolean estaComprado = false;
-            // Verificar si el juego está en la lista de juegos comprados
-            while (juegosCompradosIterator.hasNext()) {
-                Juegos juegoComprado = juegosCompradosIterator.next();
-                if (juego.equals(juegoComprado)) {
-                    estaComprado = true;
-                    break;
-                }
-            }
-            if (!estaComprado) {
-                // Agregar el nombre y la descripción del juego como una sola cadena al modelo de lista
-                juegosListModel.addElement(juego.getNombre() + " - " + juego.getDescripcion());
-            }
-        }
-    }
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton agregar;
-    private javax.swing.JPanel compras;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JList<String> listadecompra;
-    // End of variables declaration//GEN-END:variables
+	private void actualizarLista() {
+		DefaultListModel<String> juegosListModel = (DefaultListModel<String>) listadecompra.getModel();
+		juegosListModel.clear(); // Limpiar la lista actual
+		Iterator<Juegos> todosLosJuegosIterator = modelo.obtenerTodosLosJuegos();
+		Iterator<Juegos> juegosCompradosIterator = modelo.obtenerJuegosComprados(1);
+
+		// Agregar los juegos que no han sido comprados
+		while (todosLosJuegosIterator.hasNext()) {
+			Juegos juego = todosLosJuegosIterator.next();
+			boolean estaComprado = false;
+			// Verificar si el juego está en la lista de juegos comprados
+			while (juegosCompradosIterator.hasNext()) {
+				Juegos juegoComprado = juegosCompradosIterator.next();
+				if (juego.equals(juegoComprado)) {
+					estaComprado = true;
+					break;
+				}
+			}
+			if (!estaComprado) {
+				// Agregar el nombre y la descripción del juego como una sola cadena al modelo
+				// de lista
+				juegosListModel.addElement(" - " + juego.getNombre() + " - " + juego.getDescripcion());
+			}
+		}
+		listadecompra.setModel(juegosListModel);
+	}
+
+	// Variables declaration - do not modify//GEN-BEGIN:variables
+	private javax.swing.JButton agregar;
+	private javax.swing.JPanel compras;
+	private javax.swing.JScrollPane jScrollPane1;
+	private javax.swing.JList<String> listadecompra;
+	// End of variables declaration//GEN-END:variables
 }

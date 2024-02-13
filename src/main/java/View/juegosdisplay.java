@@ -5,10 +5,23 @@
 package View;
 
 import com.formdev.flatlaf.ui.FlatRoundBorder;
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JTextArea;
 
-public class juegosdisplay extends JPanel {
+/**
+ *
+ * @author Alberto Barcala Gutiérrez
+ */
+public class juegosdisplay extends javax.swing.JPanel {
+
+	/**
+	 * Creates new form juegosdisplay
+	 */
 	private final String title;
 	private final String description;
 	private final String creator;
@@ -19,40 +32,34 @@ public class juegosdisplay extends JPanel {
 		this.description = des;
 		this.creator = crea;
 		this.gameType = game;
-
+		initComponents();
 		setPreferredSize(new Dimension(320, 208));
-		setLayout(null);
+		setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10)); // Usar FlowLayout en lugar de null layout
 		setBackground(new Color(44, 47, 72));
 		FlatRoundBorder border = new FlatRoundBorder();
 		setBorder(BorderFactory.createCompoundBorder(border, BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
 		JLabel titleLabel = new JLabel(title);
-		titleLabel.setBounds(12, 113, 139, 20);
 		titleLabel.setForeground(Color.WHITE);
 		add(titleLabel);
 
 		JTextArea descriptionArea = new JTextArea(description);
-		descriptionArea.setBounds(12, 145, 283, 28);
 		descriptionArea.setForeground(new Color(255, 255, 255, 55));
 		descriptionArea.setOpaque(false);
 		descriptionArea.setEditable(false);
 		add(descriptionArea);
 
-		// Añadir la etiqueta para la imagen (icono)
 		JLabel imagen = new JLabel("");
-		imagen.setBounds(10, 10, 100, 93);
 		add(imagen);
 
-		// Configurar el icono basado en el tipo de juego
 		String iconPath = "/image/" + (gameType.equals("PC") ? "PC.png" : "Consola.png");
 		ImageIcon icon = new ImageIcon(getClass().getResource(iconPath));
 		imagen.setIcon(icon);
 
-		// Añadir información del creador
 		JLabel creatorLabel = new JLabel("Creador: " + creator);
-		creatorLabel.setBounds(150, 113, 200, 20);
 		creatorLabel.setForeground(Color.WHITE);
 		add(creatorLabel);
+
 	}
 
 	/**
@@ -72,4 +79,7 @@ public class juegosdisplay extends JPanel {
 		layout.setVerticalGroup(
 				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 300, Short.MAX_VALUE));
 	}// </editor-fold>//GEN-END:initComponents
+
+	// Variables declaration - do not modify//GEN-BEGIN:variables
+	// End of variables declaration//GEN-END:variables
 }

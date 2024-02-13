@@ -28,13 +28,13 @@ public class AmigosNuevos extends javax.swing.JFrame {
 		initComponents();
 		this.us = use;
 		this.mod = mode;
-		// Llamada al método obtenerNoAmigos
-		Iterator<Usuario> usuariosNoAmigos = mod.obtenerNoAmigos(us.getId());
 
-		// Construir un DefaultListModel a partir del iterador de usuarios
+		// Llamada al método obtenerNoAmigos
+		List<Usuario> usuariosNoAmigos = mod.obtenerNoAmigos(us.getId());
+
+		// Construir un DefaultListModel a partir de la lista de usuarios
 		DefaultListModel<Usuario> listModel = new DefaultListModel<>();
-		while (usuariosNoAmigos.hasNext()) {
-			Usuario usuario = usuariosNoAmigos.next();
+		for (Usuario usuario : usuariosNoAmigos) {
 			listModel.addElement(usuario);
 		}
 

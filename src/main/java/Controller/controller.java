@@ -32,9 +32,10 @@ public class controller {
 
 	public static void setUser(Usuario usuario) {
 		us = usuario;
-                mod.setHistory(us);
+		mod.setHistory(us);
 	}
-        public static Usuario getUser() {
+
+	public static Usuario getUser() {
 		return us;
 	}
 
