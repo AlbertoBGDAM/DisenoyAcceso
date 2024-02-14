@@ -38,49 +38,39 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="nombre" min="-2" pref="170" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="Nombre" min="-2" pref="231" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="codtar" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="CodTar" min="-2" pref="231" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="confcont" alignment="0" min="-2" pref="183" max="-2" attributes="0"/>
+                          <Component id="contraseña" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="edad" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="nombre1" min="-2" max="-2" attributes="0"/>
+                          <Component id="nombre1" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="contra" pref="231" max="32767" attributes="0"/>
+                          <Component id="ConfCont" pref="231" max="32767" attributes="0"/>
+                          <Component id="Tarjeta" alignment="0" pref="231" max="32767" attributes="0"/>
+                          <Component id="Edad" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="nombre2" min="-2" pref="170" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="Alias" min="-2" pref="232" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="confcont" alignment="0" min="-2" pref="183" max="-2" attributes="0"/>
-                                  <Component id="contraseña" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="contra" min="-2" pref="231" max="-2" attributes="0"/>
-                                  <Component id="ConfCont" min="-2" pref="231" max="-2" attributes="0"/>
-                                  <Component id="Edad" alignment="0" min="-2" pref="231" max="-2" attributes="0"/>
-                                  <Component id="Tarjeta" alignment="0" min="-2" pref="231" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="nombre2" min="-2" pref="170" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="Alias" min="-2" pref="232" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <EmptySpace min="6" max="32767" attributes="0"/>
+                      <Component id="nombre" min="-2" pref="170" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="Nombre" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="codtar" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
+                      <Component id="CodTar" max="32767" attributes="0"/>
                   </Group>
               </Group>
+              <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -92,12 +82,12 @@
                   <Component id="nombre" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                   <Component id="Nombre" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace pref="18" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="Alias" alignment="3" min="-2" pref="44" max="-2" attributes="0"/>
                   <Component id="nombre2" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                  <Component id="Alias" alignment="3" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" pref="37" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="contra" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                   <Component id="contraseña" alignment="3" min="-2" max="-2" attributes="0"/>

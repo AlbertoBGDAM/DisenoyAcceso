@@ -35,275 +35,259 @@ public class nuevacuenta extends javax.swing.JPanel {
 	 */
 	@SuppressWarnings("unchecked")
 	// <editor-fold defaultstate="collapsed" desc="Generated
-	// Code">//GEN-BEGIN:initComponents
-	private void initComponents() {
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
 
-		nombre = new javax.swing.JLabel();
-		Nombre = new javax.swing.JTextField();
-		NC = new javax.swing.JButton();
-		contraseña = new javax.swing.JLabel();
-		contra = new javax.swing.JPasswordField();
-		confcont = new javax.swing.JLabel();
-		ConfCont = new javax.swing.JPasswordField();
-		edad = new javax.swing.JLabel();
-		Edad = new javax.swing.JSpinner();
-		Tarjeta = new javax.swing.JTextField();
-		nombre1 = new javax.swing.JLabel();
-		codtar = new javax.swing.JLabel();
-		CodTar = new javax.swing.JPasswordField();
-		nombre2 = new javax.swing.JLabel();
-		Alias = new javax.swing.JTextField();
+        nombre = new javax.swing.JLabel();
+        Nombre = new javax.swing.JTextField();
+        NC = new javax.swing.JButton();
+        contraseña = new javax.swing.JLabel();
+        contra = new javax.swing.JPasswordField();
+        confcont = new javax.swing.JLabel();
+        ConfCont = new javax.swing.JPasswordField();
+        edad = new javax.swing.JLabel();
+        Edad = new javax.swing.JSpinner();
+        Tarjeta = new javax.swing.JTextField();
+        nombre1 = new javax.swing.JLabel();
+        codtar = new javax.swing.JLabel();
+        CodTar = new javax.swing.JPasswordField();
+        nombre2 = new javax.swing.JLabel();
+        Alias = new javax.swing.JTextField();
 
-		setBackground(new java.awt.Color(31, 37, 51));
-		setMaximumSize(new java.awt.Dimension(432, 636));
-		setMinimumSize(new java.awt.Dimension(432, 636));
-		setPreferredSize(new java.awt.Dimension(432, 636));
+        setBackground(new java.awt.Color(31, 37, 51));
+        setMaximumSize(new java.awt.Dimension(432, 636));
+        setMinimumSize(new java.awt.Dimension(432, 636));
+        setPreferredSize(new java.awt.Dimension(432, 636));
 
-		nombre.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
-		nombre.setForeground(new java.awt.Color(255, 255, 255));
-		nombre.setText("Correo:");
+        nombre.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
+        nombre.setForeground(new java.awt.Color(255, 255, 255));
+        nombre.setText("Correo:");
 
-		Nombre.setBackground(new java.awt.Color(31, 37, 51));
-		Nombre.setForeground(new java.awt.Color(204, 204, 204));
-		Nombre.setText("ejemplo@ejemplo.com");
-		Nombre.setToolTipText("");
-		Nombre.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mouseClicked(java.awt.event.MouseEvent evt) {
-				NombreMouseClicked(evt);
-			}
-		});
-		Nombre.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				NombreActionPerformed(evt);
-			}
-		});
-		Nombre.addKeyListener(new java.awt.event.KeyAdapter() {
-			public void keyPressed(java.awt.event.KeyEvent evt) {
-				NombreKeyPressed(evt);
-			}
-		});
+        Nombre.setBackground(new java.awt.Color(31, 37, 51));
+        Nombre.setForeground(new java.awt.Color(204, 204, 204));
+        Nombre.setText("ejemplo@ejemplo.com");
+        Nombre.setToolTipText("");
+        Nombre.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                NombreMouseClicked(evt);
+            }
+        });
+        Nombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NombreActionPerformed(evt);
+            }
+        });
+        Nombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                NombreKeyPressed(evt);
+            }
+        });
 
-		NC.setBackground(new java.awt.Color(25, 30, 42));
-		NC.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-		NC.setForeground(new java.awt.Color(255, 255, 255));
-		NC.setText("Nueva Cuenta");
-		NC.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				NCActionPerformed(evt);
-			}
-		});
+        NC.setBackground(new java.awt.Color(25, 30, 42));
+        NC.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        NC.setForeground(new java.awt.Color(255, 255, 255));
+        NC.setText("Nueva Cuenta");
+        NC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NCActionPerformed(evt);
+            }
+        });
 
-		contraseña.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
-		contraseña.setForeground(new java.awt.Color(255, 255, 255));
-		contraseña.setText("Contraseña:");
+        contraseña.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
+        contraseña.setForeground(new java.awt.Color(255, 255, 255));
+        contraseña.setText("Contraseña:");
 
-		contra.setBackground(new java.awt.Color(31, 37, 51));
-		contra.setForeground(new java.awt.Color(255, 255, 255));
-		contra.setText("holabuenosdias");
-		contra.setMinimumSize(new java.awt.Dimension(139, 22));
-		contra.setPreferredSize(new java.awt.Dimension(139, 22));
-		contra.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mouseClicked(java.awt.event.MouseEvent evt) {
-				contraMouseClicked(evt);
-			}
-		});
-		contra.addKeyListener(new java.awt.event.KeyAdapter() {
-			public void keyPressed(java.awt.event.KeyEvent evt) {
-				contraKeyPressed(evt);
-			}
-		});
+        contra.setBackground(new java.awt.Color(31, 37, 51));
+        contra.setForeground(new java.awt.Color(255, 255, 255));
+        contra.setText("holabuenosdias");
+        contra.setMinimumSize(new java.awt.Dimension(139, 22));
+        contra.setPreferredSize(new java.awt.Dimension(139, 22));
+        contra.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                contraMouseClicked(evt);
+            }
+        });
+        contra.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                contraKeyPressed(evt);
+            }
+        });
 
-		confcont.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
-		confcont.setForeground(new java.awt.Color(255, 255, 255));
-		confcont.setText("Confirmar Contraseña:");
+        confcont.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
+        confcont.setForeground(new java.awt.Color(255, 255, 255));
+        confcont.setText("Confirmar Contraseña:");
 
-		ConfCont.setBackground(new java.awt.Color(31, 37, 51));
-		ConfCont.setForeground(new java.awt.Color(255, 255, 255));
-		ConfCont.setText("holabuenosdias");
-		ConfCont.setMinimumSize(new java.awt.Dimension(139, 22));
-		ConfCont.setPreferredSize(new java.awt.Dimension(139, 22));
-		ConfCont.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mouseClicked(java.awt.event.MouseEvent evt) {
-				ConfContMouseClicked(evt);
-			}
-		});
-		ConfCont.addKeyListener(new java.awt.event.KeyAdapter() {
-			public void keyPressed(java.awt.event.KeyEvent evt) {
-				ConfContKeyPressed(evt);
-			}
-		});
+        ConfCont.setBackground(new java.awt.Color(31, 37, 51));
+        ConfCont.setForeground(new java.awt.Color(255, 255, 255));
+        ConfCont.setText("holabuenosdias");
+        ConfCont.setMinimumSize(new java.awt.Dimension(139, 22));
+        ConfCont.setPreferredSize(new java.awt.Dimension(139, 22));
+        ConfCont.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ConfContMouseClicked(evt);
+            }
+        });
+        ConfCont.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                ConfContKeyPressed(evt);
+            }
+        });
 
-		edad.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
-		edad.setForeground(new java.awt.Color(255, 255, 255));
-		edad.setText("Edad:");
+        edad.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
+        edad.setForeground(new java.awt.Color(255, 255, 255));
+        edad.setText("Edad:");
 
-		Edad.addKeyListener(new java.awt.event.KeyAdapter() {
-			public void keyPressed(java.awt.event.KeyEvent evt) {
-				EdadKeyPressed(evt);
-			}
-		});
+        Edad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                EdadKeyPressed(evt);
+            }
+        });
 
-		Tarjeta.setBackground(new java.awt.Color(31, 37, 51));
-		Tarjeta.setForeground(new java.awt.Color(204, 204, 204));
-		Tarjeta.setText("Numero Tarjeta");
-		Tarjeta.setToolTipText("");
-		Tarjeta.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mouseClicked(java.awt.event.MouseEvent evt) {
-				TarjetaMouseClicked(evt);
-			}
-		});
-		Tarjeta.addKeyListener(new java.awt.event.KeyAdapter() {
-			public void keyPressed(java.awt.event.KeyEvent evt) {
-				TarjetaKeyPressed(evt);
-			}
-		});
+        Tarjeta.setBackground(new java.awt.Color(31, 37, 51));
+        Tarjeta.setForeground(new java.awt.Color(204, 204, 204));
+        Tarjeta.setText("Numero Tarjeta");
+        Tarjeta.setToolTipText("");
+        Tarjeta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TarjetaMouseClicked(evt);
+            }
+        });
+        Tarjeta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TarjetaKeyPressed(evt);
+            }
+        });
 
-		nombre1.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
-		nombre1.setForeground(new java.awt.Color(255, 255, 255));
-		nombre1.setText("Tarjeta:");
+        nombre1.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
+        nombre1.setForeground(new java.awt.Color(255, 255, 255));
+        nombre1.setText("Tarjeta:");
 
-		codtar.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
-		codtar.setForeground(new java.awt.Color(255, 255, 255));
-		codtar.setText("Codigo Tarjeta:");
+        codtar.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
+        codtar.setForeground(new java.awt.Color(255, 255, 255));
+        codtar.setText("Codigo Tarjeta:");
 
-		CodTar.setBackground(new java.awt.Color(31, 37, 51));
-		CodTar.setForeground(new java.awt.Color(255, 255, 255));
-		CodTar.setText("pin tarjeta");
-		CodTar.setMinimumSize(new java.awt.Dimension(139, 22));
-		CodTar.setPreferredSize(new java.awt.Dimension(139, 22));
-		CodTar.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mouseClicked(java.awt.event.MouseEvent evt) {
-				CodTarMouseClicked(evt);
-			}
-		});
-		CodTar.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				CodTarActionPerformed(evt);
-			}
-		});
-		CodTar.addKeyListener(new java.awt.event.KeyAdapter() {
-			public void keyPressed(java.awt.event.KeyEvent evt) {
-				CodTarKeyPressed(evt);
-			}
-		});
+        CodTar.setBackground(new java.awt.Color(31, 37, 51));
+        CodTar.setForeground(new java.awt.Color(255, 255, 255));
+        CodTar.setText("pin tarjeta");
+        CodTar.setMinimumSize(new java.awt.Dimension(139, 22));
+        CodTar.setPreferredSize(new java.awt.Dimension(139, 22));
+        CodTar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CodTarMouseClicked(evt);
+            }
+        });
+        CodTar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CodTarActionPerformed(evt);
+            }
+        });
+        CodTar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                CodTarKeyPressed(evt);
+            }
+        });
 
-		nombre2.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
-		nombre2.setForeground(new java.awt.Color(255, 255, 255));
-		nombre2.setText("Nombre:");
+        nombre2.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
+        nombre2.setForeground(new java.awt.Color(255, 255, 255));
+        nombre2.setText("Nombre:");
 
-		Alias.setBackground(new java.awt.Color(31, 37, 51));
-		Alias.setForeground(new java.awt.Color(204, 204, 204));
-		Alias.setText("TuNombre");
-		Alias.setToolTipText("");
-		Alias.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mouseClicked(java.awt.event.MouseEvent evt) {
-				AliasMouseClicked(evt);
-			}
-		});
-		Alias.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				AliasActionPerformed(evt);
-			}
-		});
-		Alias.addKeyListener(new java.awt.event.KeyAdapter() {
-			public void keyPressed(java.awt.event.KeyEvent evt) {
-				AliasKeyPressed(evt);
-			}
-		});
+        Alias.setBackground(new java.awt.Color(31, 37, 51));
+        Alias.setForeground(new java.awt.Color(204, 204, 204));
+        Alias.setText("TuNombre");
+        Alias.setToolTipText("");
+        Alias.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                AliasMouseClicked(evt);
+            }
+        });
+        Alias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AliasActionPerformed(evt);
+            }
+        });
+        Alias.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                AliasKeyPressed(evt);
+            }
+        });
 
-		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-		this.setLayout(layout);
-		layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-				javax.swing.GroupLayout.Alignment.TRAILING,
-				layout.createSequentialGroup().addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(NC).addGap(137, 137, 137))
-				.addGroup(layout.createSequentialGroup().addContainerGap()
-						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-								.addGroup(layout.createSequentialGroup()
-										.addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 170,
-												javax.swing.GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-												javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-										.addComponent(
-												Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 231,
-												javax.swing.GroupLayout.PREFERRED_SIZE)
-										.addContainerGap())
-								.addGroup(layout.createSequentialGroup().addGap(19, 19, 19).addGroup(layout
-										.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-										.addGroup(layout.createSequentialGroup().addComponent(codtar)
-												.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-														javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-												.addComponent(
-														CodTar, javax.swing.GroupLayout.PREFERRED_SIZE, 231,
-														javax.swing.GroupLayout.PREFERRED_SIZE))
-										.addComponent(edad).addComponent(nombre1)).addContainerGap())
-								.addGroup(layout.createSequentialGroup().addGroup(layout
-										.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-										.addGroup(layout.createSequentialGroup().addGroup(
-												layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-														.addComponent(confcont, javax.swing.GroupLayout.PREFERRED_SIZE,
-																183, javax.swing.GroupLayout.PREFERRED_SIZE)
-														.addComponent(contraseña))
-												.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-												.addGroup(layout
-														.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-														.addComponent(contra, javax.swing.GroupLayout.PREFERRED_SIZE,
-																231, javax.swing.GroupLayout.PREFERRED_SIZE)
-														.addComponent(ConfCont, javax.swing.GroupLayout.PREFERRED_SIZE,
-																231, javax.swing.GroupLayout.PREFERRED_SIZE)
-														.addComponent(Edad, javax.swing.GroupLayout.PREFERRED_SIZE, 231,
-																javax.swing.GroupLayout.PREFERRED_SIZE)
-														.addComponent(Tarjeta, javax.swing.GroupLayout.PREFERRED_SIZE,
-																231, javax.swing.GroupLayout.PREFERRED_SIZE)))
-										.addGroup(layout.createSequentialGroup()
-												.addComponent(nombre2, javax.swing.GroupLayout.PREFERRED_SIZE, 170,
-														javax.swing.GroupLayout.PREFERRED_SIZE)
-												.addGap(18, 18, 18).addComponent(Alias,
-														javax.swing.GroupLayout.PREFERRED_SIZE, 232,
-														javax.swing.GroupLayout.PREFERRED_SIZE)))
-										.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))));
-		layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup().addGap(45, 45, 45)
-						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-								.addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 31,
-										javax.swing.GroupLayout.PREFERRED_SIZE)
-								.addComponent(Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 40,
-										javax.swing.GroupLayout.PREFERRED_SIZE))
-						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-								.addComponent(nombre2, javax.swing.GroupLayout.PREFERRED_SIZE, 31,
-										javax.swing.GroupLayout.PREFERRED_SIZE)
-								.addComponent(Alias))
-						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 37, Short.MAX_VALUE)
-						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-								.addComponent(contra, javax.swing.GroupLayout.PREFERRED_SIZE, 35,
-										javax.swing.GroupLayout.PREFERRED_SIZE)
-								.addComponent(contraseña))
-						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-								.addGroup(layout.createSequentialGroup().addGap(35, 35, 35).addComponent(ConfCont,
-										javax.swing.GroupLayout.PREFERRED_SIZE, 35,
-										javax.swing.GroupLayout.PREFERRED_SIZE))
-								.addGroup(layout.createSequentialGroup()
-										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-										.addComponent(confcont, javax.swing.GroupLayout.PREFERRED_SIZE, 60,
-												javax.swing.GroupLayout.PREFERRED_SIZE)))
-						.addGap(27, 27, 27)
-						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-								.addComponent(edad).addComponent(Edad, javax.swing.GroupLayout.PREFERRED_SIZE, 31,
-										javax.swing.GroupLayout.PREFERRED_SIZE))
-						.addGap(35, 35, 35)
-						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-								.addComponent(Tarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 40,
-										javax.swing.GroupLayout.PREFERRED_SIZE)
-								.addComponent(nombre1))
-						.addGap(34, 34, 34)
-						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-								.addComponent(codtar).addComponent(CodTar, javax.swing.GroupLayout.PREFERRED_SIZE, 35,
-										javax.swing.GroupLayout.PREFERRED_SIZE))
-						.addGap(52, 52, 52).addComponent(NC, javax.swing.GroupLayout.PREFERRED_SIZE, 65,
-								javax.swing.GroupLayout.PREFERRED_SIZE)
-						.addGap(45, 45, 45)));
-	}// </editor-fold>//GEN-END:initComponents
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(NC)
+                .addGap(137, 137, 137))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(confcont, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(contraseña)
+                            .addComponent(edad)
+                            .addComponent(nombre1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(contra, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
+                            .addComponent(ConfCont, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
+                            .addComponent(Tarjeta, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
+                            .addComponent(Edad))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(nombre2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Alias, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(Nombre))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(codtar)
+                        .addGap(68, 68, 68)
+                        .addComponent(CodTar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(6, 6, 6))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(45, 45, 45)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Alias, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nombre2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(contra, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(contraseña))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(ConfCont, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(confcont, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(edad)
+                    .addComponent(Edad, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(35, 35, 35)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Tarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nombre1))
+                .addGap(34, 34, 34)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(codtar)
+                    .addComponent(CodTar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(52, 52, 52)
+                .addComponent(NC, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45))
+        );
+    }// </editor-fold>//GEN-END:initComponents
 
 	private void NombreMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_NombreMouseClicked
 		if (Nombre.getText().equals(defN)) {
@@ -434,21 +418,21 @@ public class nuevacuenta extends javax.swing.JPanel {
 		}
 	}// GEN-LAST:event_CodTarActionPerformed
 
-	// Variables declaration - do not modify//GEN-BEGIN:variables
-	private javax.swing.JTextField Alias;
-	private javax.swing.JPasswordField CodTar;
-	private javax.swing.JPasswordField ConfCont;
-	private javax.swing.JSpinner Edad;
-	private javax.swing.JButton NC;
-	private javax.swing.JTextField Nombre;
-	private javax.swing.JTextField Tarjeta;
-	private javax.swing.JLabel codtar;
-	private javax.swing.JLabel confcont;
-	private javax.swing.JPasswordField contra;
-	private javax.swing.JLabel contraseña;
-	private javax.swing.JLabel edad;
-	private javax.swing.JLabel nombre;
-	private javax.swing.JLabel nombre1;
-	private javax.swing.JLabel nombre2;
-	// End of variables declaration//GEN-END:variables
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField Alias;
+    private javax.swing.JPasswordField CodTar;
+    private javax.swing.JPasswordField ConfCont;
+    private javax.swing.JSpinner Edad;
+    private javax.swing.JButton NC;
+    private javax.swing.JTextField Nombre;
+    private javax.swing.JTextField Tarjeta;
+    private javax.swing.JLabel codtar;
+    private javax.swing.JLabel confcont;
+    private javax.swing.JPasswordField contra;
+    private javax.swing.JLabel contraseña;
+    private javax.swing.JLabel edad;
+    private javax.swing.JLabel nombre;
+    private javax.swing.JLabel nombre1;
+    private javax.swing.JLabel nombre2;
+    // End of variables declaration//GEN-END:variables
 }

@@ -45,7 +45,7 @@ public class EmailUtil {
 			msg.addHeader("Content-type", "text/HTML; charset=UTF-8");
 			msg.addHeader("format", "flowed");
 			msg.addHeader("Content-Transfer-Encoding", "8bit");
-			msg.setFrom(new InternetAddress(fromEmail, "NoReply-JD"));
+			msg.setFrom(new InternetAddress(fromEmail, "NR-PixelPlayNexus"));
 			msg.setSubject("MiAplicacion", "UTF-8");
 			msg.setSentDate(new Date());
 			String nuevaContrasena = "Garbagool"; 
